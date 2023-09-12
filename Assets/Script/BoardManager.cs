@@ -84,6 +84,12 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
+        // AI turn
+        else if (!isWhiteTurn)
+        {
+            // NPC가 움직임을 수행
+            ChessAI.Instance.NPCMove();
+        }
 
     }
 
@@ -136,8 +142,6 @@ public class BoardManager : MonoBehaviour
         outline_selectpieceX = selectionX;
         outline_selectpieceY = selectionY;
 
-        Debug.Log(SelectedChessman.GetType());
-        
         // 허용된 움직임.
         allowedMoves = SelectedChessman.PossibleMoves();
 
@@ -219,8 +223,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    bool ispromotion = false;
     // 체스 기물 이동
-    void MoveChessman(int x, int y)
+   public void MoveChessman(int x, int y)
     {
         // 갈 수 있는 곳이라면.
         if (allowedMoves[x, y])
@@ -234,10 +239,11 @@ public class BoardManager : MonoBehaviour
                 ActiveChessmans.Remove(opponent.gameObject);
                 Destroy(opponent.gameObject);
             }
-            
+
             // Pawn 프로모션.
             if (SelectedChessman.GetType() == typeof(Pawn))
             {
+
                 //-------프로모션 이동 관리------------
                 // AI
                 if (y == 7)
@@ -248,8 +254,6 @@ public class BoardManager : MonoBehaviour
                     SpawnChessman(10, new Vector3(x, 0, y));
                     SelectedChessman = Chessmans[x, y];
 
-                    Chessmans[x, y].outline.enabled = true;
-
                 }
                 // Player
                 if (y == 0)
@@ -259,8 +263,7 @@ public class BoardManager : MonoBehaviour
                     SpawnChessman(4, new Vector3(x, 0, y));
                     SelectedChessman = Chessmans[x, y];
 
-                    Chessmans[x, y].outline.enabled = true;
-
+                    ispromotion = true;
                 }
                 //-------프로모션 이동 관리 끝-------
             }
@@ -279,8 +282,11 @@ public class BoardManager : MonoBehaviour
             //isWhiteTurn = !isWhiteTurn;
 
             // Outline 해제와 SelectedChessman 해제 해주고 return
+            if(!ispromotion)
             Chessmans[x, y].outline.enabled = false;
+            else ispromotion = false;
             SelectedChessman = null;
+            Debug.Log(ispromotion);
             return;
         }
 
@@ -289,5 +295,7 @@ public class BoardManager : MonoBehaviour
             Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
         // 선택된 체스맨 해제
         SelectedChessman = null;
+
+        isWhiteTurn = !isWhiteTurn;
     }
 }

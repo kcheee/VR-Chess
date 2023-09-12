@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,17 @@ public class Chessman : MonoBehaviour
     public bool isWhite;
 
     public bool isMoved = false;
+
+    // chessman 클래스의 생성재.
+    public Chessman Clone()
+    {
+        // 객체 복사 하는 것
+        // 쓰는 이유는 다음과 같다. 
+        // AI를 사용하기 위해서는 플레이어의 체스 말의 위치를 알아야 하기 때문이고 그 위치값을 자유자제로 사용하기 위해 객체 복사를 해서 사용한다.
+        // 위치를 가져온다.
+        return (Chessman)this.MemberwiseClone();
+
+    }
 
     // 기물의 현재 위치
     public void SetPosition(int x, int y)
@@ -43,6 +55,8 @@ public class Chessman : MonoBehaviour
         }
         return arr;
     }
+
+
 
     //public bool KingInDanger(int x, int y)
     //{
@@ -82,6 +96,6 @@ public class Chessman : MonoBehaviour
     //    // 결과 반환
     //    return result;
     //}
-
-
+    
+    
 }
