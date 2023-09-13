@@ -154,10 +154,11 @@ public class ChessAI : MonoBehaviour
     private void Think()
     {
         // 최대 탐색 깊이.
-        maxDepth = 4;
+        maxDepth = 2;
         int depth = maxDepth - 1;
         // winningValue = MiniMax(depth, true);
         winningValue = AlphaBeta(depth, true, System.Int32.MinValue, System.Int32.MaxValue);
+        Debug.Log(winningValue);
     }
 
     #region MinMax Algorithm 지금 사용되진않음.
@@ -575,30 +576,30 @@ public class ChessAI : MonoBehaviour
         #region 앙파상 
         // 이건 패스
         // If it is an EnPassant move than Capture the opponent
-        if (EnPassant[0] == x && EnPassant[1] == y && chessman.GetType() == typeof(Pawn))
-        {
-            if (chessman.isWhite)
-            {
-                opponent = Chessmans[x, y + 1];
+        //if (EnPassant[0] == x && EnPassant[1] == y && chessman.GetType() == typeof(Pawn))
+        //{
+        //    if (chessman.isWhite)
+        //    {
+        //        opponent = Chessmans[x, y + 1];
 
-                capturedChessman.chessman = opponent;
-                capturedChessman.Position = (x, y + 1);
-                Chessmans[x, y + 1] = null;
-            }
-            else
-            {
-                opponent = Chessmans[x, y - 1];
+        //        capturedChessman.chessman = opponent;
+        //        capturedChessman.Position = (x, y + 1);
+        //        Chessmans[x, y + 1] = null;
+        //    }
+        //    else
+        //    {
+        //        opponent = Chessmans[x, y - 1];
 
-                capturedChessman.chessman = opponent;
-                capturedChessman.Position = (x, y - 1);
-                Chessmans[x, y - 1] = null;
-            }
+        //        capturedChessman.chessman = opponent;
+        //        capturedChessman.Position = (x, y - 1);
+        //        Chessmans[x, y - 1] = null;
+        //    }
 
-            ActiveChessmans.Remove(opponent);
-        }
+        //    ActiveChessmans.Remove(opponent);
+        //}
 
-        // Reset the EnPassant move
-        EnPassant[0] = EnPassant[1] = -1;
+        //Reset the EnPassant move
+        //EnPassant[0] = EnPassant[1] = -1;
 
         // Set EnPassant available for opponent
         if (chessman.GetType() == typeof(Pawn))

@@ -21,6 +21,7 @@ public class BoardManager : MonoBehaviour
     private const float TILE_OFFSET = TILE_SIZE / 2;
     #endregion
 
+    public int ChessCount = 0;
     // 체스 말 
     public List<GameObject> ChessmanPrefabs;
 
@@ -145,7 +146,8 @@ public class BoardManager : MonoBehaviour
         SelectedChessman = Chessmans[selectionX, selectionY];
 
         // Outline 
-        Chessmans[selectionX, selectionY].outline.enabled = true;
+        if(isWhiteTurn)
+            Chessmans[selectionX, selectionY].outline.enabled = true;
 
         // 위치값 저장.
         outline_selectpieceX = selectionX;
@@ -155,6 +157,7 @@ public class BoardManager : MonoBehaviour
         allowedMoves = SelectedChessman.PossibleMoves();
 
         // 허용된 움직임 UI 띄워주기.
+        // 나중에 설정 해줘야함.
         BoardHighlight.Instance.HighlightPossibleMoves(allowedMoves, !isWhiteTurn);
 
     }
@@ -357,25 +360,86 @@ public class BoardManager : MonoBehaviour
             SelectedChessman.transform.position = new Vector3(x, 0, y);
             SelectedChessman.isMoved = true;
 
+            // Promotion 할 때.
+            // Outline 해제와 SelectedChessman 해제 해주고 return
+            if (isWhiteTurn)
+            {
+                Debug.Log(Chessmans[x, y]);
+                Chessmans[x, y].outline.enabled = false;
+            }
+
             // 상대 턴으로 넘김.
             isWhiteTurn = !isWhiteTurn;
 
-            // Promotion 할 때.
-            // Outline 해제와 SelectedChessman 해제 해주고 return
-            if (!ispromotion)
-            Chessmans[x, y].outline.enabled = false;
-            else ispromotion = false;
-            SelectedChessman = null;
-            Debug.Log(ispromotion);
+            // CheckMate 
+            isCheckmate();
+            ChessCount++;
+            Debug.Log("턴 수 : "+ChessCount);
             return;
         }
 
         // 체스 기물에 대한 Outline 해제.
-        if (Chessmans[outline_selectpieceX, outline_selectpieceY].GetComponent<Outline>() != null)
+        //if (Chessmans[outline_selectpieceX, outline_selectpieceY].GetComponent<Outline>() != null)
+        //    Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
+
+        if (isWhiteTurn)
+        {
+            Debug.Log(Chessmans[outline_selectpieceX, outline_selectpieceY]);
             Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
+        }
+
         // 선택된 체스맨 해제
         SelectedChessman = null;
 
-        //isWhiteTurn = !isWhiteTurn;
+    }
+
+
+    // 체크메이트 체크 함수.
+    private void isCheckmate()
+    {
+        // 초기에는 어떤 체스맨도 허용된 움직임이 없다고 가정합니다.
+        bool hasAllowedMove = false;
+
+        // 활성화된 모든 체스맨을 순회합니다.
+        foreach (GameObject chessman in ActiveChessmans)
+        {
+            // 현재 체스맨이 현재 턴 플레이어의 것이 아니면 넘어갑니다.
+            if (chessman.GetComponent<Chessman>().isWhite != isWhiteTurn)
+                continue;
+
+            // 현재 체스맨이 할 수 있는 움직임을 가져옵니다.
+            bool[,] allowedMoves = chessman.GetComponent<Chessman>().PossibleMoves();
+
+            // 모든 좌표를 확인하여 허용된 움직임이 있는지 확인합니다.
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    if (allowedMoves[x, y])
+                    {
+                        // 허용된 움직임이 있으면 플래그를 true로 설정하고 루프를 종료합니다.
+                        hasAllowedMove = true;
+                        break;
+                    }
+                }
+                if (hasAllowedMove) break; // 이미 허용된 움직임이 있으면 루프를 종료합니다.
+            }
+        }
+
+        // 만약 어떤 체스맨도 허용된 움직임이 없다면 체크메이트입니다.
+        if (!hasAllowedMove)
+        {
+
+            // 디버그 로그로 체크메이트임을 출력합니다.
+            Debug.Log("CheckMate");
+
+            // 컴퓨터의 평균 응답 시간을 출력합니다.
+            Debug.Log("Average Response Time of computer (in seconds): " + (ChessAI.Instance.averageResponseTime / 1000.0));
+
+            // 게임 오버 메뉴를 표시합니다.
+            Debug.Log("CheckMate");
+            // 게임 종료 로직을 호출할 수 있습니다. (주석 처리된 코드)
+            // EndGame();
+        }
     }
 }

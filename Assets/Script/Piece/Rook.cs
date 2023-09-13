@@ -62,7 +62,6 @@ public class Rook : Chessman
         // 기물이 없으면 계속 실행.
         if (piece == null)
         {
-            Debug.Log("움직일수 있는 부분");
             moves[x, y] = true;
             return true;
         }

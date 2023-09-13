@@ -36,8 +36,12 @@ public class Chessman : MonoBehaviour
     public Outline outline;
     private void Start()
     {
+        if(isWhite)
+        {
+
         outline = transform.GetComponent<Outline>();
         outline.enabled = false;
+        }
     }
 
 
