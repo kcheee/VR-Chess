@@ -49,8 +49,16 @@ public class BoardManager : MonoBehaviour
     // Turn System
     public bool isWhiteTurn = true;
 
+    // promotion 하기 위해 기물들 가져옴.
     public Chessman WhiteKing;
     public Chessman BlackKing;
+    public Chessman WhiteRook1;
+    public Chessman WhiteRook2;
+    public Chessman BlackRook1;
+    public Chessman BlackRook2;
+
+// 앙파상을 위한 움직임. ( 일단 안하는 걸로) 
+    public int[] EnPassant { set; get; }
 
     private void Start()
     {
@@ -58,6 +66,7 @@ public class BoardManager : MonoBehaviour
         ActiveChessmans = new List<GameObject>();
         Chessmans = new Chessman[8, 8];
         cam = Camera.main;
+        EnPassant = new int[2] { -1, -1 };
         SpawnAllChessmans();
     }
 
@@ -221,6 +230,16 @@ public class BoardManager : MonoBehaviour
         {
             SpawnChessman(11, new Vector3(i, 0, 1));
         }
+
+        // 보드 매니저에서 따로 체스 말 관리.
+        // 특수한 이동이나 체크메이트를 위해.
+        WhiteKing = Chessmans[3, 7];
+        BlackKing = Chessmans[3, 0];
+
+        WhiteRook1 = Chessmans[0, 7];
+        WhiteRook2 = Chessmans[7, 7];
+        BlackRook1 = Chessmans[0, 0];
+        BlackRook2 = Chessmans[7, 0];
     }
 
     bool ispromotion = false;
@@ -240,6 +259,23 @@ public class BoardManager : MonoBehaviour
                 Destroy(opponent.gameObject);
             }
 
+            // -------앙파상트 이동 관리------------
+            // 앙파상트 이동이면 상대 말을 파괴
+            if (EnPassant[0] == x && EnPassant[1] == y && SelectedChessman.GetType() == typeof(Pawn))
+            {
+                if (isWhiteTurn)
+                    opponent = Chessmans[x, y + 1];
+                else
+                    opponent = Chessmans[x, y - 1];
+
+                ActiveChessmans.Remove(opponent.gameObject);
+                Destroy(opponent.gameObject);
+            }
+
+            // 앙파상트 이동 초기화
+            EnPassant[0] = EnPassant[1] = -1;
+
+
             // Pawn 프로모션.
             if (SelectedChessman.GetType() == typeof(Pawn))
             {
@@ -255,6 +291,7 @@ public class BoardManager : MonoBehaviour
                     SelectedChessman = Chessmans[x, y];
 
                 }
+
                 // Player
                 if (y == 0)
                 {
@@ -266,7 +303,49 @@ public class BoardManager : MonoBehaviour
                     ispromotion = true;
                 }
                 //-------프로모션 이동 관리 끝-------
+
+                // 앙파상
+                if (SelectedChessman.currentY == 1 && y == 3)
+                {
+                    EnPassant[0] = x;
+                    EnPassant[1] = y - 1;
+                }
+                if (SelectedChessman.currentY == 6 && y == 4)
+                {
+                    EnPassant[0] = x;
+                    EnPassant[1] = y + 1;
+                }
             }
+                // -------앙파상트 이동 관리 끝-------
+
+            // -------캐슬링 이동 관리------------
+            // 캐슬링이란 룩을 킹이랑 바꾸는 행위이다.
+            // 선택된 체스맨이 킹이고, 이동 거리가 2일 경우 (캐슬링)
+            if (SelectedChessman.GetType() == typeof(King) && System.Math.Abs(x - SelectedChessman.currentX) == 2)
+            {
+                // 킹 쪽 (0, 0)으로 가는 경우
+                if (x - SelectedChessman.currentX < 0)
+                {
+                    // 룩1을 이동
+                    Chessmans[x + 1, y] = Chessmans[x - 1, y];
+                    Chessmans[x - 1, y] = null;
+                    Chessmans[x + 1, y].SetPosition(x + 1, y);
+                    Chessmans[x + 1, y].transform.position = new Vector3(x + 1, 0, y);
+                    Chessmans[x + 1, y].isMoved = true;
+                }
+                // 퀸 쪽 (0, 0)으로 가는 경우
+                else
+                {
+                    // 룩2을 이동
+                    Chessmans[x - 1, y] = Chessmans[x + 2, y];
+                    Chessmans[x + 2, y] = null;
+                    Chessmans[x - 1, y].SetPosition(x - 1, y);
+                    Chessmans[x - 1, y].transform.position = new Vector3(x - 1, 0, y);
+                    Chessmans[x - 1, y].isMoved = true;
+                }
+                // 주의: 킹은 이 함수에서 선택된 체스맨으로서 이동합니다.
+            }
+            // -------캐슬링 이동 관리 끝-------
 
             // 가고자 하는 위치가 null이라면
             Chessmans[SelectedChessman.currentX, SelectedChessman.currentY] = null;
@@ -279,10 +358,11 @@ public class BoardManager : MonoBehaviour
             SelectedChessman.isMoved = true;
 
             // 상대 턴으로 넘김.
-            //isWhiteTurn = !isWhiteTurn;
+            isWhiteTurn = !isWhiteTurn;
 
+            // Promotion 할 때.
             // Outline 해제와 SelectedChessman 해제 해주고 return
-            if(!ispromotion)
+            if (!ispromotion)
             Chessmans[x, y].outline.enabled = false;
             else ispromotion = false;
             SelectedChessman = null;
@@ -296,6 +376,6 @@ public class BoardManager : MonoBehaviour
         // 선택된 체스맨 해제
         SelectedChessman = null;
 
-        isWhiteTurn = !isWhiteTurn;
+        //isWhiteTurn = !isWhiteTurn;
     }
 }

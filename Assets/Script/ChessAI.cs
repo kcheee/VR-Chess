@@ -67,11 +67,11 @@ public class ChessAI : MonoBehaviour
         ActualChessmansReference = BoardManager.Instance.Chessmans;
         ActualWhiteKing = BoardManager.Instance.WhiteKing;
         ActualBlackKing = BoardManager.Instance.BlackKing;
-        //ActualWhiteRook1 = BoardManager.Instance.WhiteRook1;
-        //ActualWhiteRook2 = BoardManager.Instance.WhiteRook2;
-        //ActualBlackRook1 = BoardManager.Instance.BlackRook1;
-        //ActualBlackRook2 = BoardManager.Instance.BlackRook2;
-        //ActualEnPassant = BoardManager.Instance.EnPassant;
+        ActualWhiteRook1 = BoardManager.Instance.WhiteRook1;
+        ActualWhiteRook2 = BoardManager.Instance.WhiteRook2;
+        ActualBlackRook1 = BoardManager.Instance.BlackRook1;
+        ActualBlackRook2 = BoardManager.Instance.BlackRook2;
+        ActualEnPassant = BoardManager.Instance.EnPassant;
 
         ActiveChessmans = new List<Chessman>();
         Chessmans = new Chessman[8, 8];
@@ -107,11 +107,11 @@ public class ChessAI : MonoBehaviour
         BoardManager.Instance.Chessmans = Chessmans;
         BoardManager.Instance.WhiteKing = Chessmans[ActualWhiteKing.currentX, ActualWhiteKing.currentY];
         BoardManager.Instance.BlackKing = Chessmans[ActualBlackKing.currentX, ActualBlackKing.currentY];
-        //if (ActualWhiteRook1 != null) BoardManager.Instance.WhiteRook1 = Chessmans[ActualWhiteRook1.currentX, ActualWhiteRook1.currentY];
-        //if (ActualWhiteRook2 != null) BoardManager.Instance.WhiteRook2 = Chessmans[ActualWhiteRook2.currentX, ActualWhiteRook2.currentY];
-        //if (ActualBlackRook1 != null) BoardManager.Instance.BlackRook1 = Chessmans[ActualBlackRook1.currentX, ActualBlackRook1.currentY];
-        //if (ActualBlackRook2 != null) BoardManager.Instance.BlackRook2 = Chessmans[ActualBlackRook2.currentX, ActualBlackRook2.currentY];
-        //BoardManager.Instance.EnPassant = EnPassant;
+        if (ActualWhiteRook1 != null) BoardManager.Instance.WhiteRook1 = Chessmans[ActualWhiteRook1.currentX, ActualWhiteRook1.currentY];
+        if (ActualWhiteRook2 != null) BoardManager.Instance.WhiteRook2 = Chessmans[ActualWhiteRook2.currentX, ActualWhiteRook2.currentY];
+        if (ActualBlackRook1 != null) BoardManager.Instance.BlackRook1 = Chessmans[ActualBlackRook1.currentX, ActualBlackRook1.currentY];
+        if (ActualBlackRook2 != null) BoardManager.Instance.BlackRook2 = Chessmans[ActualBlackRook2.currentX, ActualBlackRook2.currentY];
+        BoardManager.Instance.EnPassant = EnPassant;
 
         // 가장 유리한 이동을 위한 함수.
         Think();
@@ -120,11 +120,11 @@ public class ChessAI : MonoBehaviour
         BoardManager.Instance.Chessmans = ActualChessmansReference;
         BoardManager.Instance.WhiteKing = ActualWhiteKing;
         BoardManager.Instance.BlackKing = ActualBlackKing;
-        //BoardManager.Instance.WhiteRook1 = ActualWhiteRook1;
-        //BoardManager.Instance.WhiteRook2 = ActualWhiteRook2;
-        //BoardManager.Instance.BlackRook1 = ActualBlackRook1;
-        //BoardManager.Instance.BlackRook2 = ActualBlackRook2;
-        //BoardManager.Instance.EnPassant = ActualEnPassant;
+        BoardManager.Instance.WhiteRook1 = ActualWhiteRook1;
+        BoardManager.Instance.WhiteRook2 = ActualWhiteRook2;
+        BoardManager.Instance.BlackRook1 = ActualBlackRook1;
+        BoardManager.Instance.BlackRook2 = ActualBlackRook2;
+        BoardManager.Instance.EnPassant = ActualEnPassant;
 
         // board = board + "\n\nAfter Restoring with actual board :\n";
         // printBoard();

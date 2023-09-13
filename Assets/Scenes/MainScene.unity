@@ -610,6 +610,10 @@ MonoBehaviour:
   isWhiteTurn: 1
   WhiteKing: {fileID: 0}
   BlackKing: {fileID: 0}
+  WhiteRook1: {fileID: 0}
+  WhiteRook2: {fileID: 0}
+  BlackRook1: {fileID: 0}
+  BlackRook2: {fileID: 0}
 --- !u!114 &1747323638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +626,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbf51d92b84fc54fa47beffb3b34162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1747323643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747323628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d29af25d37a6e48844553498563b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  averageResponseTime: 0
 --- !u!4 &1865186126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86bc93b015f65644b8c51f7c7d92f4c2, type: 3}
