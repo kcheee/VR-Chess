@@ -14,6 +14,13 @@ public class Chessman : MonoBehaviour
 
     public bool isMoved = false;
 
+    // 타입 설정
+    public enum ChessType
+    {
+        KING, QUEEN, BISHUP, KNIGHT, ROOK, PAWN
+    }
+    public ChessType chesstype;
+
     // chessman 클래스의 생성재.
     public Chessman Clone()
     {
@@ -30,17 +37,27 @@ public class Chessman : MonoBehaviour
     {
         currentX = x;
         currentY = y;
+
+        // 기물들을 움직임.
+    }
+
+    public void Move(int x, int y, Type type)
+    {
+        if(type == typeof(Pawn))
+        {
+            Debug.Log("실행");
+            transform.GetComponent<J_PawnMove>().PawnMove(x,y);
+        }
     }
 
     // Outline
     public Outline outline;
     private void Start()
     {
-        if(isWhite)
+        if (isWhite)
         {
-
-        outline = transform.GetComponent<Outline>();
-        outline.enabled = false;
+            outline = transform.GetComponent<Outline>();
+            outline.enabled = false;
         }
     }
 
@@ -100,6 +117,6 @@ public class Chessman : MonoBehaviour
     //    // 결과 반환
     //    return result;
     //}
-    
-    
+
+
 }

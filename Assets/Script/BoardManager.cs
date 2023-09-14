@@ -49,7 +49,7 @@ public class BoardManager : MonoBehaviour
 
     // Turn System
     public bool isWhiteTurn = true;
-
+    public bool move_TurnLimit = false;
     // promotion 하기 위해 기물들 가져옴.
     public Chessman WhiteKing;
     public Chessman BlackKing;
@@ -95,7 +95,7 @@ public class BoardManager : MonoBehaviour
             }
         }
         // AI turn
-        else if (!isWhiteTurn)
+        else if (!isWhiteTurn&&!move_TurnLimit)
         {
             // NPC가 움직임을 수행
             ChessAI.Instance.NPCMove();
@@ -134,6 +134,8 @@ public class BoardManager : MonoBehaviour
     //  체스 기물 선택함.
     private void SelectChessman()
     {
+        // 만약 기물이 움직이는 도중이라면
+        if (move_TurnLimit) return;
 
         // 만약 클릭한 타일에 체스맨이 없다면
         if (Chessmans[selectionX, selectionY] == null) return;
@@ -357,7 +359,9 @@ public class BoardManager : MonoBehaviour
             // 선택된 체스말 위치 업데이트
             SelectedChessman.SetPosition(x, y);
 
+            if(SelectedChessman.GetType() != typeof(Pawn)&&!isWhiteTurn)
             SelectedChessman.transform.position = new Vector3(x, 0, y);
+
             SelectedChessman.isMoved = true;
 
             // Promotion 할 때.
@@ -371,7 +375,12 @@ public class BoardManager : MonoBehaviour
             }
 
             // 상대 턴으로 넘김.
-            isWhiteTurn = !isWhiteTurn;
+
+            // AI 턴제한.
+
+            // 움직이는 함수 
+            StartCoroutine(move(x,y));
+            //isWhiteTurn = !isWhiteTurn;
             SelectedChessman = null;
 
             // CheckMate 
@@ -381,7 +390,11 @@ public class BoardManager : MonoBehaviour
             return;
         }
 
+        //AI도 같이 이 함수를 쓰니깐.
+        // 
+        
         // 체스 기물에 대한 Outline 해제.
+        // 이것도 고쳐야 되네.
         if (isWhiteTurn)
         {
             Debug.Log(isWhiteTurn);
@@ -390,18 +403,24 @@ public class BoardManager : MonoBehaviour
             BoardHighlight.Instance.deleteHighlight();
         }
 
-        //if (isWhiteTurn)
-        //{
-        //    Debug.Log(outline_selectpieceX + " " + outline_selectpieceY);
-        //    Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
-        //}
-
         // 선택된 체스맨 해제
         SelectedChessman = null;
 
     }
 
-
+    IEnumerator move(int x, int y)
+    {
+        move_TurnLimit = true;
+        // 이 코루틴 함수가 될 동안. 선택하지 못하게
+        // 이동 하는 함수 
+        SelectedChessman.Move(x, y, SelectedChessman.GetType());
+        yield return new WaitForSeconds(3);
+        
+        Debug.Log("턴 넘김");
+        isWhiteTurn = !isWhiteTurn;
+        move_TurnLimit = false;
+        yield return null;
+    }
     
 
     // 체크메이트 체크 함수.

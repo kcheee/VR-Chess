@@ -57,7 +57,6 @@ public class BoardHighlight : MonoBehaviour
     {
         foreach (GameObject go in HighLights)
         {
-            Debug.Log(go.transform.position);
             Destroy(go);
         }
         // 리스트 클리어

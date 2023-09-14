@@ -50,8 +50,7 @@ public class J_PawnMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             PawnMove(5, 5);
-            
-            
+                     
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -60,8 +59,9 @@ public class J_PawnMove : MonoBehaviour
         }
     }
 
-    void PawnMove(int targetX, int targetY)
+   public void PawnMove(int targetX, int targetY)
     {
+        Debug.Log("½ÇÇà");
         int dir = 0;
         Vector3 targetPos =  new Vector3 (targetX, 0, targetY) - transform.position; 
         float dot = Vector3.Dot(transform.right, targetPos);

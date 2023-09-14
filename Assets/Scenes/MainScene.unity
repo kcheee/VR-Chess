@@ -1202,15 +1202,16 @@ MonoBehaviour:
   - {fileID: 1720791739575168, guid: 1af4a70d27b38ac4fbf68e9582204df7, type: 3}
   - {fileID: 1725687788178442, guid: db8ad03b9fba5a542a61e263294e0429, type: 3}
   - {fileID: 1858696927787306, guid: 34c3e15543d04d649876217901e95549, type: 3}
-  - {fileID: 1681747661894772, guid: 2e3dc2196874bcd428f0cb79440e68a8, type: 3}
+  - {fileID: 8327214096998406999, guid: fc0793fd8d351164490389f76a552fd4, type: 3}
   - {fileID: 1414007765012872, guid: db550880c8280d44189f22ac55131bca, type: 3}
   - {fileID: 1994935599750250, guid: 899d49447f9c77a4bae75ebb4d4aca42, type: 3}
   - {fileID: 1930024537875770, guid: b01673f79d79c73429dd4d2844b19986, type: 3}
   - {fileID: 1887074840451402, guid: 3506e95142a449849a33fc0dfc090360, type: 3}
   - {fileID: 1699309027193058, guid: 31adbf6eb9a3fe84e9d91b91cf4e2cdc, type: 3}
-  - {fileID: 1943999446811244, guid: a2dfb9c0fd5ff8943b4794a8e6f8958f, type: 3}
+  - {fileID: 5219323918571120936, guid: 6aa40a30f4a5dc8439acfc35d27dea70, type: 3}
   SelectedChessman: {fileID: 0}
   isWhiteTurn: 1
+  move_TurnLimit: 0
   WhiteKing: {fileID: 0}
   BlackKing: {fileID: 0}
   WhiteRook1: {fileID: 0}
