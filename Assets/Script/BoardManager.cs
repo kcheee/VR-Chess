@@ -402,6 +402,8 @@ public class BoardManager : MonoBehaviour
     }
 
 
+    
+
     // 체크메이트 체크 함수.
     private void isCheckmate()
     {
