@@ -362,14 +362,14 @@ public class BoardManager : MonoBehaviour
 
             // Promotion 할 때.
             // Outline 해제와 SelectedChessman 해제 해주고 return
-            if (isWhiteTurn)
+            if (Chessmans[x, y].isWhite)
             {
-                Debug.Log(Chessmans[x, y]);
                 Chessmans[x, y].outline.enabled = false;
             }
 
             // 상대 턴으로 넘김.
             isWhiteTurn = !isWhiteTurn;
+            SelectedChessman = null;
 
             // CheckMate 
             isCheckmate();
@@ -379,14 +379,18 @@ public class BoardManager : MonoBehaviour
         }
 
         // 체스 기물에 대한 Outline 해제.
-        //if (Chessmans[outline_selectpieceX, outline_selectpieceY].GetComponent<Outline>() != null)
-        //    Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
-
         if (isWhiteTurn)
         {
-            Debug.Log(Chessmans[outline_selectpieceX, outline_selectpieceY]);
-            Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
+            Debug.Log(isWhiteTurn);
+            Debug.Log(SelectedChessman);
+            SelectedChessman.outline.enabled = false;
         }
+
+        //if (isWhiteTurn)
+        //{
+        //    Debug.Log(outline_selectpieceX + " " + outline_selectpieceY);
+        //    Chessmans[outline_selectpieceX, outline_selectpieceY].outline.enabled = false;
+        //}
 
         // 선택된 체스맨 해제
         SelectedChessman = null;

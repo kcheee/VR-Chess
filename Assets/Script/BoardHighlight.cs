@@ -28,8 +28,8 @@ public class BoardHighlight : MonoBehaviour
                     {
                         Debug.Log("먹을 수 있는 부분.");
                         // 테스트용
-                        //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        //go.transform.position = new Vector3(i, 0, j);
+                        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                        go.transform.position = new Vector3(i, 0, j);
                     }
                     // 이동 가능 한 부분 
                     else
