@@ -364,7 +364,10 @@ public class BoardManager : MonoBehaviour
             // Outline 해제와 SelectedChessman 해제 해주고 return
             if (Chessmans[x, y].isWhite)
             {
+
                 Chessmans[x, y].outline.enabled = false;
+                BoardHighlight.Instance.deleteHighlight();
+
             }
 
             // 상대 턴으로 넘김.
@@ -384,6 +387,7 @@ public class BoardManager : MonoBehaviour
             Debug.Log(isWhiteTurn);
             Debug.Log(SelectedChessman);
             SelectedChessman.outline.enabled = false;
+            BoardHighlight.Instance.deleteHighlight();
         }
 
         //if (isWhiteTurn)
