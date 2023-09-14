@@ -63,7 +63,7 @@ public class J_Pawn : MonoBehaviour
             currentX = (int)transform.position.x;
             currentY = (int)transform.position.z;
             
-            MoveMethod(3, 5);
+            MoveMethod(1, 1);
         }
         if (Input.GetKeyDown(KeyCode.G) && !isMoving)
         {
@@ -76,14 +76,14 @@ public class J_Pawn : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.J) && !isMoving)
         {
-            //MoveMethod(5,5);
+            //PawnMove(5,5);
             StartCoroutine(RotatePiece(45, 1f));
             //MovePiece(1);
             //RoatatePiece(1);j
         }
         if (Input.GetKeyDown(KeyCode.K) && !isMoving)
         {
-            //MoveMethod(5,5);
+            //PawnMove(5,5);
             StartCoroutine(RotatePiece(-45, 1f));
             //MovePiece(1);
             //RoatatePiece(1);j
@@ -100,7 +100,10 @@ public class J_Pawn : MonoBehaviour
         }
         //targetPosition의 방향을 나의 앞으로 설정
         Vector3 dir = transform.forward;
-        targetPosition = transform.position + dir.normalized * y;
+        targetPosition = transform.position + dir * y;
+
+        int targetY = y - currentY;
+        int targetX = x - currentX;
         //targetPosition = (new Vector3(0, 0, steps) - transform.position).normalized;
 
         //충돌 체크
