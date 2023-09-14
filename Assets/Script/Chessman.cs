@@ -48,6 +48,26 @@ public class Chessman : MonoBehaviour
             Debug.Log("角青");
             transform.GetComponent<J_PawnMove>().PawnMove(x,y);
         }
+        if (type == typeof(Rook))
+        {
+            Debug.Log("角青");
+            transform.GetComponent<J_PawnMove>().PawnMove(x, y);
+        }
+        if (type == typeof(Knight))
+        {
+            Debug.Log("角青");
+            transform.GetComponent<J_PawnMove>().PawnMove(x, y);
+        }
+        if (type == typeof(Queen))
+        {
+            Debug.Log("角青");
+            transform.GetComponent<J_PawnMove>().PawnMove(x, y);
+        }
+        if (type == typeof(Bishop))
+        {
+            Debug.Log("角青");
+            transform.GetComponent<J_PawnMove>().PawnMove(x, y);
+        }
     }
 
     // Outline

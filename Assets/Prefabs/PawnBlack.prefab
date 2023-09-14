@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23889733405944412}
   - component: {fileID: 2891904896061968872}
   - component: {fileID: -2821820979987505831}
+  - component: {fileID: 4729287409356642058}
   m_Layer: 0
   m_Name: PawnBlack
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   isMoved: 0
+  chesstype: 0
   outline: {fileID: 0}
 --- !u!114 &-2821820979987505831
 MonoBehaviour:
@@ -118,3 +120,21 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &4729287409356642058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943999446811244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efd0321afa2ec748aad2e2eef07671a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  isMoving: 0
+  isRightRotate: 0
+  isLeftRotate: 0
+  currentX: 0
+  currentY: 0

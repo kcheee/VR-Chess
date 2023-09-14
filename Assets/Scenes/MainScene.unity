@@ -977,117 +977,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2321527512367231968, guid: 3f7511fbc40ae7a4b89c3298a3de199d, type: 3}
   m_PrefabInstance: {fileID: 1010946414}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1653853320
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1653853324}
-  - component: {fileID: 1653853323}
-  - component: {fileID: 1653853322}
-  - component: {fileID: 1653853321}
-  - component: {fileID: 1653853325}
-  m_Layer: 0
-  m_Name: Cylinder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!136 &1653853321
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653853320}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!23 &1653853322
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653853320}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1653853323
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653853320}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1653853324
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653853320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.01, z: 0.7}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1653853325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653853320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28351b268080acb41a14ac599128761a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1676542249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,18 +1086,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChessCount: 0
   ChessmanPrefabs:
-  - {fileID: 1816410311040928, guid: 23629ef41f35f9c4eb31fd4549ef63e7, type: 3}
-  - {fileID: 1727552785236268, guid: 9f83a0730f5808c45a2f5df52f5223c4, type: 3}
-  - {fileID: 1720791739575168, guid: 1af4a70d27b38ac4fbf68e9582204df7, type: 3}
+  - {fileID: 488209355170328060, guid: af9c290eb24c2804fad47dd93131f7c7, type: 3}
+  - {fileID: 8373577355685179793, guid: a44f0b22e8c738a4d80e4b3465a29f68, type: 3}
+  - {fileID: 5361428310898464093, guid: d2f97109211c9e146abce8cd40a9eb80, type: 3}
   - {fileID: 1725687788178442, guid: db8ad03b9fba5a542a61e263294e0429, type: 3}
-  - {fileID: 1858696927787306, guid: 34c3e15543d04d649876217901e95549, type: 3}
-  - {fileID: 8327214096998406999, guid: fc0793fd8d351164490389f76a552fd4, type: 3}
-  - {fileID: 1414007765012872, guid: db550880c8280d44189f22ac55131bca, type: 3}
-  - {fileID: 1994935599750250, guid: 899d49447f9c77a4bae75ebb4d4aca42, type: 3}
-  - {fileID: 1930024537875770, guid: b01673f79d79c73429dd4d2844b19986, type: 3}
-  - {fileID: 1887074840451402, guid: 3506e95142a449849a33fc0dfc090360, type: 3}
-  - {fileID: 1699309027193058, guid: 31adbf6eb9a3fe84e9d91b91cf4e2cdc, type: 3}
+  - {fileID: 7884806390629214701, guid: 2b256691a57282444b58f64c2051d761, type: 3}
   - {fileID: 5219323918571120936, guid: 6aa40a30f4a5dc8439acfc35d27dea70, type: 3}
+  - {fileID: 488209355170328060, guid: 7fe84efdb9f6c694c9cabf96abbab527, type: 3}
+  - {fileID: 8373577355685179793, guid: 8dc0286f9001efa40865783c03c78605, type: 3}
+  - {fileID: 5361428310898464093, guid: cebf9272e00e1f145a3484cfcf69962c, type: 3}
+  - {fileID: 1887074840451402, guid: 3506e95142a449849a33fc0dfc090360, type: 3}
+  - {fileID: 7884806390629214701, guid: 49477cd35a5307e45b2d058b3fb45738, type: 3}
+  - {fileID: 5277041288790819008, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
   SelectedChessman: {fileID: 0}
   isWhiteTurn: 1
   move_TurnLimit: 0
