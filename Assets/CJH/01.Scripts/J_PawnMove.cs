@@ -165,6 +165,13 @@ public class J_PawnMove : MonoBehaviour
         transform.position = targetPosition;
         yield return new WaitForSeconds(0.04f);
         anim.CrossFade("Idle", 0.5f, 0);
+
+        // ----------- 턴넘김----------------
+        BoardManager.Instance.PieceIsMove = false;
+        // ----------- 턴넘김 ----------------
+
+        //yield return new WaitForSeconds(1f);
+
         //회전한만큼 회전시킨다.
         StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
 
