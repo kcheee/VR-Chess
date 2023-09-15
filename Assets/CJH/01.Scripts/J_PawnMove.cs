@@ -1,43 +1,22 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class J_PawnMove : MonoBehaviour
 {
-    //폰의 이동규칙 : 앞으로 1보, 앞으로 2보, 45도 회전 후 앞으로 1보, -45도 회전 후 앞으로 1보
-    //앞으로 1보는 MovePiece(0,1), 45도 회전은 StartCoroutine(RotatePiece(-45, 1f)),  
-    //45도 회전과 -45회전할때를 다시 비교해보자
-    //45도회전은 x +1을 받았을 때 -45도 회전은 x-1을 받았을 때 그리고 공통적으로 y+1을 받았을 때다
-    //45도 회전은 targetPosition - this.transform.position.x =1
-
-
-    //회전해서 앞으로 이동했으면 다시 앞으로 또 회전한다.
-
     [SerializeField]
     public float moveSpeed = 5f;
     public bool isMoving = false; // 움직이는지
-    public bool isRightRotate = false; //오른쪽회전하는지(+)
-    public bool isLeftRotate = false; //왼쪽회전하는지(-)
 
     Animator anim;
     public int currentX;
     public int currentY;
     private Vector3 targetPosition;
-    float originRot;
-    bool isDelay;
-    float currentTime;
-    float dealyTime;
-    float fianlAngle;
     Chessman[,] ch = new Chessman[8,8];
 
     float myAngle; //내가 움직였던 각도
     private void Start()
     {
-        originRot = transform.localEulerAngles.y;
         myAngle = transform.eulerAngles.y; 
         anim = GetComponentInChildren<Animator>();
     }
@@ -92,10 +71,11 @@ public class J_PawnMove : MonoBehaviour
     public void PawnMove(int targetX, int targetY)
     {
         Debug.Log("실행");
-        nDir = 0;
+        //nDir = 0;
         Vector3 targetPos =  new Vector3 (targetX, 0, targetY) - transform.position; 
         float dot = Vector3.Dot(transform.right, targetPos);
-
+        nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
+        #region 1if
         if (dot > 0)
         {
             nDir = 1;
@@ -120,6 +100,7 @@ public class J_PawnMove : MonoBehaviour
                 print("회전 하지 말아라");
             }
         }
+        #endregion
         //상대방과 나와의 각도를 잰다
         angle = Vector3.Angle(transform.forward, targetPos);
         //StartCoroutine(Attack(targetX, targetY));
@@ -153,8 +134,6 @@ public class J_PawnMove : MonoBehaviour
         }   
 
     }
-
-
     //직선이동(완료)
     IEnumerator StraightMove(int targetX, int targetY)
     {
@@ -180,18 +159,12 @@ public class J_PawnMove : MonoBehaviour
             transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
             //멈추고
             yield return null;// new WaitForSeconds(0.05f);
-            print("움직인다");
+            //print("움직인다");
         }
-
         transform.position = targetPosition;
-
         yield return new WaitForSeconds(0.04f);
-        //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
-        //yield return new WaitForSeconds(1f);
-
-        //나의 앞을 기준으로 초기값으로 안되어있다면 회전시킨다.
-        //초기각도 : v3.orgin; 변경된 각도 currnetAngle 
+        //회전한만큼 회전시킨다.
         StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
 
         
@@ -220,17 +193,10 @@ public class J_PawnMove : MonoBehaviour
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(1);
-        //StartCoroutine(StraightMove(0, 1));
 
         if(moveFoward)
         {
             StartCoroutine(StraightMove(x, y));
         }
-
-        //회전해서 앞으로 이동했으면
-        //다시 앞으로 또 회전한다.
-        //transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
-
-        
     }
 }
