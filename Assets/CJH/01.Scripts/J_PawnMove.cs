@@ -14,6 +14,9 @@ public class J_PawnMove : MonoBehaviour
     //45도회전은 x +1을 받았을 때 -45도 회전은 x-1을 받았을 때 그리고 공통적으로 y+1을 받았을 때다
     //45도 회전은 targetPosition - this.transform.position.x =1
 
+
+    //회전해서 앞으로 이동했으면 다시 앞으로 또 회전한다.
+
     [SerializeField]
     public float moveSpeed = 5f;
     public bool isMoving = false; // 움직이는지
@@ -96,6 +99,7 @@ public class J_PawnMove : MonoBehaviour
         StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY));
 
         return;
+        #region 전코드
         //타겟 위치와 나와의 위치의 거리를 잰다
         int moveX = targetX - currentX;
         int moveY = targetY - currentY;
@@ -128,6 +132,7 @@ public class J_PawnMove : MonoBehaviour
             print("이동할수없음");
             //return;
         }
+        #endregion
     }
 
     //직선이동(완료)
@@ -164,7 +169,6 @@ public class J_PawnMove : MonoBehaviour
         //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
         //yield return new WaitForSeconds(1f);
-        
     }
 
     //회전 공식(완료)
@@ -193,6 +197,9 @@ public class J_PawnMove : MonoBehaviour
         yield return new WaitForSeconds(1);
         //StartCoroutine(StraightMove(0, 1));
         StartCoroutine(StraightMove(x, y));
+        //회전해서 앞으로 이동했으면
+        //다시 앞으로 또 회전한다.
+        //transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
 
     }
 }
