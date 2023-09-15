@@ -27,13 +27,17 @@ public class J_PawnMove : MonoBehaviour
     public int currentX;
     public int currentY;
     private Vector3 targetPosition;
+    float originRot;
     bool isDelay;
     float currentTime;
     float dealyTime;
+    float fianlAngle;
+    Chessman[,] ch = new Chessman[8,8];
 
     float myAngle; //내가 움직였던 각도
     private void Start()
     {
+        originRot = transform.localEulerAngles.y;
         myAngle = transform.eulerAngles.y; 
         anim = GetComponentInChildren<Animator>();
     }
@@ -60,23 +64,46 @@ public class J_PawnMove : MonoBehaviour
             PawnMove(0, 1);
 
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            
+            //PawnMove(0, 0);
+            Attack(1, 1);
+        }
     }
 
-   public void PawnMove(int targetX, int targetY)
+    //모든 말들의 움직임을 계산하는 함수 (현재 PawnMove랑 같음)
+    void PieceMove(int targetX, int targetY)
+    {
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        float dot = Vector3.Dot(transform.right, targetPos);
+        //내적을 통해 회전할지를 정한다.
+        int dir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
+        //상대방과 나와의 각도를 잰다
+        float angle = Vector3.Angle(transform.forward, targetPos);
+        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY, true));
+
+        return;
+    }
+
+    float angle = 0;
+    int nDir = 0;
+    //모든 말들의 움직임을 계산하는 함수 
+    public void PawnMove(int targetX, int targetY)
     {
         Debug.Log("실행");
-        int dir = 0;
+        nDir = 0;
         Vector3 targetPos =  new Vector3 (targetX, 0, targetY) - transform.position; 
         float dot = Vector3.Dot(transform.right, targetPos);
 
         if (dot > 0)
         {
-            dir = 1;
+            nDir = 1;
             print("오른쪽에 회전해야해");
         }
         else if (dot < 0)
         {
-            dir = -1;
+            nDir = -1;
             print("왼쪽에 회전해야해");
         }
         else // dot = 0 앞/뒤
@@ -84,56 +111,49 @@ public class J_PawnMove : MonoBehaviour
             float d = Vector3.Dot(transform.forward, targetPos);
             if (d < 0) //뒤
             {
-                dir = 1;
+                nDir = 1;
                 print("뒤로 돌아라");
             }
             else //앞
             {
-                dir = 0;
+                nDir = 0;
                 print("회전 하지 말아라");
             }
         }
         //상대방과 나와의 각도를 잰다
-        float angle = Vector3.Angle(transform.forward, targetPos);
-
-        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY));
-
+        angle = Vector3.Angle(transform.forward, targetPos);
+        //StartCoroutine(Attack(targetX, targetY));
+        StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle, targetX, targetY, true));
+        
         return;
         #region 전코드
-        //타겟 위치와 나와의 위치의 거리를 잰다
-        int moveX = targetX - currentX;
-        int moveY = targetY - currentY;
-
-        //회전을 한다
-        if(moveY >0)
-        {
-            if(moveX >0) //오른쪽 대각선 회전(+)
-            {
-                StartCoroutine(RotatePiece(0, (1.0f / 0) * 0, 0, targetY));
-                //StopCoroutine("RotatePiece");
-                //위의 코루틴이 실행 완료되고나서 직선이동하고싶다
-                //StartCoroutine(StraightMove());
-
-            }
-            else if(moveX <0) //왼쪽 대각선 회전(-)
-            {
-                //StartCoroutine(RotatePiece(-45, 1));
-                //위의 코루틴이 실행 완료되고나서 직선이동하고싶다
-                //StartCoroutine(StraightMove(0, 1));
-
-            }
-            else if(moveX == 0) //직선이동
-            {
-                StartCoroutine(StraightMove(0, 1));
-            }
-        }
-        else if(moveY < 0)
-        {
-            print("이동할수없음");
-            //return;
-        }
+        
         #endregion
     }
+    //1. 위치값을 받는다
+    //2. 적이 있는지 확인한다
+    //3. 있으면 원래 위치까지 움직이는 것이 아니라 -1만큼 가서
+    //4. 때리는 애니메이션 하고 다시+1만큼 간다
+    //++다시 앞으로 회전한다.
+    public void Attack(int targetX, int targetY)
+    {
+        //적이 있는지 확인한다. => 내가 가고자하는 목표값에 적이 있다면
+        //적인지 구분하는 것 : Chessman 코드의 bool값의 isWhite 
+
+
+        //ch.SetValue(targetX, targetY);
+        //ch[targetX, targetY];
+        //
+        Chessman targetPosition = ch[targetX, targetY];
+        // 적이라면
+        if(ch[targetX, targetY].isWhite == false)
+        {
+            Debug.Log("무조건 띄워야 함");
+
+        }   
+
+    }
+
 
     //직선이동(완료)
     IEnumerator StraightMove(int targetX, int targetY)
@@ -154,11 +174,11 @@ public class J_PawnMove : MonoBehaviour
         //타겟의 방향
         Vector3 dir = transform.forward;
         anim.Play("Move", 0, 0);
-        while (elapsedTime / duration < 1)
+        while (elapsedTime / duration <  1 /* 적이 없으면 */)
         {
             elapsedTime +=  Time.deltaTime;
             transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
-            
+            //멈추고
             yield return null;// new WaitForSeconds(0.05f);
             print("움직인다");
         }
@@ -169,10 +189,15 @@ public class J_PawnMove : MonoBehaviour
         //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
         //yield return new WaitForSeconds(1f);
-    }
 
+        //나의 앞을 기준으로 초기값으로 안되어있다면 회전시킨다.
+        //초기각도 : v3.orgin; 변경된 각도 currnetAngle 
+        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
+
+        
+    }
     //회전 공식(완료)
-    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y)
+    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y, bool moveFoward)
     {
         if(duration > 0)
         {
@@ -196,10 +221,16 @@ public class J_PawnMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(1);
         //StartCoroutine(StraightMove(0, 1));
-        StartCoroutine(StraightMove(x, y));
+
+        if(moveFoward)
+        {
+            StartCoroutine(StraightMove(x, y));
+        }
+
         //회전해서 앞으로 이동했으면
         //다시 앞으로 또 회전한다.
         //transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
 
+        
     }
 }
