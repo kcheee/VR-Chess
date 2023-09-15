@@ -9,29 +9,36 @@ using UnityEngine.UIElements;
 
 public class J_PawnMove : MonoBehaviour
 {
-    //ÆùÀÇ ÀÌµ¿±ÔÄ¢ : ¾ÕÀ¸·Î 1º¸, ¾ÕÀ¸·Î 2º¸, 45µµ È¸Àü ÈÄ ¾ÕÀ¸·Î 1º¸, -45µµ È¸Àü ÈÄ ¾ÕÀ¸·Î 1º¸
-    //¾ÕÀ¸·Î 1º¸´Â MovePiece(0,1), 45µµ È¸ÀüÀº StartCoroutine(RotatePiece(-45, 1f)),  
-    //45µµ È¸Àü°ú -45È¸ÀüÇÒ¶§¸¦ ´Ù½Ã ºñ±³ÇØº¸ÀÚ
-    //45µµÈ¸ÀüÀº x +1À» ¹Þ¾ÒÀ» ¶§ -45µµ È¸ÀüÀº x-1À» ¹Þ¾ÒÀ» ¶§ ±×¸®°í °øÅëÀûÀ¸·Î y+1À» ¹Þ¾ÒÀ» ¶§´Ù
-    //45µµ È¸ÀüÀº targetPosition - this.transform.position.x =1
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Ä¢ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½, 45ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½, -45ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ MovePiece(0,1), 45ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ StartCoroutine(RotatePiece(-45, 1f)),  
+    //45ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ -45È¸ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½
+    //45ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ x +1ï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ -45ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ x-1ï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ y+1ï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //45ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ targetPosition - this.transform.position.x =1
+
+
+    //È¸ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ñ´ï¿½.
 
     [SerializeField]
     public float moveSpeed = 5f;
-    public bool isMoving = false; // ¿òÁ÷ÀÌ´ÂÁö
-    public bool isRightRotate = false; //¿À¸¥ÂÊÈ¸ÀüÇÏ´ÂÁö(+)
-    public bool isLeftRotate = false; //¿ÞÂÊÈ¸ÀüÇÏ´ÂÁö(-)
+    public bool isMoving = false; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½
+    public bool isRightRotate = false; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½(+)
+    public bool isLeftRotate = false; //ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½(-)
 
     Animator anim;
     public int currentX;
     public int currentY;
     private Vector3 targetPosition;
+    float originRot;
     bool isDelay;
     float currentTime;
     float dealyTime;
+    float fianlAngle;
+    Chessman[,] ch = new Chessman[8,8];
 
-    float myAngle; //³»°¡ ¿òÁ÷¿´´ø °¢µµ
+    float myAngle; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Start()
     {
+        originRot = transform.localEulerAngles.y;
         myAngle = transform.eulerAngles.y; 
         anim = GetComponentInChildren<Animator>();
     }
@@ -58,105 +65,123 @@ public class J_PawnMove : MonoBehaviour
             PawnMove(0, 1);
 
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            
+            //PawnMove(0, 0);
+            Attack(1, 1);
+        }
     }
 
-   public void PawnMove(int targetX, int targetY)
+    //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ (ï¿½ï¿½ï¿½ï¿½ PawnMoveï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    void PieceMove(int targetX, int targetY)
     {
-        Debug.Log("½ÇÇà");
-        int dir = 0;
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        float dot = Vector3.Dot(transform.right, targetPos);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
+        int dir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        float angle = Vector3.Angle(transform.forward, targetPos);
+        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY, true));
+
+        return;
+    }
+
+    float angle = 0;
+    int nDir = 0;
+    //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ 
+    public void PawnMove(int targetX, int targetY)
+    {
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½");
+        nDir = 0;
         Vector3 targetPos =  new Vector3 (targetX, 0, targetY) - transform.position; 
         float dot = Vector3.Dot(transform.right, targetPos);
 
         if (dot > 0)
         {
-            dir = 1;
-            print("¿À¸¥ÂÊ¿¡ È¸ÀüÇØ¾ßÇØ");
+            nDir = 1;
+            print("ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ È¸ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½");
         }
         else if (dot < 0)
         {
-            dir = -1;
-            print("¿ÞÂÊ¿¡ È¸ÀüÇØ¾ßÇØ");
+            nDir = -1;
+            print("ï¿½ï¿½ï¿½Ê¿ï¿½ È¸ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½");
         }
-        else // dot = 0 ¾Õ/µÚ
+        else // dot = 0 ï¿½ï¿½/ï¿½ï¿½
         {
             float d = Vector3.Dot(transform.forward, targetPos);
-            if (d < 0) //µÚ
+            if (d < 0) //ï¿½ï¿½
             {
-                dir = 1;
-                print("µÚ·Î µ¹¾Æ¶ó");
+                nDir = 1;
+                print("ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½Æ¶ï¿½");
             }
-            else //¾Õ
+            else //ï¿½ï¿½
             {
-                dir = 0;
-                print("È¸Àü ÇÏÁö ¸»¾Æ¶ó");
+                nDir = 0;
+                print("È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¶ï¿½");
             }
         }
-        //»ó´ë¹æ°ú ³ª¿ÍÀÇ °¢µµ¸¦ Àé´Ù
-        float angle = Vector3.Angle(transform.forward, targetPos);
-
-        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY));
-
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        angle = Vector3.Angle(transform.forward, targetPos);
+        //StartCoroutine(Attack(targetX, targetY));
+        StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle, targetX, targetY, true));
+        
         return;
-        //Å¸°Ù À§Ä¡¿Í ³ª¿ÍÀÇ À§Ä¡ÀÇ °Å¸®¸¦ Àé´Ù
-        int moveX = targetX - currentX;
-        int moveY = targetY - currentY;
+        #region ï¿½ï¿½ï¿½Úµï¿½
+        
+        #endregion
+    }
+    //1. ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½
+    //2. ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ñ´ï¿½
+    //3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ -1ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½
+    //4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ï°ï¿½ ï¿½Ù½ï¿½+1ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½
+    //++ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ñ´ï¿½.
+    public void Attack(int targetX, int targetY)
+    {
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ñ´ï¿½. => ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ : Chessman ï¿½Úµï¿½ï¿½ï¿½ boolï¿½ï¿½ï¿½ï¿½ isWhite 
 
-        //È¸ÀüÀ» ÇÑ´Ù
-        if(moveY >0)
+
+        //ch.SetValue(targetX, targetY);
+        //ch[targetX, targetY];
+        //
+        Chessman targetPosition = ch[targetX, targetY];
+        // ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
+        if(ch[targetX, targetY].isWhite == false)
         {
-            if(moveX >0) //¿À¸¥ÂÊ ´ë°¢¼± È¸Àü(+)
-            {
-                StartCoroutine(RotatePiece(0, (1.0f / 0) * 0, 0, targetY));
-                //StopCoroutine("RotatePiece");
-                //À§ÀÇ ÄÚ·çÆ¾ÀÌ ½ÇÇà ¿Ï·áµÇ°í³ª¼­ Á÷¼±ÀÌµ¿ÇÏ°í½Í´Ù
-                //StartCoroutine(StraightMove());
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
 
-            }
-            else if(moveX <0) //¿ÞÂÊ ´ë°¢¼± È¸Àü(-)
-            {
-                //StartCoroutine(RotatePiece(-45, 1));
-                //À§ÀÇ ÄÚ·çÆ¾ÀÌ ½ÇÇà ¿Ï·áµÇ°í³ª¼­ Á÷¼±ÀÌµ¿ÇÏ°í½Í´Ù
-                //StartCoroutine(StraightMove(0, 1));
+        }   
 
-            }
-            else if(moveX == 0) //Á÷¼±ÀÌµ¿
-            {
-                StartCoroutine(StraightMove(0, 1));
-            }
-        }
-        else if(moveY < 0)
-        {
-            print("ÀÌµ¿ÇÒ¼ö¾øÀ½");
-            //return;
-        }
     }
 
-    //Á÷¼±ÀÌµ¿(¿Ï·á)
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½(ï¿½Ï·ï¿½)
     IEnumerator StraightMove(int targetX, int targetY)
     {
-        //ÃÊ±â À§Ä¡
+        //ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡
         Vector3 currentPos = transform.position;
-        //Å¸°ÙÀÇ À§Ä¡
+        //Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
         targetPosition = new Vector3(targetX, 0, targetY);
         
-        //Èå¸¥½Ã°£ Ã¼Å©
+        //ï¿½å¸¥ï¿½Ã°ï¿½ Ã¼Å©
         float elapsedTime = 0;
-        //°Å¸®Àé´Ù
+        //ï¿½Å¸ï¿½ï¿½ï¿½ï¿½
         float dist = Vector3.Distance(transform.position, targetPosition);
-        //½Ã°£
+        //ï¿½Ã°ï¿½
         float duration = dist / moveSpeed;
 
 
-        //Å¸°ÙÀÇ ¹æÇâ
+        //Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 dir = transform.forward;
         anim.Play("Move", 0, 0);
-        while (elapsedTime / duration < 1)
+        while (elapsedTime / duration <  1 /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */)
         {
             elapsedTime +=  Time.deltaTime;
             transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
-            
+            //ï¿½ï¿½ï¿½ß°ï¿½
             yield return null;// new WaitForSeconds(0.05f);
-            print("¿òÁ÷ÀÎ´Ù");
+            print("ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½");
         }
 
         transform.position = targetPosition;
@@ -165,29 +190,34 @@ public class J_PawnMove : MonoBehaviour
         //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
 
-        // ¿òÁ÷ÀÓ ¿Ï·á move ¿Ï·á
-        // °ø°ÝÀ» ÇÏ´Â ÇÔ¼ö¸¦ Â¥¸é °ø°ÝÇÏ°í ±× À§Ä¡·Î ÀÌµ¿ÇÏ°í ±×´ÙÀ½ ÅÏ ³Ñ±è.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ move ï¿½Ï·ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï°ï¿½ ï¿½×´ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ñ±ï¿½.
 
-        // ----------- ÅÏ³Ñ±è ----------------
+        // ----------- ï¿½Ï³Ñ±ï¿½ ----------------
         BoardManager.Instance.PieceIsMove = false;
-        // ----------- ÅÏ³Ñ±è ----------------
+        // ----------- ï¿½Ï³Ñ±ï¿½ ----------------
 
         //yield return new WaitForSeconds(1f);
 
-    }
 
-    //È¸Àü °ø½Ä(¿Ï·á)
-    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y)
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±â°ªï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ¾ï¿½ï¿½Ö´Ù¸ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
+        //ï¿½Ê±â°¢ï¿½ï¿½ : v3.orgin; ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ currnetAngle 
+        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
+
+
+    }
+    //È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Ï·ï¿½)
+    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y, bool moveFoward)
     {
         if(duration > 0)
         {
-            //ÀÚ½ÅÀÇ °¢µµ
+            //ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             float currentAngle = 0;// transform.eulerAngles.y;
-            float elapsedTime = 0f; // ½Ã°£
-                                    //½Ã°£ÀÌ Èå¸£¸é
+            float elapsedTime = 0f; // ï¿½Ã°ï¿½
+                                    //ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½å¸£ï¿½ï¿½
             while (elapsedTime < duration)
             {
-                //È¸ÀüÀ» Lerp°ªÀ¸·Î È¸Àü
+                //È¸ï¿½ï¿½ï¿½ï¿½ Lerpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
                 float angle = Mathf.LerpAngle(currentAngle, targetAngle, elapsedTime / duration);
                 
                 transform.rotation = Quaternion.Euler(0, myAngle + angle, 0);
@@ -201,7 +231,16 @@ public class J_PawnMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(1);
         //StartCoroutine(StraightMove(0, 1));
-        StartCoroutine(StraightMove(x, y));
 
+        if(moveFoward)
+        {
+            StartCoroutine(StraightMove(x, y));
+        }
+
+        //È¸ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ñ´ï¿½.
+        //transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
+
+        
     }
 }
