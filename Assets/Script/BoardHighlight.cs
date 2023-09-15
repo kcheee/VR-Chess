@@ -30,8 +30,9 @@ public class BoardHighlight : MonoBehaviour
                     {
                         Debug.Log("먹을 수 있는 부분.");
                         // 테스트용
-                        GameObject go = Resources.Load("Resources") as GameObject;
-                        go.transform.position = new Vector3(i,0,j);
+                        GameObject highlightObject = Instantiate(Resources.Load<GameObject>("HighlightEat")
+                            , new Vector3(i, 0, j), Quaternion.identity);
+                        HighLights.Add(highlightObject);
                     }
                     // 이동 가능 한 부분 
                     else

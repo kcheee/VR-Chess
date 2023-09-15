@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -163,8 +164,10 @@ public class J_PawnMove : MonoBehaviour
         yield return new WaitForSeconds(0.04f);
         //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
+
+        // move 완료
+        BoardManager.Instance.PieceIsMove = false;
         //yield return new WaitForSeconds(1f);
-        
     }
 
     //회전 공식(완료)

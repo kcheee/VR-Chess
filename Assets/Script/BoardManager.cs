@@ -50,6 +50,10 @@ public class BoardManager : MonoBehaviour
     // Turn System
     public bool isWhiteTurn = true;
     public bool move_TurnLimit = false;
+
+    // Turn Move System
+    public bool PieceIsMove = false;
+
     // promotion 하기 위해 기물들 가져옴.
     public Chessman WhiteKing;
     public Chessman BlackKing;
@@ -134,6 +138,7 @@ public class BoardManager : MonoBehaviour
     //  체스 기물 선택함.
     private void SelectChessman()
     {
+        Debug.Log(Chessmans[1, 1]);
         // 만약 기물이 움직이는 도중이라면
         if (move_TurnLimit) return;
 
@@ -294,7 +299,6 @@ public class BoardManager : MonoBehaviour
                     // 보통 퀸으로 소환하기 때문에 퀸으로 소환.
                     SpawnChessman(10, new Vector3(x, 0, y));
                     SelectedChessman = Chessmans[x, y];
-
                 }
 
                 // Player
@@ -359,8 +363,8 @@ public class BoardManager : MonoBehaviour
             // 선택된 체스말 위치 업데이트
             SelectedChessman.SetPosition(x, y);
 
-            if(SelectedChessman.GetType() != typeof(Pawn)&&!isWhiteTurn)
-            SelectedChessman.transform.position = new Vector3(x, 0, y);
+            //if(SelectedChessman.GetType() != typeof(Pawn)&&!isWhiteTurn)
+            //SelectedChessman.transform.position = new Vector3(x, 0, y);
 
             SelectedChessman.isMoved = true;
 
@@ -368,10 +372,8 @@ public class BoardManager : MonoBehaviour
             // Outline 해제와 SelectedChessman 해제 해주고 return
             if (Chessmans[x, y].isWhite)
             {
-
                 Chessmans[x, y].outline.enabled = false;
                 BoardHighlight.Instance.deleteHighlight();
-
             }
 
             // 상대 턴으로 넘김.
@@ -407,15 +409,21 @@ public class BoardManager : MonoBehaviour
         SelectedChessman = null;
 
     }
-
     IEnumerator move(int x, int y)
     {
         move_TurnLimit = true;
         // 이 코루틴 함수가 될 동안. 선택하지 못하게
         // 이동 하는 함수 
         SelectedChessman.Move(x, y, SelectedChessman.GetType());
-        yield return new WaitForSeconds(3);
-        
+
+        PieceIsMove =true;
+
+        // Move하는 기물 스크립트에서 조종
+        while (PieceIsMove)
+        {
+            yield return null;
+        }
+
         Debug.Log("턴 넘김");
         isWhiteTurn = !isWhiteTurn;
         move_TurnLimit = false;
