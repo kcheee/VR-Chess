@@ -165,9 +165,15 @@ public class J_PawnMove : MonoBehaviour
         //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
 
-        // move 완료
+        // 움직임 완료 move 완료
+        // 공격을 하는 함수를 짜면 공격하고 그 위치로 이동하고 그다음 턴 넘김.
+
+        // ----------- 턴넘김 ----------------
         BoardManager.Instance.PieceIsMove = false;
+        // ----------- 턴넘김 ----------------
+
         //yield return new WaitForSeconds(1f);
+
     }
 
     //회전 공식(완료)

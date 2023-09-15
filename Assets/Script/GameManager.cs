@@ -1,25 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public bool yourTrun;
+    // 프로토는 1분으로 제한.
+    public Text timerText;
+    public float totalTime = 60f;
+    private float currentTime = 60f;
+
     private void Start()
     {
-        // 보드 활성화.
-        // 턴제 시스템.
-        yourTrun = true;
+        currentTime = totalTime;
     }
 
-    private void Update()
+    void Update()
     {
-        // 타일 배치
-        if (Input.GetKeyDown(KeyCode.V))
+        if (currentTime > 0)
         {
+            currentTime -= Time.deltaTime;
+            UpdateTimerDisplay();
+        }
+        else
+        {
+            currentTime = 0;
+            // 타이머가 종료되었을 때 실행할 작업
+            // 게임 오버
+            TimerOver();
 
         }
     }
-    // 턴제 방식으로 코드 
 
+    void UpdateTimerDisplay()
+    {
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    void TimerOver()
+    {
+        // 게임 꺼버림.
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
+
+    }
 }
