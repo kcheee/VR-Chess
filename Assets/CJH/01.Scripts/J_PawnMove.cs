@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class J_PawnMove : MonoBehaviour
 {
     [SerializeField]
     public float moveSpeed = 5f;
     public bool isMoving = false; // 움직이는지
+    public bool hasAttacked = false; //공격해야되는경우가 아니라면
 
     Animator anim;
     public int currentX;
@@ -46,9 +48,10 @@ public class J_PawnMove : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-
+            //Attack();
             //PawnMove(0, 0);
-            Attack(1, 1);
+
+            //TryAttack(currentX + 1, currentY + 1);
         }
     }
 
@@ -62,7 +65,6 @@ public class J_PawnMove : MonoBehaviour
         //상대방과 나와의 각도를 잰다
         float angle = Vector3.Angle(transform.forward, targetPos);
         StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY, true));
-
         return;
     }
 
@@ -71,36 +73,36 @@ public class J_PawnMove : MonoBehaviour
     //모든 말들의 움직임을 계산하는 함수 
     public void PawnMove(int targetX, int targetY)
     {
-        Debug.Log("실행");
+        //Debug.Log("실행");
         //nDir = 0;
         Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
         float dot = Vector3.Dot(transform.right, targetPos);
         nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
         #region 1if
-        if (dot > 0)
-        {
-            nDir = 1;
-            print("오른쪽에 회전해야해");
-        }
-        else if (dot < 0)
-        {
-            nDir = -1;
-            print("왼쪽에 회전해야해");
-        }
-        else // dot = 0 앞/뒤
-        {
-            float d = Vector3.Dot(transform.forward, targetPos);
-            if (d < 0) //뒤
-            {
-                nDir = 1;
-                print("뒤로 돌아라");
-            }
-            else //앞
-            {
-                nDir = 0;
-                print("회전 하지 말아라");
-            }
-        }
+        //if (dot > 0)
+        //{
+        //    nDir = 1;
+        //    print("오른쪽에 회전해야해");
+        //}
+        //else if (dot < 0)
+        //{
+        //    nDir = -1;
+        //    print("왼쪽에 회전해야해");
+        //}
+        //else // dot = 0 앞/뒤
+        //{
+        //    float d = Vector3.Dot(transform.forward, targetPos);
+        //    if (d < 0) //뒤
+        //    {
+        //        nDir = 1;
+        //        print("뒤로 돌아라");
+        //    }
+        //    else //앞
+        //    {
+        //        nDir = 0;
+        //        print("회전 하지 말아라");
+        //    }
+        //}
         #endregion
         //상대방과 나와의 각도를 잰다
         angle = Vector3.Angle(transform.forward, targetPos);
@@ -108,32 +110,61 @@ public class J_PawnMove : MonoBehaviour
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle, targetX, targetY, true));
 
         return;
-        #region 전코드
-
-        #endregion
     }
     //1. 위치값을 받는다
     //2. 적이 있는지 확인한다
     //3. 있으면 원래 위치까지 움직이는 것이 아니라 -1만큼 가서
     //4. 때리는 애니메이션 하고 다시+1만큼 간다
     //++다시 앞으로 회전한다.
+    //float attackRange = 2f;
     public void Attack(int targetX, int targetY)
     {
-        //적이 있는지 확인한다. => 내가 가고자하는 목표값에 적이 있다면
-        //적인지 구분하는 것 : Chessman 코드의 bool값의 isWhite 
 
+        Debug.Log("적을 공격하는 진짜 함수");
+        anim.Play("Attack",0,0);
+        //Chessman targetChessman = ch[targetX, targetY];
 
-        //ch.SetValue(targetX, targetY);
-        //ch[targetX, targetY];
-        //
-        Chessman targetPosition = ch[targetX, targetY];
-        // 적이라면
-        if (ch[targetX, targetY].isWhite == false)
-        {
-            Debug.Log("무조건 띄워야 함");
+        //Debug.Log("그래도 여기 공격 함수는 들어오는거 맞지");
+        //if(targetChessman != null)
+        //{
+        //    Debug.Log("코루틴이 문제인듯");
+        //    //적인 경우
+        //    if(targetChessman.isWhite != GetComponent<Chessman>().isWhite) { 
+        //        Debug.Log("적 공격");
+        //        anim.Play("Attack");
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("적 공격 불가");
+        //    }
+        //}
 
-        }
+        ////적을 탐지. 
+        //Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
 
+        //foreach(Collider enemy in hitEnemies)
+        //{
+        //    //적인지 확인하기 위해 Chessman 스크립트를 가진 체스 찾기
+        //    Chessman chessman = enemy.GetComponent<Chessman>();
+
+        //    if(chessman != null)
+        //    {
+        //        //적인 경우에만 
+        //        if(chessman.isWhite =false)
+        //        {
+        //            //isWhite값이 false인 경우 공격(적)
+        //            Debug.Log("적을 공=격");
+        //            anim.Play("Attack");
+        //            //적 파괴
+        //            //Destroy(enemy.gameObject);
+
+        //        }
+        //        else
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
     }
     //직선이동(완료)
     IEnumerator StraightMove(int targetX, int targetY)
@@ -158,7 +189,13 @@ public class J_PawnMove : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
-            //멈추고
+            //타겟 위치에 적이 있는 경우 공격
+            if(!hasAttacked && isEnemyPosition(targetX,targetY))
+            {
+                Debug.Log("적이 있어서 공격");
+                Attack(targetX, targetY);
+                hasAttacked = true; //중복 공격 방지
+            }
             yield return null;// new WaitForSeconds(0.05f);
             //print("움직인다");
         }
@@ -174,9 +211,22 @@ public class J_PawnMove : MonoBehaviour
 
         //회전한만큼 회전시킨다.
         StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
-
-
     }
+    //타겟위치에 적이 있는지 체크하는 함수
+    bool isEnemyPosition(int targetX, int targetY)
+    {
+        Chessman targetChessman = ch[targetX, targetY];
+        if(targetChessman != null)
+        {
+            //적인 경우
+            if(targetChessman.isWhite != GetComponent<Chessman>().isWhite)
+            {
+                Debug.Log("적입니다.");
+                return true;
+            }
+        }
+        return false;
+    } 
     //회전 공식(완료)
     private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y, bool moveFoward)
     {

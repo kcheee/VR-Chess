@@ -405,12 +405,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676542249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6200b97d3d1cafd4a9aa82b5716294c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yourTrun: 0
+  timerText: {fileID: 0}
+  totalTime: 60
 --- !u!1 &1747323628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8729485250777845241, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
@@ -445,6 +446,7 @@ MonoBehaviour:
   SelectedChessman: {fileID: 0}
   isWhiteTurn: 1
   move_TurnLimit: 0
+  PieceIsMove: 0
   WhiteKing: {fileID: 0}
   BlackKing: {fileID: 0}
   WhiteRook1: {fileID: 0}
@@ -476,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5274228413259969526, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.953
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5274228413259969526, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -484,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5274228413259969526, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.069
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5274228413259969526, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1127,8 +1129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   isMoving: 0
-  isRightRotate: 0
-  isLeftRotate: 0
   currentX: 0
   currentY: 0
 --- !u!4 &2242467978592345246
