@@ -41,6 +41,10 @@ public class J_AttackTest : MonoBehaviour
         anim.Play("Attack");
 
     }
+    void Die()
+    {
+        anim.Play("Die");
+    }
     private void OnTriggerEnter(Collider other)
     {
         //상대방 콜라이더 검출
@@ -60,5 +64,15 @@ public class J_AttackTest : MonoBehaviour
                 }
             }
         }
+    }
+
+    void Test()
+    {
+        //상대폰을 찾는다
+        
+        //상대폰 애내메이션 (Die)
+        
+        //
+
     }
 }
