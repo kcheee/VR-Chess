@@ -31,7 +31,7 @@ public class BoardHighlight : MonoBehaviour
                         Debug.Log("먹을 수 있는 부분.");
                         // 테스트용
                         GameObject highlightObject = Instantiate(Resources.Load<GameObject>("HighlightEat")
-                            , new Vector3(i, 0, j), Quaternion.identity);
+                            , new Vector3(i, 0.1f, j), Quaternion.identity);
                         HighLights.Add(highlightObject);
                     }
                     // 이동 가능 한 부분 
@@ -43,7 +43,7 @@ public class BoardHighlight : MonoBehaviour
                         // 하이라이트나 따로 Mark를 Material를 보여줘야함.
 
                         GameObject highlightObject = Instantiate(Resources.Load<GameObject>("Highlight")
-                            , new Vector3(i, 0, j),Quaternion.identity);
+                            , new Vector3(i, 0.1f, j),Quaternion.identity);
                         HighLights.Add(highlightObject);
                         //go.transform.position = new Vector3(i, 0, j);
                         //Debug.Log(go.transform.position);

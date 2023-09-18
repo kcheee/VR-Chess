@@ -154,7 +154,7 @@ public class ChessAI : MonoBehaviour
     private void Think()
     {
         // √÷¥Î ≈Ωªˆ ±Ì¿Ã.
-        maxDepth = 4;
+        maxDepth = 3;
         int depth = maxDepth - 1;
         // winningValue = MiniMax(depth, true);
         winningValue = AlphaBeta(depth, true, System.Int32.MinValue, System.Int32.MaxValue);
