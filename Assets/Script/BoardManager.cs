@@ -297,6 +297,9 @@ public class BoardManager : MonoBehaviour
                 // AI
                 if (y == 7)
                 {
+                    // 바로 바꾸지말고 움직임이 끝났다면 바꿔줘야 함.
+                    // 코루틴으로 다시 설정해주자
+
                     ActiveChessmans.Remove(SelectedChessman.gameObject);
                     Destroy(SelectedChessman.gameObject);
                     // 보통 퀸으로 소환하기 때문에 퀸으로 소환.
