@@ -68,6 +68,12 @@ public class Chessman : MonoBehaviour
             Debug.Log("실행");
             transform.GetComponent<J_PawnMove>().PawnMove(x, y);
         }
+        if (type == typeof(King))
+        {
+            Debug.Log("실행");
+            transform.GetComponent<J_PawnMove>().PawnMove(x, y);
+        }
+
     }
 
     // Outline

@@ -894,7 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936463c2a4a0df148ac9401a04c21745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWhite: 1
+  isWhite: 0
   isMoved: 0
   chesstype: 0
   outline: {fileID: 0}
