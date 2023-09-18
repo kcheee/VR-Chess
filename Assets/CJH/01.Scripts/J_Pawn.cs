@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 //폰의 이동규칙 : 앞으로 1보, 앞으로 2보, 45도 회전 후 앞으로 1보, -45도 회전 후 앞으로 1보
 //앞으로 1보는 MovePiece(0,1), 45도 회전은 StartCoroutine(RotatePiece(-45, 1f)),  
