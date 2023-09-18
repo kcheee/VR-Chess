@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4744f2b8006c6f647a29e72cfbfc1125, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.48395744, g: 0.57573867, b: 0.68019843, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -337,7 +337,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &726490027
 GameObject:
@@ -834,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ce80d7520e4604c6faaad086dc1a7590, type: 2}
     - target: {fileID: 5773256366622995465, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5773256366622995465, guid: 5eccbf4be2c00e94689ee8062e4e7276, type: 3}
       propertyPath: m_LocalPosition.x
@@ -943,18 +943,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChessCount: 0
   ChessmanPrefabs:
-  - {fileID: 488209355170328060, guid: af9c290eb24c2804fad47dd93131f7c7, type: 3}
-  - {fileID: 8373577355685179793, guid: a44f0b22e8c738a4d80e4b3465a29f68, type: 3}
-  - {fileID: 5361428310898464093, guid: d2f97109211c9e146abce8cd40a9eb80, type: 3}
-  - {fileID: 1725687788178442, guid: db8ad03b9fba5a542a61e263294e0429, type: 3}
-  - {fileID: 7884806390629214701, guid: 2b256691a57282444b58f64c2051d761, type: 3}
-  - {fileID: 5219323918571120936, guid: 6aa40a30f4a5dc8439acfc35d27dea70, type: 3}
-  - {fileID: 488209355170328060, guid: 7fe84efdb9f6c694c9cabf96abbab527, type: 3}
-  - {fileID: 8373577355685179793, guid: 8dc0286f9001efa40865783c03c78605, type: 3}
-  - {fileID: 5361428310898464093, guid: cebf9272e00e1f145a3484cfcf69962c, type: 3}
-  - {fileID: 1887074840451402, guid: 3506e95142a449849a33fc0dfc090360, type: 3}
-  - {fileID: 7884806390629214701, guid: 49477cd35a5307e45b2d058b3fb45738, type: 3}
-  - {fileID: 5277041288790819008, guid: e945b09ff7f66a549bda20880982ba7e, type: 3}
+  - {fileID: 7193480333137699817, guid: 7942ef4971c8f5a4a926079ec85e9409, type: 3}
+  - {fileID: 869186455945884708, guid: 8ea4a3cb997067c4483615fed99ddd12, type: 3}
+  - {fileID: 26152986674880324, guid: 0d26627502b5070468d0cfc493ca2837, type: 3}
+  - {fileID: 6659525048061705379, guid: 11132ca9a5f5d4b46af91d7e6f46d227, type: 3}
+  - {fileID: 3395763510902437890, guid: 7cc2802879fc220458610e6c5b62d817, type: 3}
+  - {fileID: 1728187353904243389, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+  - {fileID: 7861527571580540591, guid: 4a9f7ecf1aaa8ca4da3b960001778023, type: 3}
+  - {fileID: 7208156746699134750, guid: 5d2146fc980a1e14fa8e5921b68b39d6, type: 3}
+  - {fileID: 3487407850554737821, guid: 6e511269bf2b0f944b746d16edd4cb3a, type: 3}
+  - {fileID: 1999779285983888674, guid: 38ce18cc3000183478ac7b6c33d49228, type: 3}
+  - {fileID: 1800045439719810722, guid: cbfd4d56a3596444cb615987291dad28, type: 3}
+  - {fileID: 2142620018598608326, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
   SelectedChessman: {fileID: 0}
   isWhiteTurn: 1
   move_TurnLimit: 0

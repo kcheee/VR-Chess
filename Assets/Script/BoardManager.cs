@@ -256,6 +256,8 @@ public class BoardManager : MonoBehaviour
     }
 
     bool ispromotion = false;
+    Chessman deletePiece = null;
+    
     // 체스 기물 이동
    public void MoveChessman(int x, int y)
     {
@@ -269,7 +271,11 @@ public class BoardManager : MonoBehaviour
             {
                 // 상대 말을 잡음
                 ActiveChessmans.Remove(opponent.gameObject);
-                Destroy(opponent.gameObject);
+                // 나중에 제거하기 위해.
+                deletePiece = opponent;
+                
+                // 바로 삭제하지말고 나중에 삭제.
+                //Destroy(opponent.gameObject);
             }
 
             // -------앙파상트 이동 관리------------
@@ -428,6 +434,12 @@ public class BoardManager : MonoBehaviour
         while (PieceIsMove)
         {
             yield return null;
+        }
+        
+        // 싸우는 모션하고 그 다음 체스기물이 사라지게.
+        if (deletePiece != null)
+        {
+            Destroy(deletePiece.gameObject);
         }
 
         Debug.Log("턴 넘김");
