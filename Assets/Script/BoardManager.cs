@@ -216,6 +216,9 @@ public class BoardManager : MonoBehaviour
         {
             SpawnChessman(5, new Vector3(i, 0, 6));
         }
+        
+        // 프로모션 테스트 용
+        //SpawnChessman(5, new Vector3(7, 0, 2));
 
         // Spawn Black Pieces
         // Rook1
