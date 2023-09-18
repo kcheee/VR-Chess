@@ -1,41 +1,28 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class J_PawnMove : MonoBehaviour
 {
-    //ÆùÀÇ ÀÌµ¿±ÔÄ¢ : ¾ÕÀ¸·Î 1º¸, ¾ÕÀ¸·Î 2º¸, 45µµ È¸Àü ÈÄ ¾ÕÀ¸·Î 1º¸, -45µµ È¸Àü ÈÄ ¾ÕÀ¸·Î 1º¸
-    //¾ÕÀ¸·Î 1º¸´Â MovePiece(0,1), 45µµ È¸ÀüÀº StartCoroutine(RotatePiece(-45, 1f)),  
-    //45µµ È¸Àü°ú -45È¸ÀüÇÒ¶§¸¦ ´Ù½Ã ºñ±³ÇØº¸ÀÚ
-    //45µµÈ¸ÀüÀº x +1À» ¹Ş¾ÒÀ» ¶§ -45µµ È¸ÀüÀº x-1À» ¹Ş¾ÒÀ» ¶§ ±×¸®°í °øÅëÀûÀ¸·Î y+1À» ¹Ş¾ÒÀ» ¶§´Ù
-    //45µµ È¸ÀüÀº targetPosition - this.transform.position.x =1
-
     [SerializeField]
     public float moveSpeed = 5f;
-    public bool isMoving = false; // ¿òÁ÷ÀÌ´ÂÁö
-    public bool isRightRotate = false; //¿À¸¥ÂÊÈ¸ÀüÇÏ´ÂÁö(+)
-    public bool isLeftRotate = false; //¿ŞÂÊÈ¸ÀüÇÏ´ÂÁö(-)
+    public bool isMoving = false; // ì›€ì§ì´ëŠ”ì§€
+    public bool hasAttacked = false; //ê³µê²©í•´ì•¼ë˜ëŠ”ê²½ìš°ê°€ ì•„ë‹ˆë¼ë©´
 
     Animator anim;
     public int currentX;
     public int currentY;
     private Vector3 targetPosition;
-    bool isDelay;
-    float currentTime;
-    float dealyTime;
+    Chessman[,] ch = new Chessman[8, 8];
 
-    float myAngle; //³»°¡ ¿òÁ÷¿´´ø °¢µµ
+    float myAngle; //ë‚´ê°€ ì›€ì§ì˜€ë˜ ê°ë„
     private void Start()
     {
-        myAngle = transform.eulerAngles.y; 
+        myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
     }
-   
+
     private void Update()
     {
         currentX = (int)transform.position.x;
@@ -44,164 +31,230 @@ public class J_PawnMove : MonoBehaviour
         {
             PawnMove(1, 2);
         }
-        if(Input.GetKeyDown(KeyCode.B)) {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             //StartCoroutine(RotatePiece(45, 1));
             PawnMove(0, 3);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
             PawnMove(5, 5);
-                     
+
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
             PawnMove(0, 1);
 
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            //Attack();
+            //PawnMove(0, 0);
+
+            //TryAttack(currentX + 1, currentY + 1);
+        }
     }
 
-   public void PawnMove(int targetX, int targetY)
+    //ëª¨ë“  ë§ë“¤ì˜ ì›€ì§ì„ì„ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜ (í˜„ì¬ PawnMoveë‘ ê°™ìŒ)
+    void PieceMove(int targetX, int targetY)
     {
-        Debug.Log("½ÇÇà");
-        int dir = 0;
-        Vector3 targetPos =  new Vector3 (targetX, 0, targetY) - transform.position; 
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
         float dot = Vector3.Dot(transform.right, targetPos);
-
-        if (dot > 0)
-        {
-            dir = 1;
-            print("¿À¸¥ÂÊ¿¡ È¸ÀüÇØ¾ßÇØ");
-        }
-        else if (dot < 0)
-        {
-            dir = -1;
-            print("¿ŞÂÊ¿¡ È¸ÀüÇØ¾ßÇØ");
-        }
-        else // dot = 0 ¾Õ/µÚ
-        {
-            float d = Vector3.Dot(transform.forward, targetPos);
-            if (d < 0) //µÚ
-            {
-                dir = 1;
-                print("µÚ·Î µ¹¾Æ¶ó");
-            }
-            else //¾Õ
-            {
-                dir = 0;
-                print("È¸Àü ÇÏÁö ¸»¾Æ¶ó");
-            }
-        }
-        //»ó´ë¹æ°ú ³ª¿ÍÀÇ °¢µµ¸¦ Àé´Ù
+        //ë‚´ì ì„ í†µí•´ íšŒì „í• ì§€ë¥¼ ì •í•œë‹¤.
+        int dir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
+        //ìƒëŒ€ë°©ê³¼ ë‚˜ì™€ì˜ ê°ë„ë¥¼ ì°ë‹¤
         float angle = Vector3.Angle(transform.forward, targetPos);
+        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY, true));
+        return;
+    }
 
-        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY));
+    float angle = 0;
+    int nDir = 0;
+    //ëª¨ë“  ë§ë“¤ì˜ ì›€ì§ì„ì„ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜ 
+    public void PawnMove(int targetX, int targetY)
+    {
+        //Debug.Log("ì‹¤í–‰");
+        //nDir = 0;
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        float dot = Vector3.Dot(transform.right, targetPos);
+        nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
+        #region 1if
+        //if (dot > 0)
+        //{
+        //    nDir = 1;
+        //    print("ì˜¤ë¥¸ìª½ì— íšŒì „í•´ì•¼í•´");
+        //}
+        //else if (dot < 0)
+        //{
+        //    nDir = -1;
+        //    print("ì™¼ìª½ì— íšŒì „í•´ì•¼í•´");
+        //}
+        //else // dot = 0 ì•/ë’¤
+        //{
+        //    float d = Vector3.Dot(transform.forward, targetPos);
+        //    if (d < 0) //ë’¤
+        //    {
+        //        nDir = 1;
+        //        print("ë’¤ë¡œ ëŒì•„ë¼");
+        //    }
+        //    else //ì•
+        //    {
+        //        nDir = 0;
+        //        print("íšŒì „ í•˜ì§€ ë§ì•„ë¼");
+        //    }
+        //}
+        #endregion
+        //ìƒëŒ€ë°©ê³¼ ë‚˜ì™€ì˜ ê°ë„ë¥¼ ì°ë‹¤
+        angle = Vector3.Angle(transform.forward, targetPos);
+        //StartCoroutine(Attack(targetX, targetY));
+        StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle, targetX, targetY, true));
 
         return;
-        //Å¸°Ù À§Ä¡¿Í ³ª¿ÍÀÇ À§Ä¡ÀÇ °Å¸®¸¦ Àé´Ù
-        int moveX = targetX - currentX;
-        int moveY = targetY - currentY;
-
-        //È¸ÀüÀ» ÇÑ´Ù
-        if(moveY >0)
-        {
-            if(moveX >0) //¿À¸¥ÂÊ ´ë°¢¼± È¸Àü(+)
-            {
-                StartCoroutine(RotatePiece(0, (1.0f / 0) * 0, 0, targetY));
-                //StopCoroutine("RotatePiece");
-                //À§ÀÇ ÄÚ·çÆ¾ÀÌ ½ÇÇà ¿Ï·áµÇ°í³ª¼­ Á÷¼±ÀÌµ¿ÇÏ°í½Í´Ù
-                //StartCoroutine(StraightMove());
-
-            }
-            else if(moveX <0) //¿ŞÂÊ ´ë°¢¼± È¸Àü(-)
-            {
-                //StartCoroutine(RotatePiece(-45, 1));
-                //À§ÀÇ ÄÚ·çÆ¾ÀÌ ½ÇÇà ¿Ï·áµÇ°í³ª¼­ Á÷¼±ÀÌµ¿ÇÏ°í½Í´Ù
-                //StartCoroutine(StraightMove(0, 1));
-
-            }
-            else if(moveX == 0) //Á÷¼±ÀÌµ¿
-            {
-                StartCoroutine(StraightMove(0, 1));
-            }
-        }
-        else if(moveY < 0)
-        {
-            print("ÀÌµ¿ÇÒ¼ö¾øÀ½");
-            //return;
-        }
     }
+    //1. ìœ„ì¹˜ê°’ì„ ë°›ëŠ”ë‹¤
+    //2. ì ì´ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤
+    //3. ìˆìœ¼ë©´ ì›ë˜ ìœ„ì¹˜ê¹Œì§€ ì›€ì§ì´ëŠ” ê²ƒì´ ì•„ë‹ˆë¼ -1ë§Œí¼ ê°€ì„œ
+    //4. ë•Œë¦¬ëŠ” ì• ë‹ˆë©”ì´ì…˜ í•˜ê³  ë‹¤ì‹œ+1ë§Œí¼ ê°„ë‹¤
+    //++ë‹¤ì‹œ ì•ìœ¼ë¡œ íšŒì „í•œë‹¤.
+    //float attackRange = 2f;
+    public void Attack(int targetX, int targetY)
+    {
 
-    //Á÷¼±ÀÌµ¿(¿Ï·á)
+        Debug.Log("ì ì„ ê³µê²©í•˜ëŠ” ì§„ì§œ í•¨ìˆ˜");
+        anim.Play("Attack",0,0);
+        //Chessman targetChessman = ch[targetX, targetY];
+
+        //Debug.Log("ê·¸ë˜ë„ ì—¬ê¸° ê³µê²© í•¨ìˆ˜ëŠ” ë“¤ì–´ì˜¤ëŠ”ê±° ë§ì§€");
+        //if(targetChessman != null)
+        //{
+        //    Debug.Log("ì½”ë£¨í‹´ì´ ë¬¸ì œì¸ë“¯");
+        //    //ì ì¸ ê²½ìš°
+        //    if(targetChessman.isWhite != GetComponent<Chessman>().isWhite) { 
+        //        Debug.Log("ì  ê³µê²©");
+        //        anim.Play("Attack");
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("ì  ê³µê²© ë¶ˆê°€");
+        //    }
+        //}
+
+        ////ì ì„ íƒì§€. 
+        //Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
+
+        //foreach(Collider enemy in hitEnemies)
+        //{
+        //    //ì ì¸ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ Chessman ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì§„ ì²´ìŠ¤ ì°¾ê¸°
+        //    Chessman chessman = enemy.GetComponent<Chessman>();
+
+        //    if(chessman != null)
+        //    {
+        //        //ì ì¸ ê²½ìš°ì—ë§Œ 
+        //        if(chessman.isWhite =false)
+        //        {
+        //            //isWhiteê°’ì´ falseì¸ ê²½ìš° ê³µê²©(ì )
+        //            Debug.Log("ì ì„ ê³µ=ê²©");
+        //            anim.Play("Attack");
+        //            //ì  íŒŒê´´
+        //            //Destroy(enemy.gameObject);
+
+        //        }
+        //        else
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
+    }
+    //ì§ì„ ì´ë™(ì™„ë£Œ)
     IEnumerator StraightMove(int targetX, int targetY)
     {
-        //ÃÊ±â À§Ä¡
+        //ì´ˆê¸° ìœ„ì¹˜
         Vector3 currentPos = transform.position;
-        //Å¸°ÙÀÇ À§Ä¡
+        //íƒ€ê²Ÿì˜ ìœ„ì¹˜
         targetPosition = new Vector3(targetX, 0, targetY);
-        
-        //Èå¸¥½Ã°£ Ã¼Å©
+
+        //íë¥¸ì‹œê°„ ì²´í¬
         float elapsedTime = 0;
-        //°Å¸®Àé´Ù
+        //ê±°ë¦¬ì°ë‹¤
         float dist = Vector3.Distance(transform.position, targetPosition);
-        //½Ã°£
+        //ì‹œê°„
         float duration = dist / moveSpeed;
 
 
-        //Å¸°ÙÀÇ ¹æÇâ
+        //íƒ€ê²Ÿì˜ ë°©í–¥
         Vector3 dir = transform.forward;
         anim.Play("Move", 0, 0);
-        while (elapsedTime / duration < 1)
+        while (elapsedTime / duration < 1 /* ì ì´ ì—†ìœ¼ë©´ */)
         {
-            elapsedTime +=  Time.deltaTime;
+            elapsedTime += Time.deltaTime;
             transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
-            
+            //íƒ€ê²Ÿ ìœ„ì¹˜ì— ì ì´ ìˆëŠ” ê²½ìš° ê³µê²©
+            if(!hasAttacked && isEnemyPosition(targetX,targetY))
+            {
+                Debug.Log("ì ì´ ìˆì–´ì„œ ê³µê²©");
+                Attack(targetX, targetY);
+                hasAttacked = true; //ì¤‘ë³µ ê³µê²© ë°©ì§€
+            }
             yield return null;// new WaitForSeconds(0.05f);
-            print("¿òÁ÷ÀÎ´Ù");
+            //print("ì›€ì§ì¸ë‹¤");
         }
-
         transform.position = targetPosition;
-
         yield return new WaitForSeconds(0.04f);
-        //anim.SetTrigger("Idle");
         anim.CrossFade("Idle", 0.5f, 0);
 
-        // ¿òÁ÷ÀÓ ¿Ï·á move ¿Ï·á
-        // °ø°İÀ» ÇÏ´Â ÇÔ¼ö¸¦ Â¥¸é °ø°İÇÏ°í ±× À§Ä¡·Î ÀÌµ¿ÇÏ°í ±×´ÙÀ½ ÅÏ ³Ñ±è.
-
-        // ----------- ÅÏ³Ñ±è ----------------
+        // ----------- í„´ë„˜ê¹€----------------
         BoardManager.Instance.PieceIsMove = false;
-        // ----------- ÅÏ³Ñ±è ----------------
+        // ----------- í„´ë„˜ê¹€ ----------------
 
         //yield return new WaitForSeconds(1f);
 
+        //íšŒì „í•œë§Œí¼ íšŒì „ì‹œí‚¨ë‹¤.
+        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
     }
-
-    //È¸Àü °ø½Ä(¿Ï·á)
-    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y)
+    //íƒ€ê²Ÿìœ„ì¹˜ì— ì ì´ ìˆëŠ”ì§€ ì²´í¬í•˜ëŠ” í•¨ìˆ˜
+    bool isEnemyPosition(int targetX, int targetY)
     {
-        if(duration > 0)
+        Chessman targetChessman = ch[targetX, targetY];
+        if(targetChessman != null)
         {
-            //ÀÚ½ÅÀÇ °¢µµ
+            //ì ì¸ ê²½ìš°
+            if(targetChessman.isWhite != GetComponent<Chessman>().isWhite)
+            {
+                Debug.Log("ì ì…ë‹ˆë‹¤.");
+                return true;
+            }
+        }
+        return false;
+    } 
+    //íšŒì „ ê³µì‹(ì™„ë£Œ)
+    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y, bool moveFoward)
+    {
+        if (duration > 0)
+        {
+            //ìì‹ ì˜ ê°ë„
             float currentAngle = 0;// transform.eulerAngles.y;
-            float elapsedTime = 0f; // ½Ã°£
-                                    //½Ã°£ÀÌ Èå¸£¸é
+            float elapsedTime = 0f; // ì‹œê°„
+                                    //ì‹œê°„ì´ íë¥´ë©´
             while (elapsedTime < duration)
             {
-                //È¸ÀüÀ» Lerp°ªÀ¸·Î È¸Àü
+                //íšŒì „ì„ Lerpê°’ìœ¼ë¡œ íšŒì „
                 float angle = Mathf.LerpAngle(currentAngle, targetAngle, elapsedTime / duration);
-                
+
                 transform.rotation = Quaternion.Euler(0, myAngle + angle, 0);
 
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
         }
-        
+
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(1);
-        //StartCoroutine(StraightMove(0, 1));
-        StartCoroutine(StraightMove(x, y));
 
+        if (moveFoward)
+        {
+            StartCoroutine(StraightMove(x, y));
+        }
     }
 }
