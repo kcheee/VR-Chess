@@ -200,7 +200,7 @@ public class J_PawnMove : MonoBehaviour
             //print("움직인다");
         }
         transform.position = targetPosition;
-        yield return new WaitForSeconds(0.04f);
+        yield return new WaitForSeconds(0.01f);
         anim.CrossFade("Idle", 0.5f, 0);
 
         // ----------- 턴넘김----------------
