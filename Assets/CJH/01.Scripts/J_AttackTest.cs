@@ -107,6 +107,10 @@ public class J_AttackTest : MonoBehaviour
     {
         EnemyAnimator.CrossFade("Hit",0,0);
     }
+    public void OnAttack_HitPlus()
+    {
+        EnemyAnimator.CrossFade("Hit", 0, 0);
+    }
     public void OnAttack_Finished()
     {
         Debug.Log("다이 애니");

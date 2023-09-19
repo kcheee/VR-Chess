@@ -25,6 +25,10 @@ public class J_AnimEvent : MonoBehaviour
         attackTest.OnAttack_Hit();
 
     }
+    public void OnAttack_HitPlus()
+    {
+        attackTest.OnAttack_HitPlus();
+    }
     public void OnAttack_Finished()
     {
         attackTest.OnAttack_Finished();
