@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class J_PawnMove : MonoBehaviour
 {
     [SerializeField]
-    public float moveSpeed = 5f;
+    private float moveSpeed = 3f;
     public bool isMoving = false; // 움직이는지
     public bool hasAttacked = false; //공격해야되는경우가 아니라면
 
@@ -250,7 +250,7 @@ public class J_PawnMove : MonoBehaviour
 
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
 
         if (moveFoward)
         {
