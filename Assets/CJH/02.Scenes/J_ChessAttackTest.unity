@@ -138,6 +138,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 989543049826791854, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
   m_PrefabInstance: {fileID: 1753219486}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &383582691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5582249341949231653, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+  m_PrefabInstance: {fileID: 1753219486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &383582694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383582691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fc0f4e81395ec4bbbdfeb15e23f871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &574125720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2488213950937127337, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
@@ -326,6 +343,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 52.757, y: 180, z: 0}
+--- !u!1 &984104130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1728187353904243389, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+  m_PrefabInstance: {fileID: 1098115334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1067399285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1179767630865599004, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
@@ -344,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1724118165017566193, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.018
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1724118165017566193, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -352,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1724118165017566193, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.152
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1724118165017566193, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -388,13 +410,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5086741675970741778, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
-        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
-        animation clip 'Death Forward'"
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9952804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.022964425
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0011659265
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.094277196
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.633
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953717524055364396, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -10.825
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
@@ -610,6 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  Red: {fileID: 0}
 --- !u!1001 &1753219486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,13 +664,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1212557139693224677, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
-        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
-        animation clip 'Death Forward'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -639,13 +678,33 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.036
       objectReference: {fileID: 0}
+    - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.94452393
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000014156106
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000027567154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.32844272
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394805057444141269, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -38.349
+      objectReference: {fileID: 0}
     - target: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.953
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -653,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -707,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  Red: {fileID: 984104130}
 --- !u!4 &1764672946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2140932027290373872, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
@@ -749,7 +809,7 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 0.82955766, y: 0.06522444, z: 0.16387877}
+      IKPosition: {x: 0.87655765, y: 0.06522444, z: 0.25387877}
       IKPositionWeight: 0
       root: {fileID: 1764672946}
       target: {fileID: 0}
@@ -793,7 +853,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 1.0129986, y: 0.06497879, z: -0.37978166}
+      IKPosition: {x: 1.0599985, y: 0.06497879, z: -0.28978166}
       IKPositionWeight: 0
       root: {fileID: 1764672946}
       target: {fileID: 0}
@@ -837,13 +897,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 0.62520546, y: 0.35629123, z: 0.12218949}
+      IKPosition: {x: 0.67220545, y: 0.35629123, z: 0.2121895}
       IKPositionWeight: 0
       root: {fileID: 1764672946}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.83323413, y: -0.042644277, z: 0.3727467, w: 0.4061555}
-      bendNormal: {x: -0.030562302, y: 0.010655475, z: 0.012468142}
+      bendNormal: {x: -0.030562302, y: 0.010655466, z: 0.01246813}
       bone1:
         transform: {fileID: 1494314039}
         weight: 1
@@ -881,13 +941,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 1.2675178, y: 0.3468298, z: -0.268547}
+      IKPosition: {x: 1.3145177, y: 0.3468298, z: -0.17854701}
       IKPositionWeight: 0.99
       root: {fileID: 1764672946}
       target: {fileID: 1937665655}
       IKRotationWeight: 0
       IKRotation: {x: 0.6189594, y: 0.027661812, z: -0.7771974, w: 0.10994499}
-      bendNormal: {x: -0.02817726, y: -0.011842401, z: 0.0081166485}
+      bendNormal: {x: -0.028177261, y: -0.011842402, z: 0.0081166765}
       bone1:
         transform: {fileID: 254378881}
         weight: 1
@@ -925,7 +985,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 0.9159029, y: 0.6827624, z: -0.106144786}
+      IKPosition: {x: 0.9629029, y: 0.6827624, z: -0.016144782}
       IKPositionWeight: 0
       root: {fileID: 1764672946}
       target: {fileID: 0}
@@ -936,34 +996,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 1934395551}
         weight: 1
-        solverPosition: {x: 0.91667134, y: 0.53653216, z: -0.11410673}
+        solverPosition: {x: 0.9636713, y: 0.53653216, z: -0.024106722}
         solverRotation: {x: -0.028736068, y: 0.3293583, z: 0.019179922, w: 0.94357264}
         defaultLocalPosition: {x: -0, y: 0.0781842, z: -0.007119901}
         defaultLocalRotation: {x: 0.001286657, y: -0.039365314, z: -0.00082442357, w: 0.9992237}
-        length: 0.0686942
+        length: 0.06869419
         sqrMag: 0
-        axis: {x: -0.000000027645948, y: 0.0686942, z: -0.000000011435225}
+        axis: {x: 0.000000023622487, y: 0.06869419, z: 0.000000019724315}
       - transform: {fileID: 1228103243}
         weight: 1
-        solverPosition: {x: 0.9128846, y: 0.60506237, z: -0.11696406}
+        solverPosition: {x: 0.95988464, y: 0.60506237, z: -0.026964057}
         solverRotation: {x: 0.07171054, y: 0.25107265, z: -0.0012620981, w: 0.9653074}
         defaultLocalPosition: {x: -0, y: 0.09159226, z: 9.365918e-11}
         defaultLocalRotation: {x: 0.100634485, y: -0.08236589, z: 0.011127901, w: 0.9914458}
         length: 0.07850771
         sqrMag: 0
-        axis: {x: 0.00000003314485, y: 0.07850771, z: 0.000000009546505}
+        axis: {x: -0.000000020751365, y: 0.07850771, z: -0.000000016117232}
       - transform: {fileID: 1491342967}
         weight: 1
-        solverPosition: {x: 0.9159029, y: 0.6827624, z: -0.106144786}
+        solverPosition: {x: 0.9629029, y: 0.6827624, z: -0.016144782}
         solverRotation: {x: 0.1709302, y: 0.16849144, z: -0.021682516, w: 0.9705273}
         defaultLocalPosition: {x: -0, y: 0.10467688, z: -1.629894e-10}
         defaultLocalRotation: {x: 0.10063442, y: -0.08236593, z: 0.011127882, w: 0.9914458}
         length: 0
         sqrMag: 0
-        axis: {x: -0.0011184918, y: 0.14005475, z: -0.04278642}
+        axis: {x: -0.0011184905, y: 0.14005475, z: -0.042786423}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 0.9159029, y: 0.6827624, z: 2.893855}
+      IKPosition: {x: 0.9629029, y: 0.6827624, z: 2.9838552}
       IKPositionWeight: 0
       root: {fileID: 1764672946}
       target: {fileID: 0}
@@ -1092,7 +1152,7 @@ MonoBehaviour:
       transform: {fileID: 2069348487}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 0.9237058, y: 0.47842312, z: -0.1077192}
+      position: {x: 0.9707058, y: 0.47842312, z: -0.017719192}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 355.949, y: 42.970345, z: 0.7751771}

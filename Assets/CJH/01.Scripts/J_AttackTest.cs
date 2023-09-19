@@ -105,7 +105,7 @@ public class J_AttackTest : MonoBehaviour
     }
     public void OnAttack_Hit()
     {
-        EnemyAnimator.Play("Hit");
+        EnemyAnimator.CrossFade("Hit",0,0);
     }
     public void OnAttack_Finished()
     {
