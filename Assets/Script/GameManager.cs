@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public float totalTime = 60f;
     private float currentTime = 60f;
 
+    public GameObject board;
+
     private void Start()
     {
         currentTime = totalTime;
@@ -17,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // 타이머 설정.
         if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
@@ -30,8 +34,17 @@ public class GameManager : MonoBehaviour
             TimerOver();
 
         }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            // 소인화 테스트.
+
+            board.transform.DOScale(0.1f, 1);
+        }
     }
 
+    // 타이머 설정.
+    #region Timer
     void UpdateTimerDisplay()
     {
         int minutes = Mathf.FloorToInt(currentTime / 60);
@@ -46,6 +59,6 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit(); // 어플리케이션 종료
 #endif
-
     }
+    #endregion
 }

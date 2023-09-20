@@ -75,7 +75,8 @@ public class J_PawnMove : MonoBehaviour
     {
         //Debug.Log("실행");
         //nDir = 0;
-        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        // scale 0.1f 곱해줌.
+        Vector3 targetPos = new Vector3((float)targetX * 0.1f, 0, (float)targetY*0.1f) - transform.position;
         float dot = Vector3.Dot(transform.right, targetPos);
         nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
         #region 1if
@@ -172,7 +173,8 @@ public class J_PawnMove : MonoBehaviour
         //초기 위치
         Vector3 currentPos = transform.position;
         //타겟의 위치
-        targetPosition = new Vector3(targetX, 0, targetY);
+        // scale을 작게 만들어줘서 0,1f을 곱함.
+        targetPosition = new Vector3((float)targetX*0.1f, 0, (float)targetY * 0.1f);
 
         //흐른시간 체크
         float elapsedTime = 0;
