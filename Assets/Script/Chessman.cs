@@ -80,7 +80,6 @@ public class Chessman : MonoBehaviour
     public Outline outline;
     private void Awake()
     {
-        Debug.Log("¹¹Áö");
         if (isWhite)
         {
             outline = transform.GetComponent<Outline>();

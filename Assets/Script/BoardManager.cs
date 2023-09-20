@@ -63,7 +63,7 @@ public class BoardManager : MonoBehaviour
     public Chessman BlackRook1;
     public Chessman BlackRook2;
 
-// 앙파상을 위한 움직임. ( 일단 안하는 걸로) 
+    // 앙파상을 위한 움직임. ( 일단 안하는 걸로) 
     public int[] EnPassant { set; get; }
 
 
@@ -80,17 +80,25 @@ public class BoardManager : MonoBehaviour
         SpawnAllChessmans();
     }
 
+    // 필요요소 
+    /*
+     1. 선택된 체스기물과 그 위치.
+     2. 드랍된 위치.
+     */
+
     private void Update()
     {
+        //if (CH_GrabInterable.canGrab) Debug.Log("실행");
         SelectMouseChessman();
         if (Input.GetMouseButtonDown(0))
         {
-            if (selectionX >= 0 && selectionY >= 0 && selectionX <= 7 && selectionY <= 7)
+            if (selectionX >= 0 && selectionY >= 0 && selectionX <= 0.7f && selectionY <= 0.7f)
             {
                 // 만약 선택된 체스맨이 없다면 먼저 선택해야 함
                 if (SelectedChessman == null)
                 {
                     // Chess를 선택
+                    // grab으로 대체.
                     SelectChessman();
 
                 }
@@ -98,12 +106,12 @@ public class BoardManager : MonoBehaviour
                 else
                 {
                     // 체스의 움직임 가능한 위치를 renderer에 띄워주고 움직임.
-                    MoveChessman(selectionX , selectionY);                   
+                    MoveChessman(selectionX, selectionY);
                 }
             }
         }
         // AI turn
-        else if (!isWhiteTurn&&!move_TurnLimit)
+        else if (!isWhiteTurn && !move_TurnLimit)
         {
             // NPC가 움직임을 수행
             ChessAI.Instance.NPCMove();
@@ -126,7 +134,7 @@ public class BoardManager : MonoBehaviour
 
             // 선택된 위치의 x와 y 좌표를 계산하여 저장
             // (hit.point.x, hit.point.z)의 소수점 아래 자리를 반올림해서 정수로 변환
-            selectionX = (int)((hit.point.x + 0.05f) *10);
+            selectionX = (int)((hit.point.x + 0.05f) * 10);
             selectionY = (int)((hit.point.z + 0.05f) * 10);
             //Debug.Log(selectionX + " " + selectionY);
             //Debug.Log(hit.point.z);
@@ -158,7 +166,7 @@ public class BoardManager : MonoBehaviour
         SelectedChessman = Chessmans[selectionX, selectionY];
 
         // Outline 
-        if(isWhiteTurn)
+        if (isWhiteTurn)
             Chessmans[selectionX, selectionY].outline.enabled = true;
 
         // 위치값 저장.
@@ -187,9 +195,8 @@ public class BoardManager : MonoBehaviour
         ActiveChessmans.Add(ChessmanObject);
 
         // 생성된 체스맨의 위치를 정수로 변환하여 x와 y에 저장합니다.
-        int x = (int)(position.x*10) ;
+        int x = (int)(position.x * 10);
         int y = (int)(position.z * 10);
-        Debug.Log(x + "  " + y);
 
         // Chessmans 배열에 생성된 체스맨을 추가하고 현재 위치를 설정합니다.
         Chessmans[x, y] = ChessmanObject.GetComponent<Chessman>();
@@ -275,7 +282,7 @@ public class BoardManager : MonoBehaviour
         SpawnChessman(0, new Vector3(0 * Adjustpos, 0, 7.1f * Adjustpos));
 
         SpawnChessman(3, new Vector3(3 * Adjustpos, 0, 7.1f * Adjustpos));
-                                                         
+
         SpawnChessman(4, new Vector3(5 * Adjustpos, 0, 4 * Adjustpos));
 
         // 보드 매니저에서 따로 체스 말 관리.
@@ -291,11 +298,11 @@ public class BoardManager : MonoBehaviour
         // Test 용
         //WhiteKing = null;
         //BlackKing = null;
-                   
+
         WhiteRook1 = Chessmans[0, 7];
-        WhiteRook2 =null;
-        BlackRook1 =null;
-        BlackRook2 =null;
+        WhiteRook2 = null;
+        BlackRook1 = null;
+        BlackRook2 = null;
 
         Debug.Log(Chessmans[3, 7]);
         Debug.Log(Chessmans[0, 7]);
@@ -304,9 +311,9 @@ public class BoardManager : MonoBehaviour
 
     bool ispromotion = false;
     Chessman deletePiece = null;
-    
+
     // 체스 기물 이동
-   public void MoveChessman(int x, int y)
+    public void MoveChessman(int x, int y)
     {
         // 갈 수 있는 곳이라면.
         if (allowedMoves[x, y])
@@ -320,7 +327,7 @@ public class BoardManager : MonoBehaviour
                 ActiveChessmans.Remove(opponent.gameObject);
                 // 나중에 제거하기 위해.
                 deletePiece = opponent;
-                
+
                 // 바로 삭제하지말고 나중에 삭제.
                 //Destroy(opponent.gameObject);
             }
@@ -333,7 +340,7 @@ public class BoardManager : MonoBehaviour
                     opponent = Chessmans[x, y + 1];
                 else
                     opponent = Chessmans[x, y - 1];
-                
+
                 ActiveChessmans.Remove(opponent.gameObject);
                 Destroy(opponent.gameObject);
             }
@@ -354,7 +361,7 @@ public class BoardManager : MonoBehaviour
                     ActiveChessmans.Remove(SelectedChessman.gameObject);
                     Destroy(SelectedChessman.gameObject);
                     // 보통 퀸으로 소환하기 때문에 퀸으로 소환.
-                    SpawnChessman(10, new Vector3(x*AdjustDown, 0, y * AdjustDown));
+                    SpawnChessman(10, new Vector3(x * AdjustDown, 0, y * AdjustDown));
                     SelectedChessman = Chessmans[x, y];
                 }
 
@@ -382,7 +389,7 @@ public class BoardManager : MonoBehaviour
                     EnPassant[1] = y + 1;
                 }
             }
-                // -------앙파상트 이동 관리 끝-------
+            // -------앙파상트 이동 관리 끝-------
 
             // -------캐슬링 이동 관리------------
             // 캐슬링이란 룩을 킹이랑 바꾸는 행위이다.
@@ -397,7 +404,8 @@ public class BoardManager : MonoBehaviour
                     Chessmans[x - 1, y] = null;
                     Chessmans[x + 1, y].SetPosition(x + 1, y);
                     //Chessmans[x + 1, y].transform.position = new Vector3((x + 1)*AdjustDown, 0, y*AdjustDown);
-                    StartCoroutine(move(x+1, y, Chessmans[x + 1, y]));
+
+                    StartCoroutine(move(x + 1, y, Chessmans[x + 1, y]));
                     Chessmans[x + 1, y].isMoved = true;
                 }
                 // 퀸 쪽 (0, 0)으로 가는 경우
@@ -409,7 +417,7 @@ public class BoardManager : MonoBehaviour
                     // 그 자리에 있던 룩 널값으로 설정.
                     Chessmans[x + 2, y] = null;
                     Chessmans[x - 1, y].SetPosition(x - 1, y);
-                    Chessmans[x - 1, y].transform.position = new Vector3((x - 1)*AdjustDown, 0, y*AdjustDown);
+                    Chessmans[x - 1, y].transform.position = new Vector3((x - 1) * AdjustDown, 0, y * AdjustDown);
                     Chessmans[x - 1, y].isMoved = true;
                 }
                 // 주의: 킹은 이 함수에서 선택된 체스맨으로서 이동합니다.
@@ -433,8 +441,8 @@ public class BoardManager : MonoBehaviour
             if (Chessmans[x, y].isWhite)
             {
                 Debug.Log(Chessmans[x, y]);
-                
-                StartCoroutine(IV_outline(x,y));
+
+                StartCoroutine(IV_outline(x, y));
                 BoardHighlight.Instance.deleteHighlight();
             }
 
@@ -443,20 +451,20 @@ public class BoardManager : MonoBehaviour
             // AI 턴제한.
 
             // 움직이는 함수 
-            StartCoroutine(move(x,y,SelectedChessman));
+            StartCoroutine(move(x, y, SelectedChessman, true));
             //isWhiteTurn = !isWhiteTurn;
             SelectedChessman = null;
 
             // CheckMate 
             isCheckmate();
             ChessCount++;
-            Debug.Log("턴 수 : "+ChessCount);
+            Debug.Log("턴 수 : " + ChessCount);
             return;
         }
 
         //AI도 같이 이 함수를 쓰니깐.
         // 
-        
+
         // 체스 기물에 대한 Outline 해제.
         // 이것도 고쳐야 되네.
         if (isWhiteTurn)
@@ -472,26 +480,28 @@ public class BoardManager : MonoBehaviour
     }
 
     // outline 딜레이
-    IEnumerator IV_outline(int x, int y )
+    IEnumerator IV_outline(int x, int y)
     {
         yield return new WaitForSeconds(0.5f);
         Chessmans[x, y].outline.enabled = false;
     }
-    IEnumerator move(int x, int y,Chessman Mchessman)
+
+    // 체스 기물 움직임.
+    IEnumerator move(int x, int y, Chessman Mchessman, bool condition = false)
     {
         move_TurnLimit = true;
         // 이 코루틴 함수가 될 동안. 선택하지 못하게
         // 이동 하는 함수 
         Mchessman.Move(x, y, Mchessman.GetType());
 
-        PieceIsMove =true;
+        PieceIsMove = true;
 
         // Move하는 기물 스크립트에서 조종
         while (PieceIsMove)
         {
             yield return null;
         }
-        
+
         // 싸우는 모션하고 그 다음 체스기물이 사라지게.
         if (deletePiece != null)
         {
@@ -499,12 +509,15 @@ public class BoardManager : MonoBehaviour
         }
 
         Debug.Log("턴 넘김");
-        isWhiteTurn = !isWhiteTurn;
-        move_TurnLimit = false;
+        if (condition)
+        {
+            isWhiteTurn = !isWhiteTurn;
+            move_TurnLimit = false;
+        }
         yield return null;
 
     }
-    
+
 
     // 체크메이트 체크 함수.
     private void isCheckmate()
