@@ -22,12 +22,20 @@ public class J_AttackTest : MonoBehaviour
     bool hasAttacked;
     private Vector3 targetPosition;
     public GameObject Red;
-
+    public bool playPS = true; //파티클 제어 bool
+    public ParticleSystem particleObject; //파티클 시스템
     // Start is called before the first frame update
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         EnemyAnimator = Red.GetComponentInChildren<Animator>();
+
+        //ps = GetComponentInChildren<ParticleSystem>();
+    }
+    private void Start()
+    {
+        //playPS = true;
+        //particleObject.Play();
     }
 
     // Update is called once per frame
@@ -59,7 +67,6 @@ public class J_AttackTest : MonoBehaviour
     //    }
     //    return false;
     //}
-    
 
 
     IEnumerator Attack(int targetX, int targetY)
@@ -70,8 +77,12 @@ public class J_AttackTest : MonoBehaviour
         anim.CrossFade("Attack",0,0);
         //공격 애니메이션이 끝날때쯤 Red의 게임오브젝트 안에 붙어있는 애니메이터인 Die가 실행된다.
         yield return new WaitForSeconds(1);
-
         Debug.Log("공격 애니메이션 성공");
+        //else if(!playPS)
+        //{
+        //    particleObject.Stop();
+        //}
+
         //Animator EnemyAnimator = Red.GetComponentInChildren<Animator>();
         //EnemyAnimator.Play("Hit");
         //EnemyAnimator.Play("Die",0,0);
@@ -103,13 +114,17 @@ public class J_AttackTest : MonoBehaviour
             }
         }
     }
+
     public void OnAttack_Hit()
     {
+        Debug.Log("파티클 실행");
+        particleObject.Play();
         EnemyAnimator.CrossFade("Hit",0,0);
     }
     public void OnAttack_HitPlus()
     {
-        EnemyAnimator.CrossFade("Hit", 0, 0);
+
+        //EnemyAnimator.CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
