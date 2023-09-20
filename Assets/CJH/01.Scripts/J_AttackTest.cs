@@ -43,10 +43,7 @@ public class J_AttackTest : MonoBehaviour
         {
             StartCoroutine(Attack(1,1));
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            EnemyDie();
-        }
+
     }
     //bool isEnemyPosition(int targetX, int targetY)
     //{
@@ -62,6 +59,8 @@ public class J_AttackTest : MonoBehaviour
     //    }
     //    return false;
     //}
+    
+
 
     IEnumerator Attack(int targetX, int targetY)
     {
@@ -78,6 +77,7 @@ public class J_AttackTest : MonoBehaviour
         //EnemyAnimator.Play("Die",0,0);
         
     }
+
 
     void EnemyDie()
     {
