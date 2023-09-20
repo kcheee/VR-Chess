@@ -73,7 +73,7 @@ public class J_AttackTest : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         Debug.Log("공격 애니메이션 성공");
-        Animator EnemyAnimator = Red.GetComponentInChildren<Animator>();
+        //Animator EnemyAnimator = Red.GetComponentInChildren<Animator>();
         //EnemyAnimator.Play("Hit");
         //EnemyAnimator.Play("Die",0,0);
         
