@@ -5,6 +5,16 @@ using static UnityEngine.GraphicsBuffer;
 
 public class J_PawnMove : MonoBehaviour
 {
+    public enum PieceState
+    {
+        Idle,
+        Rotate1,
+        Move1,
+        Attack,
+        Move2,
+        Rotate2
+    }
+
     [SerializeField]
     private float moveSpeed = 3f;
     public bool isMoving = false; // 움직이는지
@@ -16,11 +26,88 @@ public class J_PawnMove : MonoBehaviour
     private Vector3 targetPosition;
     Chessman[,] ch = new Chessman[8, 8];
 
+    public PieceState state = PieceState.Idle;
+    int targetX, targetZ;
+    int preTargetX, preTargetZ;
+    float currTime = 0;
+
     float myAngle; //내가 움직였던 각도
     private void Start()
     {
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
+    }
+
+    void ChangeState(PieceState s)
+    {
+        state = s;
+        switch (state)
+        {
+            case PieceState.Idle:
+                UpdateIdle();
+                break;
+            case PieceState.Rotate1:
+                UpdateRotate1();
+                break;
+            case PieceState.Move1:
+                UpdateMove1();
+                break;
+            case PieceState.Attack:
+                UpdateAttack();
+                break;
+            case PieceState.Move2:
+                UpdateMove2();
+                break;
+            case PieceState.Rotate2:
+                UpdateRotate2();
+                break;
+        }
+    }
+
+    private void UpdateIdle()
+    {
+        anim.CrossFade("Idle", 0.5f, 0);
+    }
+
+    private void UpdateRotate1()
+    {
+        targetX = 4;   //0
+        targetZ = 3;   //6
+        if (transform.position.x - targetX < 0) preTargetX = targetX - 1;
+        else if (transform.position.x - targetX > 0) preTargetX = targetX + 1;
+        if (transform.position.z - targetZ < 0) preTargetZ = targetZ - 1;
+        else if (transform.position.z - targetZ > 0) preTargetZ = targetZ + 1;
+        PawnMove(targetX, targetZ);
+    }
+
+    private void UpdateMove1()
+    {
+        StartCoroutine(StraightMove(preTargetX, preTargetZ));
+    }
+
+    private void UpdateAttack()
+    {
+        currTime = 0;
+        anim.CrossFade("Attack", 0, 0);
+    }
+
+    private void UpdateMove2()
+    {
+        StartCoroutine(StraightMove(targetX, targetZ));
+    }
+
+    private void UpdateRotate2()
+    {
+        // ----------- 턴넘김----------------
+        BoardManager.Instance.PieceIsMove = false;
+        // ----------- 턴넘김 ----------------
+
+        //yield return new WaitForSeconds(1f);
+
+        //회전한만큼 회전시킨다.
+        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle));
+
+        ChangeState(PieceState.Idle);
     }
 
     private void Update()
@@ -38,7 +125,8 @@ public class J_PawnMove : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            PawnMove(5, 5);
+            ChangeState(PieceState.Rotate1);
+            
 
         }
         if (Input.GetKeyDown(KeyCode.M))
@@ -53,6 +141,15 @@ public class J_PawnMove : MonoBehaviour
 
             //TryAttack(currentX + 1, currentY + 1);
         }
+
+        if(state == PieceState.Attack)
+        {
+            currTime += Time.deltaTime;
+            if(currTime > 3)
+            {
+                ChangeState(PieceState.Move2);
+            }
+        }
     }
 
     //모든 말들의 움직임을 계산하는 함수 (현재 PawnMove랑 같음)
@@ -64,7 +161,7 @@ public class J_PawnMove : MonoBehaviour
         int dir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
         //상대방과 나와의 각도를 잰다
         float angle = Vector3.Angle(transform.forward, targetPos);
-        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle, targetX, targetY, true));
+        StartCoroutine(RotatePiece(angle * dir, (1.0f / 45) * angle));
         return;
     }
 
@@ -107,7 +204,7 @@ public class J_PawnMove : MonoBehaviour
         //상대방과 나와의 각도를 잰다
         angle = Vector3.Angle(transform.forward, targetPos);
         //StartCoroutine(Attack(targetX, targetY));
-        StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle, targetX, targetY, true));
+        StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
 
         return;
     }
@@ -201,16 +298,15 @@ public class J_PawnMove : MonoBehaviour
         }
         transform.position = targetPosition;
         yield return new WaitForSeconds(0.01f);
-        anim.CrossFade("Idle", 0.5f, 0);
 
-        // ----------- 턴넘김----------------
-        BoardManager.Instance.PieceIsMove = false;
-        // ----------- 턴넘김 ----------------
-
-        //yield return new WaitForSeconds(1f);
-
-        //회전한만큼 회전시킨다.
-        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle, targetX, targetY, false));
+        if(state == PieceState.Move1)
+        {
+            ChangeState(PieceState.Attack);           
+        }
+        else if(state == PieceState.Move2) 
+        {
+            ChangeState(PieceState.Rotate2);
+        }
     }
     //타겟위치에 적이 있는지 체크하는 함수
     bool isEnemyPosition(int targetX, int targetY)
@@ -228,7 +324,7 @@ public class J_PawnMove : MonoBehaviour
         return false;
     } 
     //회전 공식(완료)
-    private IEnumerator RotatePiece(float targetAngle, float duration, int x, int y, bool moveFoward)
+    private IEnumerator RotatePiece(float targetAngle, float duration)
     {
         if (duration > 0)
         {
@@ -252,9 +348,12 @@ public class J_PawnMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(0.1f);
 
-        if (moveFoward)
+        if(state == PieceState.Rotate1)
         {
-            StartCoroutine(StraightMove(x, y));
+            //적 판별하기 Move1 or move2
+
+            ChangeState(PieceState.Move1);
         }
+       
     }
 }
