@@ -9,6 +9,9 @@ public class BoardManager : MonoBehaviour
     #region 싱글톤
     public static BoardManager Instance { set; get; }
 
+    // 잡았는지 체크
+    static public bool canGrab = false;
+
     private void Awake()
     {
         Instance = this;
@@ -27,7 +30,7 @@ public class BoardManager : MonoBehaviour
     public List<GameObject> ChessmanPrefabs;
 
     // 보드 위에 있는 체스말들 업데이트 하기 위한 체스말.
-    private List<GameObject> ActiveChessmans;
+    public List<GameObject> ActiveChessmans;
 
     // cam
     Camera cam;
@@ -88,7 +91,9 @@ public class BoardManager : MonoBehaviour
 
     private void Update()
     {
-        //if (CH_GrabInterable.canGrab) Debug.Log("실행");
+        // test
+        //if (canGrab) Debug.Log(SelectedChessman);
+
         SelectMouseChessman();
         if (Input.GetMouseButtonDown(0))
         {
@@ -206,29 +211,32 @@ public class BoardManager : MonoBehaviour
     // 보드에 체스 스폰.
     private void SpawnAllChessmans()
     {
+
+        float Adjustpos = 0.1f;
+
         #region 기존(csv로 해보기)
         //// Spawn White Pieces
         //// Rook1
-        //SpawnChessman(0, new Vector3(0, 0, 7));
-        //// Knight1
-        //SpawnChessman(1, new Vector3(1, 0, 7));
-        //// Bishop1
-        //SpawnChessman(2, new Vector3(2, 0, 7));
-        //// King
-        //SpawnChessman(3, new Vector3(3, 0, 7));
-        //// Queen
-        //SpawnChessman(4, new Vector3(4, 0, 7));
-        //// Bishop2
-        //SpawnChessman(2, new Vector3(5, 0, 7));
-        //// Knight2
-        //SpawnChessman(1, new Vector3(6, 0, 7));
-        //// Rook2
-        //SpawnChessman(0, new Vector3(7, 0, 7));
+        //SpawnChessman(0, new Vector3(0 * Adjustpos, 0, 7 * Adjustpos));
+
+        //SpawnChessman(1, new Vector3(1 * Adjustpos, 0, 7 * Adjustpos));
+
+        //SpawnChessman(2, new Vector3(2 * Adjustpos, 0, 7 * Adjustpos));
+
+        //SpawnChessman(3, new Vector3(3 * Adjustpos, 0, 7 * Adjustpos));
+
+        //SpawnChessman(4, new Vector3(4 * Adjustpos, 0, 7 * Adjustpos));
+        //// Bishop2                     * Adjustpos       * Adjustpos
+        //SpawnChessman(2, new Vector3(5 * Adjustpos, 0, 7 * Adjustpos));
+        //// Knight2                     * Adjustpos       * Adjustpos
+        //SpawnChessman(1, new Vector3(6 * Adjustpos, 0, 7 * Adjustpos));
+        //// Rook2                       * Adjustpos       * Adjustpos
+        //SpawnChessman(0, new Vector3(7 * Adjustpos, 0, 7 * Adjustpos));
 
         //// Pawns
         //for (int i = 0; i < 8; i++)
         //{
-        //    SpawnChessman(5, new Vector3(i, 0, 6));
+        //    SpawnChessman(5, new Vector3(i * Adjustpos, 0, 6 * Adjustpos));
         //}
 
         //// 프로모션 테스트 용
@@ -236,32 +244,31 @@ public class BoardManager : MonoBehaviour
 
         //// Spawn Black Pieces
         //// Rook1
-        //SpawnChessman(6, new Vector3(0, 0, 0));
-        //// Knight1
-        //SpawnChessman(7, new Vector3(1, 0, 0));
-        //// Bishop1
-        //SpawnChessman(8, new Vector3(2, 0, 0));
-        //// King
-        //SpawnChessman(9, new Vector3(3, 0, 0));
+        //SpawnChessman(6, new Vector3(0* Adjustpos, 0, 0* Adjustpos));
+        //// Knight1                    * Adjustpos      * Adjustpos
+        //SpawnChessman(7, new Vector3(1* Adjustpos, 0, 0* Adjustpos));
+        //// Bishop1                    * Adjustpos      * Adjustpos
+        //SpawnChessman(8, new Vector3(2* Adjustpos, 0, 0 * Adjustpos));
+        //// King                       * Adjustpos
+        //SpawnChessman(9, new Vector3(3* Adjustpos, 0, 0 * Adjustpos));
         //// Queen
-        //SpawnChessman(10, new Vector3(4, 0, 0));
+        //SpawnChessman(10, new Vector3(4 * Adjustpos, 0, 0 * Adjustpos));
         //// Bishop2
-        //SpawnChessman(8, new Vector3(5, 0, 0));
+        //SpawnChessman(8, new Vector3(5 * Adjustpos, 0, 0));
         //// Knight2
-        //SpawnChessman(7, new Vector3(6, 0, 0));
+        //SpawnChessman(7, new Vector3(6 * Adjustpos, 0, 0));
         //// Rook2
-        //SpawnChessman(6, new Vector3(7, 0, 0));
+        //SpawnChessman(6, new Vector3(7 * Adjustpos, 0, 0));
 
         //// Pawns
         //for (int i = 0; i < 8; i++)
         //{
-        //    SpawnChessman(11, new Vector3(i, 0, 1));
+        //    SpawnChessman(11, new Vector3(i * Adjustpos, 0, 1 * Adjustpos));
         //}
         #endregion  csv로 해보기
 
         // 퍼즐형
 
-        float Adjustpos = 0.1f;
         // king
         SpawnChessman(9, new Vector3(3 * Adjustpos, 0, 0 * Adjustpos));
         // rook                                          
@@ -424,6 +431,8 @@ public class BoardManager : MonoBehaviour
             }
             // -------캐슬링 이동 관리 끝-------
 
+            Debug.Log(SelectedChessman);
+            
             // 가고자 하는 위치가 null이라면
             Chessmans[SelectedChessman.currentX, SelectedChessman.currentY] = null;
             Chessmans[x, y] = SelectedChessman;
@@ -483,7 +492,7 @@ public class BoardManager : MonoBehaviour
     IEnumerator IV_outline(int x, int y)
     {
         yield return new WaitForSeconds(0.5f);
-        Chessmans[x, y].outline.enabled = false;
+        //Chessmans[x, y].outline.enabled = false;
     }
 
     // 체스 기물 움직임.
