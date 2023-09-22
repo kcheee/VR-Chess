@@ -34,7 +34,20 @@ public class CH_GrabInterable : XRGrabInteractable
     {
 
     }
+    protected override void OnSelectEntered(SelectEnterEventArgs args)
+    {
+        base.OnSelectEntered(args);
+        // 기능 추가
+        Debug.Log("selectentered");
+    }
 
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        base.OnSelectExited(args);
+        // 나갔을 때
+        Debug.Log("selectexited");
+
+    }
     protected override void Drop()
     {
         // drop된 위치를 저장후

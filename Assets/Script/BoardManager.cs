@@ -203,6 +203,8 @@ public class BoardManager : MonoBehaviour
         int x = (int)(position.x * 10);
         int y = (int)(position.z * 10);
 
+        
+
         // Chessmans 배열에 생성된 체스맨을 추가하고 현재 위치를 설정합니다.
         Chessmans[x, y] = ChessmanObject.GetComponent<Chessman>();
         Chessmans[x, y].SetPosition(x, y);
@@ -211,7 +213,8 @@ public class BoardManager : MonoBehaviour
     // 보드에 체스 스폰.
     private void SpawnAllChessmans()
     {
-
+        // 보정 값으로 0.1f 더해줘야함.
+        
         float Adjustpos = 0.1f;
 
         #region 기존(csv로 해보기)
@@ -273,24 +276,24 @@ public class BoardManager : MonoBehaviour
         SpawnChessman(9, new Vector3(3 * Adjustpos, 0, 0 * Adjustpos));
         // rook                                          
         SpawnChessman(6, new Vector3(0 * Adjustpos, 0, 0 * Adjustpos));
-        SpawnChessman(6, new Vector3(7 * Adjustpos, 0, 0 * Adjustpos));
+        SpawnChessman(6, new Vector3(7.1f * Adjustpos, 0, 0 * Adjustpos));
 
         // pawn
-        SpawnChessman(11, new Vector3(4 * Adjustpos, 0, 1 * Adjustpos));
-        SpawnChessman(11, new Vector3(5 * Adjustpos, 0, 1 * Adjustpos));
+        SpawnChessman(11, new Vector3(4.1f * Adjustpos, 0, 1.1f * Adjustpos));
+        SpawnChessman(11, new Vector3(5.1f * Adjustpos, 0, 1.1f * Adjustpos));
 
         // - - - 우리팀 - - -
 
         // pawn
-        SpawnChessman(5, new Vector3(2 * Adjustpos, 0, 6 * Adjustpos));
-        SpawnChessman(5, new Vector3(5 * Adjustpos, 0, 6 * Adjustpos));
-        SpawnChessman(5, new Vector3(2 * Adjustpos, 0, 1 * Adjustpos));
+        SpawnChessman(5, new Vector3(2.1f * Adjustpos, 0, 6.1f * Adjustpos));
+        SpawnChessman(5, new Vector3(5.1f * Adjustpos, 0, 6.1f * Adjustpos));
+        SpawnChessman(5, new Vector3(2.1f * Adjustpos, 0, 1.1f * Adjustpos));
 
         SpawnChessman(0, new Vector3(0 * Adjustpos, 0, 7.1f * Adjustpos));
 
-        SpawnChessman(3, new Vector3(3 * Adjustpos, 0, 7.1f * Adjustpos));
+        SpawnChessman(3, new Vector3(3.1f * Adjustpos, 0, 7.1f * Adjustpos));
 
-        SpawnChessman(4, new Vector3(5 * Adjustpos, 0, 4 * Adjustpos));
+        SpawnChessman(4, new Vector3(5.1f * Adjustpos, 0, 4.1f * Adjustpos));
 
         // 보드 매니저에서 따로 체스 말 관리.
         // 특수한 이동이나 체크메이트를 위해.
@@ -334,6 +337,7 @@ public class BoardManager : MonoBehaviour
                 ActiveChessmans.Remove(opponent.gameObject);
                 // 나중에 제거하기 위해.
                 deletePiece = opponent;
+
 
                 // 바로 삭제하지말고 나중에 삭제.
                 //Destroy(opponent.gameObject);
@@ -514,9 +518,16 @@ public class BoardManager : MonoBehaviour
         // 싸우는 모션하고 그 다음 체스기물이 사라지게.
         if (deletePiece != null)
         {
+            if(deletePiece.GetType()== typeof(King))
+            {
+
+                Destroy(deletePiece.gameObject);
+                // 게임오버.
+                EndGame();
+            }
             Destroy(deletePiece.gameObject);
         }
-
+        
         Debug.Log("턴 넘김");
         if (condition)
         {
@@ -573,7 +584,18 @@ public class BoardManager : MonoBehaviour
             // 게임 오버 메뉴를 표시합니다.
             Debug.Log("CheckMate");
             // 게임 종료 로직을 호출할 수 있습니다. (주석 처리된 코드)
-            // EndGame();
+            //EndGame();
         }
+    }
+
+    void EndGame()
+    {
+        if (isWhiteTurn)
+        {
+            Debug.Log("PlayerWin");
+            GameManager.instance.Winner();
+        }
+        else Debug.Log("AI Win");
+        Instance.enabled = false;
     }
 }
