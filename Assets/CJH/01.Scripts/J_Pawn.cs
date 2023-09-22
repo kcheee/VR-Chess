@@ -74,14 +74,14 @@ public class J_Pawn : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.J) && !isMoving)
         {
-            //PawnMove(5,5);
+            //PieceMove(5,5);
             StartCoroutine(RotatePiece(45, 1f));
             //MovePiece(1);
             //RoatatePiece(1);j
         }
         if (Input.GetKeyDown(KeyCode.K) && !isMoving)
         {
-            //PawnMove(5,5);
+            //PieceMove(5,5);
             StartCoroutine(RotatePiece(-45, 1f));
             //MovePiece(1);
             //RoatatePiece(1);j
