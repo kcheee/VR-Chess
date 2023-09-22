@@ -234,7 +234,7 @@ public class ChessAI : MonoBehaviour
                             // if(depth-1 == 0) detail = detail + " " + thisMoveValue + "\n";
                             // else detail = detail + "\n";
 
-                            // 3 ) Undo the current move to get back the same state that was there before making the current move'
+                            // 3 ) Undo the current move to get back the same pieceState that was there before making the current move'
                             // 현재 이동을 취소하여 현재 상태로 돌아갑니다.
                             Undo(depth);
                         }

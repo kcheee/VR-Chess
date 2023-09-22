@@ -29,7 +29,6 @@ public class J_AttackTest : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         EnemyAnimator = Red.GetComponentInChildren<Animator>();
-
         //ps = GetComponentInChildren<ParticleSystem>();
     }
     private void Start()

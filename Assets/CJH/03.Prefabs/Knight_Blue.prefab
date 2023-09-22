@@ -1583,6 +1583,8 @@ MonoBehaviour:
   hasAttacked: 0
   currentX: 0
   currentY: 0
+  chessType: 3
+  AnimState: 0
 --- !u!136 &460027079974970254
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1996,6 +1998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   Red: {fileID: 0}
+  playPS: 1
+  particleObject: {fileID: 0}
 --- !u!1 &7265624021207510958
 GameObject:
   m_ObjectHideFlags: 0

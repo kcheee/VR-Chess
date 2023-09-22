@@ -6,12 +6,14 @@ public class J_AnimEvent : MonoBehaviour
 {
     //이벤트함수를 제작하고싶다
     // Hit, AttackFinished
-    J_AttackTest attackTest;
+    //J_AttackTest attackTest;
+
+    J_PieceMove pieceMove;
 
     // Start is called before the first frame update
     void Awake()
     {
-        attackTest = GetComponentInParent<J_AttackTest>();
+        pieceMove = GetComponentInParent<J_PieceMove>();
     }
 
     // Update is called once per frame
@@ -22,15 +24,11 @@ public class J_AnimEvent : MonoBehaviour
 
    public void OnAttack_Hit()
     {
-        attackTest.OnAttack_Hit();
+        pieceMove.OnAttack_Hit();
 
-    }
-    public void OnAttack_HitPlus()
-    {
-        attackTest.OnAttack_HitPlus();
     }
     public void OnAttack_Finished()
     {
-        attackTest.OnAttack_Finished();
+        pieceMove.OnAttack_Finished();
     }
 }
