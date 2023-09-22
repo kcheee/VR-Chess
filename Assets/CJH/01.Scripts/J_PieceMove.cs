@@ -239,8 +239,8 @@ public class J_PieceMove : MonoBehaviour
 
     private void Update()
     {
-        currentX = (int)transform.position.x;
-        currentY = (int)transform.position.y;
+        currentX = (int)(transform.position.x*10);
+        currentY = (int)(transform.position.y * 10);
 
         if (Input.GetKeyDown(KeyCode.N))
         {
