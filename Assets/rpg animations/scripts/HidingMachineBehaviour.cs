@@ -9,7 +9,7 @@ public class HidingMachineBehaviour : StateMachineBehaviour
     [SerializeField]
     string meshName; 
 
-    // This will be called when the animator first transitions to this state.
+    // This will be called when the animator first transitions to this pieceState.
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("OnStateEnter");
@@ -17,7 +17,7 @@ public class HidingMachineBehaviour : StateMachineBehaviour
         var v = sword.GetComponent<HiderInTime>();
         sword.GetComponent<HiderInTime>().hide(t);
     }
-    // This will be called when the animator first transitions to this state.
+    // This will be called when the animator first transitions to this pieceState.
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("OnStateExit");

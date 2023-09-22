@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 //공격이 되는지 테스트해보는 스크립트
 
@@ -13,35 +15,81 @@ using UnityEngine;
 //죽으면 죽는 애니메이션을 실행한다.
 public class J_AttackTest : MonoBehaviour
 {
+    Chessman[,] ch = new Chessman[8, 8];
     Animator anim;
+    Animator EnemyAnimator;
     public int damage = 10;
+    bool hasAttacked;
+    private Vector3 targetPosition;
+    public GameObject Red;
+    public bool playPS = true; //파티클 제어 bool
+    public ParticleSystem particleObject; //파티클 시스템
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        EnemyAnimator = Red.GetComponentInChildren<Animator>();
+        //ps = GetComponentInChildren<ParticleSystem>();
+    }
+    private void Start()
+    {
+        //playPS = true;
+        //particleObject.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //t키를 누르면 
+        //Red.
+        //타겟 위치에 적이 있는 경우 공격
+       
+
         //G키를 누르면 공격이 실행된다.
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Attack();
-
+            StartCoroutine(Attack(1,1));
         }
 
     }
-    void Attack()
+    //bool isEnemyPosition(int targetX, int targetY)
+    //{
+    //    Chessman targetChessman = ch[targetX, targetY];
+    //    if (targetChessman != null)
+    //    {
+    //        //적인 경우
+    //        if (targetChessman.isWhite != GetComponent<Chessman>().isWhite)
+    //        {
+    //            Debug.Log("적입니다.");
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
+
+
+    IEnumerator Attack(int targetX, int targetY)
     {
+        //타겟의 위치
+        targetPosition = new Vector3(targetX,0,targetY);
+        //공격애니메이션을 실행한다
+        anim.CrossFade("Attack",0,0);
+        //공격 애니메이션이 끝날때쯤 Red의 게임오브젝트 안에 붙어있는 애니메이터인 Die가 실행된다.
+        yield return new WaitForSeconds(1);
+        Debug.Log("공격 애니메이션 성공");
+        //else if(!playPS)
+        //{
+        //    particleObject.Stop();
+        //}
 
-        //나의 무기 콜라이더에 상대방 콜라이더와 부딪히면  
-
-        //공격애니메이션 실행
-        anim.Play("Attack");
-
+        //Animator EnemyAnimator = Red.GetComponentInChildren<Animator>();
+        //EnemyAnimator.Play("Hit");
+        //EnemyAnimator.Play("Die",0,0);
+        
     }
-    void Die()
+
+
+    void EnemyDie()
     {
         anim.Play("Die");
     }
@@ -66,13 +114,20 @@ public class J_AttackTest : MonoBehaviour
         }
     }
 
-    void Test()
+    public void OnAttack_Hit()
     {
-        //상대폰을 찾는다
-        
-        //상대폰 애내메이션 (Die)
-        
-        //
+        Debug.Log("파티클 실행");
+        particleObject.Play();
+        EnemyAnimator.CrossFade("Hit",0,0);
+    }
+    public void OnAttack_HitPlus()
+    {
 
+        //EnemyAnimator.CrossFade("Hit", 0, 0);
+    }
+    public void OnAttack_Finished()
+    {
+        Debug.Log("다이 애니");
+        EnemyAnimator.CrossFade("Die",0,0);
     }
 }
