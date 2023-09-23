@@ -9,8 +9,12 @@ public class LodingScene : MonoBehaviour
 {
 
     public Slider slider;
-    public CanvasGroup canvasGroup;
+    public CanvasGroup canvasG_Fade;
 
+    private void Start()
+    {
+        canvasG_Fade.DOFade(0, 0.5f);
+    }
     private void FixedUpdate()
     {
         slider.value += 0.5f;
@@ -20,7 +24,8 @@ public class LodingScene : MonoBehaviour
     }
     IEnumerator delaySceneChage()
     {
-        canvasGroup.DOFade(1, 2).OnComplete(() =>
+        SoundManager.Instance.audioSource.DOFade(0, 3);
+        canvasG_Fade.DOFade(1, 2).OnComplete(() =>
         {
             StartCoroutine(delaySceneChage2());
         });
@@ -28,9 +33,8 @@ public class LodingScene : MonoBehaviour
     }
     IEnumerator delaySceneChage2()
     {
+        
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(2);
-
-
     }
 }

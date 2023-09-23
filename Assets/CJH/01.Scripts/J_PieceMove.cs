@@ -80,8 +80,8 @@ public class J_PieceMove : MonoBehaviour
     private void UpdateRotate1()
     {
         //비숍일 때
-        targetX = 4;   //0
-        targetZ = 3;   //6
+        //targetX = 4;   //0
+        //targetZ = 3;   //6
         #region 비숍
         if (chessType == ChessType.BISHUP)
         {
@@ -197,6 +197,8 @@ public class J_PieceMove : MonoBehaviour
 
     private void UpdateMove1()
     {
+        Debug.Log("ssssdfjshajkfhsdkfgjsah");
+
         StartCoroutine(StraightMove(preTargetX, preTargetZ));
     }
 
@@ -220,6 +222,7 @@ public class J_PieceMove : MonoBehaviour
 
     private void UpdateMove2()
     {
+
         StartCoroutine(StraightMove(targetX, targetZ));
     }
 
@@ -239,8 +242,8 @@ public class J_PieceMove : MonoBehaviour
 
     private void Update()
     {
-        currentX = (int)transform.position.x;
-        currentY = (int)transform.position.y;
+        //currentX = (int)(transform.position.x*10);
+        //currentY = (int)(transform.position.z*10);
 
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -261,7 +264,8 @@ public class J_PieceMove : MonoBehaviour
     //모든 말들의 움직임을 계산하는 함수 
     public void PieceMove(int targetX, int targetY)
     {
-        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position*10;
+        Debug.Log(new Vector3(targetX, 0, targetY) + " :  " + transform.position*10);
         float dot = Vector3.Dot(transform.right, targetPos);
         nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
         #region 1if
@@ -292,6 +296,7 @@ public class J_PieceMove : MonoBehaviour
         #endregion
         //상대방과 나와의 각도를 잰다
         angle = Vector3.Angle(transform.forward, targetPos);
+        Debug.Log(angle);
         //StartCoroutine(Attack(targetX, targetY));
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
 
@@ -365,10 +370,10 @@ public class J_PieceMove : MonoBehaviour
         //흐른시간 체크
         float elapsedTime = 0;
         //거리잰다
-        float dist = Vector3.Distance(transform.position, targetPosition);
+        float dist = Vector3.Distance(transform.position, targetPosition*0.1f);
         //시간
         float duration = dist / moveSpeed;
-
+        Debug.Log(duration+"dui");
 
         //타겟의 방향
         Vector3 dir = transform.forward;
@@ -376,7 +381,8 @@ public class J_PieceMove : MonoBehaviour
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
+            transform.position = (Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration))*0.1f;
+            Debug.Log("실행");
             //타겟 위치에 적이 있는 경우 공격
             if(!hasAttacked && isEnemyPosition(targetX,targetY))
             {
@@ -399,8 +405,6 @@ public class J_PieceMove : MonoBehaviour
             ChangeState(PieceState.Rotate2);
         }
     }
-
-
 
     //타겟위치에 적이 있는지 체크하는 함수
     bool isEnemyPosition(int targetX, int targetY)
@@ -441,16 +445,26 @@ public class J_PieceMove : MonoBehaviour
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(0.1f);
+        Debug.Log(pieceState);
 
-        if(pieceState == PieceState.Rotate1)
+        //if(pieceState == PieceState.Rotate1)
+        //{
+        //    ChangeState(PieceState.Move1);
+        //}
+        ChangeState(PieceState.Rotate1);
+
+        if (pieceState == PieceState.Rotate1)
         {
             //적 판별하기 Move1 or move2
-            if(BoardManager.Instance.Chessmans[targetX, targetZ] != null) //적이 있다면
+            if (BoardManager.Instance.Chessmans[targetX, targetZ] != null) //적이 있다면
             {
                 ChangeState(PieceState.Move1);
             }
             else if(BoardManager.Instance.Chessmans[targetX, targetZ] == null){
+                
                 ChangeState(PieceState.Move2);
+                Debug.Log("적이 있다");
+
             }
         }
 

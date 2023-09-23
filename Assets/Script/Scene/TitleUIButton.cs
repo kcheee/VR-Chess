@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class TitleUIButton : MonoBehaviour
 {
     public GameObject startbutton;
-    public List<GameObject> gameObjects;
+    public GameObject Levelbutton;
 
+    public CanvasGroup canvasG_Fadeout;
 
     private void levelUIOn()
     {
-        foreach (GameObject go in gameObjects)
-        {
-            go.SetActive(true);
-        }
+        Levelbutton.SetActive(true);
+        Levelbutton.GetComponent<CanvasGroup>().DOFade(1, 1);
     }
 
     // start ¹öÆ°
     public void onclickStart()
     {
-        startbutton.SetActive(false);
+        startbutton.GetComponent<CanvasGroup>().DOFade(0, 1).OnComplete(() =>
+        {
+            startbutton.SetActive(false);
+
+            levelUIOn();
+        });
+        //startbutton.SetActive(false);
         Debug.Log("scene Change");
-        levelUIOn();
 
     }
 
@@ -30,19 +35,27 @@ public class TitleUIButton : MonoBehaviour
 
     public void onclickEasy_Level()
     {
-        SceneSetting.Instance.depth = 2;
-        SceneManager.LoadScene(1);
+        canvasG_Fadeout.DOFade(1, 2).OnComplete(() =>
+        {
+            SceneSetting.Instance.depth = 2;
+            SceneManager.LoadScene(1);
+        });
     }
     public void onclickMiddle_Level()
     {
-        SceneSetting.Instance.depth = 3;
+        canvasG_Fadeout.DOFade(1, 2).OnComplete(() =>
+        {
+            SceneSetting.Instance.depth = 3;
+            SceneManager.LoadScene(1);
+        });
 
-        SceneManager.LoadScene(1);
     }
     public void onclickHard_Level()
     {
-        SceneSetting.Instance.depth = 4;
-
-        SceneManager.LoadScene(1);
+        canvasG_Fadeout.DOFade(1, 2).OnComplete(() =>
+        {
+            SceneSetting.Instance.depth = 4;
+            SceneManager.LoadScene(1);
+        });
     }
 }

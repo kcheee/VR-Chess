@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     {
         // 페이드 인
         currentTime = totalTime;
+        SoundManager.Instance.audioSource.clip = SoundManager.Instance.BGMList[2];
+        SoundManager.Instance.audioSource.Play();
+        SoundManager.Instance.audioSource.DOFade(1, 7);
     }
 
     void Update()
