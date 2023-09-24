@@ -17,6 +17,8 @@ public class test : MonoBehaviour
     public float shakeAmount = 0.2f; // Èçµé¸² °­µµ
     public int vibration = 10; // Áøµ¿ ¼ö
     float a;
+
+    Tween myTween;
     void Start()
     {
         
@@ -29,16 +31,17 @@ public class test : MonoBehaviour
         #region °ÅÀÎÈ­ ±â´É
         if (Input.GetKeyDown(KeyCode.F))
         {
-            map.transform.DOScale(0.1f, 5).SetEase(Ease.OutQuad);
-            DOTween.To(() => yoffset.CameraYOffset, x => yoffset.CameraYOffset = x, 0.2f, 5);
+            //map.transform.DOScale(0.1f, 5).SetEase(Ease.OutQuad);
+            //DOTween.To(() => yoffset.CameraYOffset, x => yoffset.CameraYOffset = x, 0.2f, 5);
             //transform.DOScale(0.1f, 10);
+            StartCoroutine(Giant());
         }
-        transform.DOMove(Go.transform.position, 0.1f);
+        //transform.DOMove(Go.transform.position, 0.1f);
         #endregion
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            transform.DOMove(Go.transform.position, 10);
+            Walk();
 
         }
         //transform.position += transform.forward * 2 * Time.deltaTime;
@@ -63,6 +66,32 @@ public class test : MonoBehaviour
             //myTween.Kill();
 
         }
+    }
+    IEnumerator Giant()
+    {
+        bool endWhile = false;
+        map.transform.DOScale(0.1f, 5).SetEase(Ease.OutQuad).OnComplete(()=> endWhile = true);
+        DOTween.To(() => yoffset.CameraYOffset, x => yoffset.CameraYOffset = x, 0.25f, 5);
+
+        while (!endWhile)
+        {
+            transform.position = Vector3.Lerp(transform.position,Go.transform.position,1f);
+            yield return null;
+
+        }
+        yield return null;
+    }
+    void Walk()
+    {
+        // µµÂøÇÏ¸é °È´Â È¿°ú ¸ØÃã.
+
+        float shakeDuration = 0.5f;
+        float targetY = cameraoffset.position.y - 0.15f;
+
+        myTween = cameraoffset.DOMoveY(targetY, shakeDuration).SetLoops(-1, LoopType.Yoyo);
+
+        transform.DOMove(Go.transform.position, 10).OnComplete(() => myTween.Kill());
+
     }
 
 }

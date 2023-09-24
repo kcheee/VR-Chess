@@ -18,7 +18,6 @@ public class SceneSetting : MonoBehaviour
 
     // 난이도 관리
     [Header("난이도 설정(2부터 쉬움)")]
-
     public int depth = 2;
 
 
