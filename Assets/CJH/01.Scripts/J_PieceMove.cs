@@ -1,23 +1,13 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class J_PieceMove : MonoBehaviour
 {
-    //체스말 상태의 FSM
-    public enum PieceState
-    {
-        Idle, // 기본
-        Rotate1, // 움직이기 전 회전
-        Move1, // 이동
-        Attack, // 공격
-        Move2, // 공격 후 타겟 위치로 이동
-        Rotate2 // 앞으로 돌아보기
-    }
     public enum ChessType //체스 종류
     {
-        KING, QUEEN, BISHUP, KNIGHT, ROOK, PAWN,
+        KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN,
     }
     [SerializeField]
     private float moveSpeed = 3f;
@@ -30,91 +20,64 @@ public class J_PieceMove : MonoBehaviour
     private Vector3 targetPosition;
     Chessman[,] ch = new Chessman[8, 8];
     public ChessType chessType;
-    public PieceState pieceState = PieceState.Idle;
 
-    int targetX, targetZ; //타겟위치
+    int PosX, PosY; //타겟위치
     float preTargetX, preTargetZ; // 공격하기 전 위치
     float currTime = 0;
 
     float myAngle; //내가 움직였던 각도
 
-    public GameObject particleObject; //파티클 시스템
+    bool EndRot = false;  // 마지막 앞을 바라보는 회전
+
+    public ParticleSystem particleObject; //파티클 시스템
+    public Transform particlePos; //파티클 생성 위치
     private void Start()
     {
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
-        
+        anim.Play("Idle");
     }
 
-    void ChangeState(PieceState s)
-    {
-        pieceState = s;
-        switch (pieceState)
-        {
-            case PieceState.Idle:
-                UpdateIdle();
-                break;
-            case PieceState.Rotate1:
-                UpdateRotate1();
-                break;
-            case PieceState.Move1:
-                UpdateMove1();
-                break;
-            case PieceState.Attack:
-                UpdateAttack();
-                break;
-            case PieceState.Move2:
-                UpdateMove2();
-                break;
-            case PieceState.Rotate2:
-                UpdateRotate2();
-                break;
-        }
-    }
-
-    private void UpdateIdle()
-    {
-        // 
-        anim.CrossFade("Idle", 0.5f, 0);
-    }
-
-    private void UpdateRotate1()
+    private void UpdateRotate1(int x, int y)
     {
         //비숍일 때
         //targetX = 4;   //0
         //targetZ = 3;   //6
+        PosX = x;
+        PosY = y;
+
         #region 비숍
-        if (chessType == ChessType.BISHUP)
+        if (chessType == ChessType.BISHOP)
         {
-            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 1;
-            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 1;
-            if (transform.position.z * 10 - targetZ  < 0) preTargetZ = targetZ - 1;
-            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 1;
+            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1;
+            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1;
+            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1;
+            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1;
         }
 
         #endregion
         #region 룩
         if (chessType == ChessType.ROOK)
         {
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z *10 - targetZ < 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ - 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY - 1f;
             }
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ + 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY + 1f;
             }
-            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX + 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX + 1f;
+                preTargetZ = PosY;
             }
-            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX - 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX - 1f;
+                preTargetZ = PosY;
             }
         }
 
@@ -122,41 +85,68 @@ public class J_PieceMove : MonoBehaviour
         #region 폰
         if (chessType == ChessType.PAWN)
         {
+
             //비숍처럼
-            if (transform.position.x *10 - targetX < 0) preTargetX = targetX - 0.1f;
-            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
-            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
-            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
+            if (transform.position.x * 10 - PosX == 0)
+            {
+                Debug.Log("000");
+                preTargetX = PosX;
+
+            }
+            if (transform.position.x * 10 - PosX < 0)
+            {
+                Debug.Log("111");
+                preTargetX = PosX - 1f;
+                
+            }
+            else if (transform.position.x * 10 - PosX > 0)
+            {
+                Debug.Log("222");
+
+                preTargetX = PosX + 1f;
+            }
+            if (transform.position.z * 10 - PosY < 0)
+            {
+                Debug.Log("333f");
+
+                preTargetZ = PosY - 1f;
+            }
+            else if (transform.position.z * 10 - PosY > 0)
+            {
+                Debug.Log("444f");
+
+                preTargetZ = PosY + 1f;
+            }
         }
         #endregion
         #region 퀸
         if (chessType == ChessType.QUEEN)
         {
             //비숍처럼
-            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 0.1f;
-            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
-            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
-            else if (transform.position.z* 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
+            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1f;
+            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1f;
+            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1f;
+            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1f;
             //룩처럼
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ < 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ - 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY - 1f;
             }
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ + 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY + 1f;
             }
-            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX + 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX + 1f;
+                preTargetZ = PosY;
             }
-            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX - 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX - 1f;
+                preTargetZ = PosY;
             }
         }
 
@@ -165,91 +155,52 @@ public class J_PieceMove : MonoBehaviour
         if (chessType == ChessType.KING)
         {
             //비숍처럼
-            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 0.1f;
-            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
-            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
-            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
+            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1f;
+            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1f;
+            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1f;
+            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1f;
             //룩처럼
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ < 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ - 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY - 1f;
             }
-            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
+            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
             {
-                preTargetX = targetX;
-                preTargetZ = targetZ + 0.1f;
+                preTargetX = PosX;
+                preTargetZ = PosY + 1f;
             }
-            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX + 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX + 1f;
+                preTargetZ = PosY;
             }
-            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
+            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
             {
-                preTargetX = targetX - 0.1f;
-                preTargetZ = targetZ;
+                preTargetX = PosX - 1f;
+                preTargetZ = PosY;
             }
         }
-           
+
         #endregion
-        PieceMove(3, 3);
+        Debug.Log(PosX);
+        Debug.Log(preTargetX );
+        PieceMove(PosX, PosY);
     }
-
-    private void UpdateMove1()
+    float posOffset = 0.022f;
+    public void OnAttack_Hit()
     {
-        StartCoroutine(StraightMove(preTargetX, preTargetZ));
-
-    }
-
-   public void OnAttack_Hit()
-    {
-        Instantiate(particleObject);
+        Vector3 spawnPos = transform.position + transform.forward * posOffset;
+        ParticleSystem newParticle = Instantiate(particleObject,spawnPos, Quaternion.identity);
+        newParticle.transform.parent = transform;
+        
+        //Destroy(newParticle);
         //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
         //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
     }
-
-
-    private void UpdateAttack()
-    {
-        currTime = 0;
-        //anim.CrossFade("Attack", 0, 0);
-        if (pieceState == PieceState.Attack)
-        {
-            currTime += Time.deltaTime;
-            if (currTime > 3)
-            {
-
-                ChangeState(PieceState.Move2);
-            }
-        }
-
-    }
-
-    // 애니메이션은 한번만 실행이되야한다.
-    // 고로 상태전환할떄 애니메이션을 해준다.
-    private void UpdateMove2()
-    {
-        StartCoroutine(StraightMove(targetX, targetZ));
-    }
-
-    private void UpdateRotate2()
-    {
-        // ----------- 턴넘김----------------
-        //BoardManager.Instance.PieceIsMove = false;
-        // ----------- 턴넘김 ----------------
-
-        //yield return new WaitForSeconds(1f);
-
-        //회전한만큼 회전시킨다.
-        StartCoroutine(RotatePiece(-angle * nDir, (1.0f / 45) * angle));
-
-        ChangeState(PieceState.Idle);
-    }
-
     private void Update()
     {
         currentX = (int)transform.position.x;
@@ -258,21 +209,15 @@ public class J_PieceMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             //PieceMove(3, 3);
-            UpdateRotate1();
+            UpdateRotate1(5, 4);
         }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            ChangeState(PieceState.Rotate1);
-        }
-
-
     }
     float angle = 0;
     int nDir = 0;
     //모든 말들의 움직임을 계산하는 함수 
     public void PieceMove(int targetX, int targetY)
     {
+
         Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position * 10;
         float dot = Vector3.Dot(transform.right, targetPos);
         nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
@@ -306,70 +251,13 @@ public class J_PieceMove : MonoBehaviour
         angle = Vector3.Angle(transform.forward, targetPos);
         //StartCoroutine(Attack(targetX, targetY));
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
-        Debug.Log("111");
         //ChangeState(PieceState.Rotate1);
 
         return;
     }
-    #region 공격로직 완성
-    //1. 위치값을 받는다
-    //2. 적이 있는지 확인한다
-    //3. 있으면 원래 위치까지 움직이는 것이 아니라 -1만큼 가서
-    //4. 때리는 애니메이션 하고 다시+1만큼 간다
-    //++다시 앞으로 회전한다.
-    //float attackRange = 2f;
-    #endregion
-    public void Attack(int targetX, int targetY)
-    {
 
-        Debug.Log("적을 공격하는 진짜 함수");
-        anim.Play("Attack",0,0);
-        //Chessman targetChessman = ch[targetX, targetY];
-
-        //Debug.Log("그래도 여기 공격 함수는 들어오는거 맞지");
-        //if(targetChessman != null)
-        //{
-        //    Debug.Log("코루틴이 문제인듯");
-        //    //적인 경우
-        //    if(targetChessman.isWhite != GetComponent<Chessman>().isWhite) { 
-        //        Debug.Log("적 공격");
-        //        anim.Play("Attack");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("적 공격 불가");
-        //    }
-        //}
-
-        ////적을 탐지. 
-        //Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRange);
-
-        //foreach(Collider enemy in hitEnemies)
-        //{
-        //    //적인지 확인하기 위해 Chessman 스크립트를 가진 체스 찾기
-        //    Chessman chessman = enemy.GetComponent<Chessman>();
-
-        //    if(chessman != null)
-        //    {
-        //        //적인 경우에만 
-        //        if(chessman.isWhite =false)
-        //        {
-        //            //isWhite값이 false인 경우 공격(적)
-        //            Debug.Log("적을 공=격");
-        //            anim.Play("Attack");
-        //            //적 파괴
-        //            //Destroy(enemy.gameObject);
-
-        //        }
-        //        else
-        //        {
-        //            break;
-        //        }
-        //    }
-        //}
-    }
     //직선이동(완료)
-    IEnumerator StraightMove(float targetX, float targetY)
+    IEnumerator StraightMove(float targetX, float targetY, bool Enemy = false, bool rot = false)
     {
         //초기 위치
         Vector3 currentPos = transform.position * 10;
@@ -386,53 +274,32 @@ public class J_PieceMove : MonoBehaviour
 
         //타겟의 방향
         Vector3 dir = transform.forward;
-        anim.Play("Move", 0, 0);
+        anim.CrossFade("Move", 0, 0);
 
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
         {
             elapsedTime += Time.deltaTime;
-            transform.position  = Vector3.Lerp(currentPos * 0.1f , targetPosition * 0.1f, elapsedTime / duration);
-            ////타겟 위치에 적이 있는 경우 공격
-            //if(!hasAttacked && isEnemyPosition(targetX,targetY))
-            //{
-            //    Debug.Log("적이 있어서 공격");
-            //    Attack(targetX, targetY);
-            //    hasAttacked = true; //중복 공격 방지
-            //}
+            transform.position = Vector3.Lerp(currentPos * 0.1f, targetPosition * 0.1f, elapsedTime / duration);
             yield return null;// new WaitForSeconds(0.05f);
             //print("움직인다");
         }
-        transform.position  = targetPosition;
+        transform.position = targetPosition * 0.1f;
         yield return new WaitForSeconds(0.01f);
 
-        if(pieceState == PieceState.Move1)
+        // 적이있다면 공격
+        if (Enemy)
         {
-            anim.CrossFade("Attack", 0, 0);
-            ChangeState(PieceState.Attack);           
+            // 코루틴으로 딜레이주고 실행.
+            StartCoroutine(Co_Attack());
         }
-        else if(pieceState == PieceState.Move2) 
+        if (rot)
         {
-            ChangeState(PieceState.Rotate2);
+            EndRot = true;
+            // 앞에 보게 회전.
+            StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
+            
         }
     }
-
-
-
-    //타겟위치에 적이 있는지 체크하는 함수
-    bool isEnemyPosition(int targetX, int targetY)
-    {
-        Chessman targetChessman = ch[targetX, targetY];
-        if(targetChessman != null)
-        {
-            //적인 경우
-            if(targetChessman.isWhite != GetComponent<Chessman>().isWhite)
-            {
-                Debug.Log("적입니다.");
-                return true;
-            }
-        }
-        return false;
-    } 
     //회전 공식(완료)
     private IEnumerator RotatePiece(float targetAngle, float duration)
     {
@@ -457,22 +324,31 @@ public class J_PieceMove : MonoBehaviour
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
         yield return new WaitForSeconds(0.1f);
+        anim.CrossFade("Idle",0,0);
+        // 움직임
+        // 적이 있는지 판별
 
-        if(pieceState == PieceState.Rotate1)
+        if (!EndRot)
         {
-            //무조건 내가 가는곳에 적이 있다 치고 
-            ChangeState(PieceState.Move1);
+            //1.적이없다면 바로감
+            //if (BoardManager.Instance.Chessmans[PosX, PosY] == null)
+            StartCoroutine(StraightMove(PosX, PosY));
 
-            ////적 판별하기 Move1 or move2
-            //if(BoardManager.Instance.Chessmans[targetX, targetZ] != null) //적이 있다면
-            //{
-            //    ChangeState(PieceState.Move1);
-            //}
-            //else if(BoardManager.Instance.Chessmans[targetX, targetZ] == null){
-            //    ChangeState(PieceState.Move2);
-            //}
+            // 2. 적이 있다면 pretarget
+            //else
+            Debug.Log(preTargetX + " " + preTargetZ);
+
+            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
         }
+    }
+    //공격 함수
+    IEnumerator Co_Attack()
+    {
+        //yield return null;
+        anim.CrossFade("Attack", 0, 0);
+        Debug.Log(PosX + " " + PosY);
+        yield return new WaitForSeconds(3);
+        StartCoroutine(StraightMove(PosX, PosY, false, true));
 
-       
     }
 }
