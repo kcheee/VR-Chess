@@ -160,13 +160,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 4.2153683, y: 0.07640558, z: 3.0509293}
+      IKPosition: {x: 4.021537, y: 0.007640558, z: 3.0050929}
       IKPositionWeight: 0
       root: {fileID: 6657055677839735856}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.91188145, y: 0.0051591042, z: 0.003533708, w: -0.41040638}
-      bendNormal: {x: -0.017145606, y: -0.004510915, z: 0.0006863425}
+      bendNormal: {x: -0.00017145461, y: -0.000045109693, z: 0.000006857935}
       bone1:
         transform: {fileID: 4601361413401764125}
         weight: 1
@@ -204,13 +204,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 3.9897552, y: 0.07598689, z: 3.0465236}
+      IKPosition: {x: 3.9989755, y: 0.0075986893, z: 3.0046523}
       IKPositionWeight: 0
       root: {fileID: 6657055677839735856}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.9150473, y: -0.01738128, z: -0.032788355, w: -0.4016361}
-      bendNormal: {x: -0.02297799, y: -0.002262183, z: 0.0043677567}
+      bendNormal: {x: -0.00022977527, y: -0.0000226211, z: 0.00004367784}
       bone1:
         transform: {fileID: 7854351784923688798}
         weight: 1
@@ -248,13 +248,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 4.394643, y: 0.7113509, z: 2.9735255}
+      IKPosition: {x: 4.0394645, y: 0.07113509, z: 2.9973526}
       IKPositionWeight: 0
       root: {fileID: 6657055677839735856}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.71625245, y: 0.050782606, z: -0.6931028, w: 0.06334311}
-      bendNormal: {x: 0.010450074, y: 0.004756515, z: -0.003724133}
+      bendNormal: {x: 0.000104499566, y: 0.000047564332, z: -0.00003723818}
       bone1:
         transform: {fileID: 5477100366940146726}
         weight: 1
@@ -292,13 +292,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 3.630822, y: 0.68482476, z: 2.949466}
+      IKPosition: {x: 3.9630823, y: 0.06848247, z: 2.9949465}
       IKPositionWeight: 1
       root: {fileID: 6657055677839735856}
       target: {fileID: 7320578387571705444}
       IKRotationWeight: 0
       IKRotation: {x: -0.53853726, y: -0.027246652, z: -0.84211665, w: 0.008651591}
-      bendNormal: {x: 0.010770466, y: -0.0036214048, z: 0.00449463}
+      bendNormal: {x: 0.00010770332, y: -0.000036213027, z: 0.000044944074}
       bone1:
         transform: {fileID: 5700013369402425371}
         weight: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 4.0088935, y: 0.94599104, z: 3.0084057}
+      IKPosition: {x: 4.0008893, y: 0.094599105, z: 3.0008407}
       IKPositionWeight: 0
       root: {fileID: 6657055677839735856}
       target: {fileID: 0}
@@ -347,34 +347,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 6047537552468814834}
         weight: 1
-        solverPosition: {x: 4.012159, y: 0.72670144, z: 3.002648}
+        solverPosition: {x: 4.001216, y: 0.07267015, z: 3.000265}
         solverRotation: {x: 0.009268078, y: 0.99779093, z: 0.0220154, w: 0.061989397}
         defaultLocalPosition: {x: -0, y: 0.1169734, z: -0.0048547294}
         defaultLocalRotation: {x: -0.005052508, y: 0.0062156343, z: -0.018940583, w: 0.9997885}
-        length: 0.10243978
+        length: 0.0102439765
         sqrMag: 0
-        axis: {x: -0.000000025418096, y: 0.10243978, z: -0.00000015511964}
+        axis: {x: -0.00000014159261, y: 0.0102439765, z: 0.000000025750548}
       - transform: {fileID: 932411352832589594}
         weight: 1
-        solverPosition: {x: 4.013774, y: 0.8290243, z: 3.0072665}
+        solverPosition: {x: 4.0013776, y: 0.08290243, z: 3.0007267}
         solverRotation: {x: -0.020509634, y: 0.99789417, z: 0.0061336346, w: 0.061230447}
         defaultLocalPosition: {x: -0, y: 0.13658637, z: -9.975419e-11}
         defaultLocalRotation: {x: 0.014010085, y: 0.0012720396, z: -0.030680677, w: 0.99943024}
-        length: 0.11707404
+        length: 0.011707416
         sqrMag: 0
-        axis: {x: 0.00000030444798, y: 0.11707404, z: -0.00000009437208}
+        axis: {x: 0.00000026097618, y: 0.011707416, z: -0.000000085813305}
       - transform: {fileID: 1822782857931132785}
         weight: 1
-        solverPosition: {x: 4.0088935, y: 0.94599104, z: 3.0084057}
+        solverPosition: {x: 4.0008893, y: 0.094599105, z: 3.0008407}
         solverRotation: {x: -0.050052788, y: 0.99681306, z: -0.009790132, w: 0.06133986}
         defaultLocalPosition: {x: -0, y: 0.15609877, z: 4.1326548e-10}
         defaultLocalRotation: {x: 0.014076904, y: 0.00033242392, z: -0.030478796, w: 0.99943626}
         length: 0
         sqrMag: 0
-        axis: {x: -0.019619526, y: 0.21832299, z: -0.009049184}
+        axis: {x: -0.001961861, y: 0.021832306, z: -0.0009049538}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 4.0088935, y: 0.94599104, z: 0.008405685}
+      IKPosition: {x: 4.0008893, y: 0.094599105, z: 0.0008406639}
       IKPositionWeight: 0
       root: {fileID: 6657055677839735856}
       target: {fileID: 0}
@@ -503,7 +503,7 @@ MonoBehaviour:
       transform: {fileID: 6306678350953273441}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 4.0078626, y: 0.6392896, z: 2.9955387}
+      position: {x: 4.0007863, y: 0.06392896, z: 2.999554}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 358.15518, y: 172.17513, z: 3.4137416}
@@ -690,14 +690,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: 0.89588034, z: -0.44429547, w: 0}
-  m_LocalPosition: {x: 3.5, y: 7.97, z: 9.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0.49780962, y: -0, z: -0, w: 0.8672863}
+  m_LocalPosition: {x: 0.305, y: 0.75, z: -0.18}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 52.757, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 59.71, y: 0, z: 0}
 --- !u!114 &1052896395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,13 +747,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 4.086558, y: 0.06254234, z: 2.840984}
+      IKPosition: {x: 0.4086558, y: 0.006254234, z: 0.28409842}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.75425065, y: -0.11715892, z: -0.4110761, w: -0.49839374}
-      bendNormal: {x: -0.017024985, y: -0.006199224, z: 0.011068108}
+      bendNormal: {x: -0.00017025007, y: -0.00006199214, z: 0.000110681176}
       bone1:
         transform: {fileID: 3781125769659296902}
         weight: 1
@@ -791,13 +791,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 3.9579809, y: 0.06250175, z: 3.2200058}
+      IKPosition: {x: 0.3957981, y: 0.0062501747, z: 0.3220006}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.7346818, y: -0.35501403, z: -0.44034714, w: -0.37456974}
-      bendNormal: {x: -0.018408887, y: 0.011498237, z: 0.03187712}
+      bendNormal: {x: -0.0001840895, y: 0.00011498219, z: 0.00031877146}
       bone1:
         transform: {fileID: 7395565195647165125}
         weight: 1
@@ -835,13 +835,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 4.2692223, y: 0.32349953, z: 2.7961352}
+      IKPosition: {x: 0.42692226, y: 0.03234995, z: 0.27961352}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.38376623, y: 0.3992695, z: -0.8309333, w: 0.053453654}
-      bendNormal: {x: 0.027651457, y: 0.009640691, z: -0.011280838}
+      bendNormal: {x: 0.00027651468, y: 0.00009640664, z: -0.000112807225}
       bone1:
         transform: {fileID: 5161267881647751613}
         weight: 1
@@ -879,13 +879,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 3.660205, y: 0.31480178, z: 3.1679292}
+      IKPosition: {x: 0.3660205, y: 0.03148018, z: 0.3167929}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: -0.77863145, y: 0.099159405, z: -0.61843467, w: -0.037934884}
-      bendNormal: {x: 0.025480818, y: -0.010709024, z: -0.0073398924}
+      bendNormal: {x: 0.00025480846, y: -0.00010709026, z: -0.00007339889}
       bone1:
         transform: {fileID: 4951870503463406976}
         weight: 1
@@ -923,7 +923,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 3.9992015, y: 0.6151404, z: 3.0300055}
+      IKPosition: {x: 0.39992017, y: 0.06151404, z: 0.30300057}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
@@ -934,34 +934,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 6363370038550029929}
         weight: 1
-        solverPosition: {x: 4.0079265, y: 0.42334864, z: 3.055154}
+        solverPosition: {x: 0.40079266, y: 0.042334862, z: 0.30551544}
         solverRotation: {x: 0.004110528, y: 0.9439003, z: -0.014408581, w: -0.3298906}
         defaultLocalPosition: {x: -0, y: 0.103812024, z: 0.000062532425}
         defaultLocalRotation: {x: 0.051657252, y: -0.04411481, z: 0.029802317, w: 0.99724483}
-        length: 0.09083556
+        length: 0.009083558
         sqrMag: 0
-        axis: {x: -0.00000020565955, y: 0.09083556, z: -0.00000030061437}
+        axis: {x: -0.000000024156156, y: 0.009083558, z: 0.000000012716805}
       - transform: {fileID: 527632704988967553}
         weight: 1
-        solverPosition: {x: 4.007768, y: 0.5141434, z: 3.052437}
+        solverPosition: {x: 0.4007768, y: 0.05141434, z: 0.3052437}
         solverRotation: {x: -0.012733085, y: 0.9610226, z: -0.1157434, w: -0.25075257}
         defaultLocalPosition: {x: -0, y: 0.12111406, z: 4.0337511e-13}
         defaultLocalRotation: {x: 0.10063449, y: -0.08100615, z: 0.018600589, w: 0.9914458}
-        length: 0.1038121
+        length: 0.010381202
         sqrMag: 0
-        axis: {x: 0.00000005379367, y: 0.1038121, z: 0.000000107220465}
+        axis: {x: -9.80241e-10, y: 0.010381202, z: -0.000000026125027}
       - transform: {fileID: 1362835124365181674}
         weight: 1
-        solverPosition: {x: 3.9992015, y: 0.6151404, z: 3.0300055}
+        solverPosition: {x: 0.39992017, y: 0.06151404, z: 0.30300057}
         solverRotation: {x: -0.029358875, y: 0.9617034, z: -0.21509795, w: -0.16732462}
         defaultLocalPosition: {x: -0, y: 0.13841616, z: 1.9958434e-12}
         defaultLocalRotation: {x: 0.10063443, y: -0.08100608, z: 0.018600559, w: 0.9914458}
         length: 0
         sqrMag: 0
-        axis: {x: 0.0027853628, y: 0.18499197, z: -0.057121485}
+        axis: {x: 0.0002785343, y: 0.018499201, z: -0.0057121445}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 3.9992015, y: 0.6151404, z: 0.030005455}
+      IKPosition: {x: 0.39992017, y: 0.06151404, z: -2.6969995}
       IKPositionWeight: 0
       root: {fileID: 1724118166111023863}
       target: {fileID: 0}
@@ -1090,7 +1090,7 @@ MonoBehaviour:
       transform: {fileID: 6640490043404785146}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 4.006313, y: 0.34579927, z: 3.048407}
+      position: {x: 0.40063128, y: 0.034579925, z: 0.3048407}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 355.54562, y: 223.68082, z: 357.42902}
@@ -1117,6 +1117,18 @@ PrefabInstance:
     - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1157,6 +1169,10 @@ PrefabInstance:
     - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731430578283854035, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
@@ -1283,14 +1299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d86eacdca3b9448baf0486502bd44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  EnemyAnimator: {fileID: 0}
-  damage: 10
-  hasAttacked: 0
-  targetPosition: {x: 0, y: 0, z: 0}
-  Red: {fileID: 0}
-  playPS: 1
-  particleObject: {fileID: 0}
 --- !u!114 &1764672947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,13 +1336,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 4.876558, y: 0.06522444, z: 2.2538788}
+      IKPosition: {x: 0.48765576, y: 0.006522444, z: 0.22538787}
       IKPositionWeight: 0
       root: {fileID: 2140932025537154926}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.3948535, y: 0.48468566, z: 0.76476926, w: -0.15588014}
-      bendNormal: {x: 0.040143806, y: -0.017764451, z: -0.042145625}
+      bendNormal: {x: 0.00040143827, y: -0.00017764486, z: -0.00042145618}
       bone1:
         transform: {fileID: 7078852720777740521}
         weight: 1
@@ -1372,13 +1380,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 5.0599985, y: 0.06497879, z: 1.7102183}
+      IKPosition: {x: 0.50599986, y: 0.006497879, z: 0.17102183}
       IKPositionWeight: 0
       root: {fileID: 2140932025537154926}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.4153412, y: 0.37377536, z: 0.75588465, w: -0.3412068}
-      bendNormal: {x: 0.031665582, y: 0.010864821, z: -0.02530604}
+      bendNormal: {x: 0.0003166556, y: 0.00010864849, z: -0.00025306002}
       bone1:
         transform: {fileID: 3523558241451069098}
         weight: 1
@@ -1416,13 +1424,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 4.6722054, y: 0.35629123, z: 2.2121894}
+      IKPosition: {x: 0.46722054, y: 0.035629123, z: 0.22121896}
       IKPositionWeight: 0
       root: {fileID: 2140932025537154926}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.83323413, y: -0.042644277, z: 0.3727467, w: 0.4061555}
-      bendNormal: {x: -0.030562297, y: 0.010655489, z: 0.012468176}
+      bendNormal: {x: -0.00030562328, y: 0.000106554726, z: 0.0001246811}
       bone1:
         transform: {fileID: 1289405098788826578}
         weight: 1
@@ -1460,13 +1468,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 5.314518, y: 0.3468298, z: 1.821453}
+      IKPosition: {x: 0.53145176, y: 0.03468298, z: 0.1821453}
       IKPositionWeight: 0.99
       root: {fileID: 2140932025537154926}
       target: {fileID: 1394805056764664139}
       IKRotationWeight: 0
       IKRotation: {x: 0.6189594, y: 0.027661812, z: -0.7771974, w: 0.10994499}
-      bendNormal: {x: -0.028177276, y: -0.011842422, z: 0.008116665}
+      bendNormal: {x: -0.00028177226, y: -0.00011842376, z: 0.00008116715}
       bone1:
         transform: {fileID: 1368233564477727215}
         weight: 1
@@ -1504,7 +1512,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 4.962903, y: 0.6827624, z: 1.9838552}
+      IKPosition: {x: 0.4962903, y: 0.06827624, z: 0.19838552}
       IKPositionWeight: 0
       root: {fileID: 2140932025537154926}
       target: {fileID: 0}
@@ -1515,34 +1523,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 1012000964795599366}
         weight: 1
-        solverPosition: {x: 4.963671, y: 0.53653216, z: 1.9758933}
+        solverPosition: {x: 0.49636713, y: 0.053653218, z: 0.19758934}
         solverRotation: {x: -0.028736068, y: 0.3293583, z: 0.019179922, w: 0.94357264}
         defaultLocalPosition: {x: -0, y: 0.0781842, z: -0.007119901}
         defaultLocalRotation: {x: 0.001286657, y: -0.039365314, z: -0.00082442357, w: 0.9992237}
-        length: 0.06869418
+        length: 0.006869417
         sqrMag: 0
-        axis: {x: 0.00000011224206, y: 0.06869418, z: 0.00000009950893}
+        axis: {x: 0.000000009282304, y: 0.006869417, z: -0.0000000069097856}
       - transform: {fileID: 5843110418538766062}
         weight: 1
-        solverPosition: {x: 4.9598846, y: 0.60506237, z: 1.9730359}
+        solverPosition: {x: 0.49598846, y: 0.060506236, z: 0.1973036}
         solverRotation: {x: 0.07171054, y: 0.25107265, z: -0.0012620981, w: 0.9653074}
         defaultLocalPosition: {x: -0, y: 0.09159226, z: 9.365918e-11}
         defaultLocalRotation: {x: 0.100634485, y: -0.08236589, z: 0.011127901, w: 0.9914458}
-        length: 0.078507714
+        length: 0.007850775
         sqrMag: 0
-        axis: {x: 0.000000063557685, y: 0.078507714, z: 0.00000007703528}
+        axis: {x: 0.000000007925967, y: 0.007850775, z: 0.000000004611569}
       - transform: {fileID: 4948789148823301765}
         weight: 1
-        solverPosition: {x: 4.962903, y: 0.6827624, z: 1.9838552}
+        solverPosition: {x: 0.4962903, y: 0.06827624, z: 0.19838552}
         solverRotation: {x: 0.1709302, y: 0.16849144, z: -0.021682516, w: 0.9705273}
         defaultLocalPosition: {x: -0, y: 0.10467688, z: -1.629894e-10}
         defaultLocalRotation: {x: 0.10063442, y: -0.08236593, z: 0.011127882, w: 0.9914458}
         length: 0
         sqrMag: 0
-        axis: {x: -0.001118282, y: 0.14005478, z: -0.042786304}
+        axis: {x: -0.00011183442, y: 0.014005474, z: -0.0042786477}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 4.962903, y: 0.6827624, z: 4.9838552}
+      IKPosition: {x: 0.4962903, y: 0.06827624, z: 3.1983855}
       IKPositionWeight: 0
       root: {fileID: 2140932025537154926}
       target: {fileID: 0}
@@ -1671,7 +1679,7 @@ MonoBehaviour:
       transform: {fileID: 748618241877014933}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 4.970706, y: 0.47842312, z: 1.9822809}
+      position: {x: 0.49707058, y: 0.04784231, z: 0.19822809}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 355.949, y: 42.970345, z: 0.7751771}
@@ -1783,7 +1791,7 @@ Transform:
   m_GameObject: {fileID: 26152985772502403}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1, y: 0, z: 1}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3855466697028234760}
@@ -1829,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &31872364910755935
 GameObject:
   m_ObjectHideFlags: 0
@@ -13608,7 +13616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &871575064527941243
 Transform:
   m_ObjectHideFlags: 0
@@ -13618,7 +13626,7 @@ Transform:
   m_GameObject: {fileID: 869186455227020869}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1, y: 0, z: 1}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8119541345086084833}
@@ -31518,8 +31526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728187352846371771}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4, y: 0, z: 3}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0.3}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1186575692597785966}
@@ -31835,7 +31843,7 @@ Transform:
   m_GameObject: {fileID: 1800045438592457556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4, y: 0, z: 0}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4387012028962581052}
@@ -31913,7 +31921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1803641349845394237
 Transform:
   m_ObjectHideFlags: 0
@@ -32597,7 +32605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005577744855802616
 Transform:
   m_ObjectHideFlags: 0
@@ -32640,7 +32648,7 @@ Transform:
   m_GameObject: {fileID: 1999779285217771271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 0, z: 4.17}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3980347580538518012}
@@ -33067,8 +33075,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142620020083391576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 2}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0.2}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5058653573877504257}
@@ -37888,7 +37896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3396140646231957434
 GameObject:
   m_ObjectHideFlags: 0
@@ -37946,7 +37954,7 @@ Transform:
   m_GameObject: {fileID: 3395763510614666125}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 4, y: 0, z: 3}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 809217552689928933}
@@ -38374,7 +38382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3489578690767305329
 Transform:
   m_ObjectHideFlags: 0
@@ -38384,7 +38392,7 @@ Transform:
   m_GameObject: {fileID: 3487407852502002211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1010751556946412091}
@@ -38728,13 +38736,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 3.8099983, y: 0.34127724, z: 6.9998035}
+      IKPosition: {x: 3.9269998, y: 0.034127727, z: 7.0269804}
       IKPositionWeight: 0
       root: {fileID: 7859309605230549813}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: -0.026359774, y: 0.09588566, z: -0.95881873, w: -0.2660413}
-      bendNormal: {x: 0.059352808, y: 0.009732758, z: -0.004632763}
+      bendNormal: {x: 0.0005935353, y: 0.00009732857, z: -0.000046331937}
       bone1:
         transform: {fileID: 986760294069859650}
         weight: 1
@@ -38772,13 +38780,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: 3.9852617, y: 0.052199543, z: 6.9732566}
+      IKPosition: {x: 3.9445262, y: 0.005219954, z: 7.024326}
       IKPositionWeight: 0
       root: {fileID: 7859309605230549813}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.07012792, y: 0.5821115, z: 0.8027962, w: -0.108382754}
-      bendNormal: {x: 0.01831067, y: -0.0034616988, z: 0.0017382671}
+      bendNormal: {x: 0.00018312469, y: -0.000034620305, z: 0.000017380731}
       bone1:
         transform: {fileID: 6875518631383071489}
         weight: 1
@@ -38816,13 +38824,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 3.5579464, y: 0.85076934, z: 7.1169043}
+      IKPosition: {x: 3.9017947, y: 0.08507693, z: 7.0386906}
       IKPositionWeight: 0
       root: {fileID: 7859309605230549813}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.36130908, y: -0.24736166, z: 0.66953653, w: 0.599991}
-      bendNormal: {x: -0.010364409, y: 0.0022943553, z: -0.0076407567}
+      bendNormal: {x: -0.000103642, y: 0.000022943868, z: -0.00007640691}
       bone1:
         transform: {fileID: 9108650446349604985}
         weight: 1
@@ -38860,13 +38868,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: 4.2415237, y: 0.8394258, z: 7.1382713}
+      IKPosition: {x: 3.9701524, y: 0.08394258, z: 7.0408273}
       IKPositionWeight: 1
       root: {fileID: 7859309605230549813}
       target: {fileID: 3973965121421568749}
       IKRotationWeight: 0
       IKRotation: {x: 0.64409786, y: 0.21006525, z: -0.460741, w: 0.5733486}
-      bendNormal: {x: -0.005567468, y: -0.0016797178, z: 0.00077193306}
+      bendNormal: {x: -0.000055683893, y: -0.000016799919, z: 0.000007719515}
       bone1:
         transform: {fileID: 9038864521037059140}
         weight: 1
@@ -38904,7 +38912,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 3.9096334, y: 1.053785, z: 7.024935}
+      IKPosition: {x: 3.9369633, y: 0.1053785, z: 7.029494}
       IKPositionWeight: 0
       root: {fileID: 7859309605230549813}
       target: {fileID: 0}
@@ -38915,34 +38923,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 7027823019737431981}
         weight: 1
-        solverPosition: {x: 3.9219756, y: 0.76458, z: 7.018865}
+        solverPosition: {x: 3.9381976, y: 0.076458, z: 7.028887}
         solverRotation: {x: -0.005341038, y: 0.00010608509, z: 0.023263516, w: 0.9997152}
         defaultLocalPosition: {x: -0, y: 0.15403962, z: 0.011729658}
         defaultLocalRotation: {x: 0.024620062, y: -0.026297737, z: 0.005188922, w: 0.9993375}
-        length: 0.13517487
+        length: 0.013517493
         sqrMag: 0
-        axis: {x: 0.000000072886714, y: 0.13517487, z: -0.00000003928331}
+        axis: {x: 0.000000055285867, y: 0.013517493, z: -0.00000019459036}
       - transform: {fileID: 4511036443126049605}
         weight: 1
-        solverPosition: {x: 3.915688, y: 0.89960086, z: 7.017422}
+        solverPosition: {x: 3.937569, y: 0.08996009, z: 7.0287423}
         solverRotation: {x: 0.024380457, y: -0.0027464218, z: 0.019538505, w: 0.99950814}
         defaultLocalPosition: {x: -0, y: 0.18023317, z: 5.290888e-10}
         defaultLocalRotation: {x: 0.029645959, y: -0.0035232024, z: -0.003731215, w: 0.9995473}
-        length: 0.15448572
+        length: 0.015448587
         sqrMag: 0
-        axis: {x: -0.00000008083417, y: 0.15448572, z: -0.000000009622268}
+        axis: {x: -0.00000012566379, y: 0.015448587, z: 0.00000023771022}
       - transform: {fileID: 3107817770995555118}
         weight: 1
-        solverPosition: {x: 3.9096334, y: 1.053785, z: 7.024935}
+        solverPosition: {x: 3.9369633, y: 0.1053785, z: 7.029494}
         solverRotation: {x: 0.054076023, y: -0.005454559, z: 0.015639512, w: 0.9983996}
         defaultLocalPosition: {x: -0, y: 0.20598088, z: 1.9181645e-10}
         defaultLocalRotation: {x: 0.029644355, y: -0.0033851145, z: -0.0038909467, w: 0.99954724}
         length: 0
         sqrMag: 0
-        axis: {x: -0.003398104, y: 0.28841916, z: -0.025130041}
+        axis: {x: -0.0003398811, y: 0.02884193, z: -0.0025129567}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 3.9096334, y: 1.053785, z: 10.024935}
+      IKPosition: {x: 3.9369633, y: 0.1053785, z: 10.029493}
       IKPositionWeight: 0
       root: {fileID: 7859309605230549813}
       target: {fileID: 0}
@@ -39071,7 +39079,7 @@ MonoBehaviour:
       transform: {fileID: 7345140207312260158}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 3.9258513, y: 0.648795, z: 7.017044}
+      position: {x: 3.9385853, y: 0.0648795, z: 7.0287046}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 356.44586, y: 2.8971741, z: 1.9656519}
@@ -73317,7 +73325,7 @@ Transform:
   m_GameObject: {fileID: 6659525048460575044}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 4, y: 0, z: 3}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2005650253624719605}
@@ -73345,7 +73353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6660113081149889554
 GameObject:
   m_ObjectHideFlags: 0
@@ -84641,7 +84649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7195698453672013961
 Transform:
   m_ObjectHideFlags: 0
@@ -84651,7 +84659,7 @@ Transform:
   m_GameObject: {fileID: 7193480333025325515}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1, y: 0, z: 1}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1716922846211748942}
@@ -84744,7 +84752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &7209360640675131953
 GameObject:
   m_ObjectHideFlags: 0
@@ -84818,7 +84826,7 @@ Transform:
   m_GameObject: {fileID: 7208156745117662252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.01, y: 0, z: 1.97}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1776982257819835528}
@@ -97100,7 +97108,7 @@ Transform:
   m_GameObject: {fileID: 7861527571225909879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.94, y: 0, z: 7.03}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3008260336978963626}
@@ -97129,7 +97137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &7875608066068099211
 MeshRenderer:
   m_ObjectHideFlags: 0

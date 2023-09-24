@@ -33,7 +33,7 @@ public class J_PieceMove : MonoBehaviour
     public PieceState pieceState = PieceState.Idle;
 
     int targetX, targetZ; //타겟위치
-    int preTargetX, preTargetZ; // 공격하기 전 위치
+    float preTargetX, preTargetZ; // 공격하기 전 위치
     float currTime = 0;
 
     float myAngle; //내가 움직였던 각도
@@ -74,45 +74,46 @@ public class J_PieceMove : MonoBehaviour
 
     private void UpdateIdle()
     {
+        // 
         anim.CrossFade("Idle", 0.5f, 0);
     }
 
     private void UpdateRotate1()
     {
         //비숍일 때
-        targetX = 4;   //0
-        targetZ = 3;   //6
+        //targetX = 4;   //0
+        //targetZ = 3;   //6
         #region 비숍
         if (chessType == ChessType.BISHUP)
         {
-            if (transform.position.x - targetX < 0) preTargetX = targetX - 1;
-            else if (transform.position.x - targetX > 0) preTargetX = targetX + 1;
-            if (transform.position.z - targetZ < 0) preTargetZ = targetZ - 1;
-            else if (transform.position.z - targetZ > 0) preTargetZ = targetZ + 1;
+            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 1;
+            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 1;
+            if (transform.position.z * 10 - targetZ  < 0) preTargetZ = targetZ - 1;
+            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 1;
         }
 
         #endregion
         #region 룩
         if (chessType == ChessType.ROOK)
         {
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ < 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z *10 - targetZ < 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ - 1;
+                preTargetZ = targetZ - 0.1f;
             }
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ > 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ + 1;
+                preTargetZ = targetZ + 0.1f;
             }
-            if (transform.position.x - targetX > 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX + 1;
+                preTargetX = targetX + 0.1f;
                 preTargetZ = targetZ;
             }
-            if (transform.position.x - targetX < 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX - 1;
+                preTargetX = targetX - 0.1f;
                 preTargetZ = targetZ;
             }
         }
@@ -122,39 +123,39 @@ public class J_PieceMove : MonoBehaviour
         if (chessType == ChessType.PAWN)
         {
             //비숍처럼
-            if (transform.position.x - targetX < 0) preTargetX = targetX - 1;
-            else if (transform.position.x - targetX > 0) preTargetX = targetX + 1;
-            if (transform.position.z - targetZ < 0) preTargetZ = targetZ - 1;
-            else if (transform.position.z - targetZ > 0) preTargetZ = targetZ + 1;
+            if (transform.position.x *10 - targetX < 0) preTargetX = targetX - 0.1f;
+            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
+            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
+            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
         }
         #endregion
         #region 퀸
         if (chessType == ChessType.QUEEN)
         {
             //비숍처럼
-            if (transform.position.x - targetX < 0) preTargetX = targetX - 1;
-            else if (transform.position.x - targetX > 0) preTargetX = targetX + 1;
-            if (transform.position.z - targetZ < 0) preTargetZ = targetZ - 1;
-            else if (transform.position.z - targetZ > 0) preTargetZ = targetZ + 1;
+            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 0.1f;
+            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
+            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
+            else if (transform.position.z* 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
             //룩처럼
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ < 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ < 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ - 1;
+                preTargetZ = targetZ - 0.1f;
             }
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ > 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ + 1;
+                preTargetZ = targetZ + 0.1f;
             }
-            if (transform.position.x - targetX > 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX + 1;
+                preTargetX = targetX + 0.1f;
                 preTargetZ = targetZ;
             }
-            if (transform.position.x - targetX < 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX - 1;
+                preTargetX = targetX - 0.1f;
                 preTargetZ = targetZ;
             }
         }
@@ -164,60 +165,72 @@ public class J_PieceMove : MonoBehaviour
         if (chessType == ChessType.KING)
         {
             //비숍처럼
-            if (transform.position.x - targetX < 0) preTargetX = targetX - 1;
-            else if (transform.position.x - targetX > 0) preTargetX = targetX + 1;
-            if (transform.position.z - targetZ < 0) preTargetZ = targetZ - 1;
-            else if (transform.position.z - targetZ > 0) preTargetZ = targetZ + 1;
+            if (transform.position.x * 10 - targetX < 0) preTargetX = targetX - 0.1f;
+            else if (transform.position.x * 10 - targetX > 0) preTargetX = targetX + 0.1f;
+            if (transform.position.z * 10 - targetZ < 0) preTargetZ = targetZ - 0.1f;
+            else if (transform.position.z * 10 - targetZ > 0) preTargetZ = targetZ + 0.1f;
             //룩처럼
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ < 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ < 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ - 1;
+                preTargetZ = targetZ - 0.1f;
             }
-            if (transform.position.x - targetX == 0 && transform.position.z - targetZ > 0)
+            if (transform.position.x * 10 - targetX == 0 && transform.position.z * 10 - targetZ > 0)
             {
                 preTargetX = targetX;
-                preTargetZ = targetZ + 1;
+                preTargetZ = targetZ + 0.1f;
             }
-            if (transform.position.x - targetX > 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX > 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX + 1;
+                preTargetX = targetX + 0.1f;
                 preTargetZ = targetZ;
             }
-            if (transform.position.x - targetX < 0 && transform.position.z - targetZ == 0)
+            if (transform.position.x * 10 - targetX < 0 && transform.position.z * 10 - targetZ == 0)
             {
-                preTargetX = targetX - 1;
+                preTargetX = targetX - 0.1f;
                 preTargetZ = targetZ;
             }
         }
            
         #endregion
-        PieceMove(targetX, targetZ);
+        PieceMove(3, 3);
     }
 
     private void UpdateMove1()
     {
         StartCoroutine(StraightMove(preTargetX, preTargetZ));
+
     }
 
    public void OnAttack_Hit()
     {
         Instantiate(particleObject);
-        BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
+        //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
-        BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+        //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
     }
 
 
     private void UpdateAttack()
     {
         currTime = 0;
-        anim.CrossFade("Attack", 0, 0);
-        
+        //anim.CrossFade("Attack", 0, 0);
+        if (pieceState == PieceState.Attack)
+        {
+            currTime += Time.deltaTime;
+            if (currTime > 3)
+            {
+
+                ChangeState(PieceState.Move2);
+            }
+        }
+
     }
 
+    // 애니메이션은 한번만 실행이되야한다.
+    // 고로 상태전환할떄 애니메이션을 해준다.
     private void UpdateMove2()
     {
         StartCoroutine(StraightMove(targetX, targetZ));
@@ -226,7 +239,7 @@ public class J_PieceMove : MonoBehaviour
     private void UpdateRotate2()
     {
         // ----------- 턴넘김----------------
-        BoardManager.Instance.PieceIsMove = false;
+        //BoardManager.Instance.PieceIsMove = false;
         // ----------- 턴넘김 ----------------
 
         //yield return new WaitForSeconds(1f);
@@ -242,26 +255,25 @@ public class J_PieceMove : MonoBehaviour
         currentX = (int)transform.position.x;
         currentY = (int)transform.position.y;
 
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            //PieceMove(3, 3);
+            UpdateRotate1();
+        }
+
         if (Input.GetKeyDown(KeyCode.N))
         {
             ChangeState(PieceState.Rotate1);
         }
 
-        if(pieceState == PieceState.Attack)
-        {
-            currTime += Time.deltaTime;
-            if(currTime > 3)
-            {
-                ChangeState(PieceState.Move2);
-            }
-        }
+
     }
     float angle = 0;
     int nDir = 0;
     //모든 말들의 움직임을 계산하는 함수 
     public void PieceMove(int targetX, int targetY)
     {
-        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position;
+        Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position * 10;
         float dot = Vector3.Dot(transform.right, targetPos);
         nDir = (dot > 0) ? 1 : (dot < 0) ? -1 : (Vector3.Dot(transform.forward, targetPos) < 0) ? 1 : 0;
         #region 1if
@@ -294,6 +306,8 @@ public class J_PieceMove : MonoBehaviour
         angle = Vector3.Angle(transform.forward, targetPos);
         //StartCoroutine(Attack(targetX, targetY));
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
+        Debug.Log("111");
+        //ChangeState(PieceState.Rotate1);
 
         return;
     }
@@ -355,17 +369,17 @@ public class J_PieceMove : MonoBehaviour
         //}
     }
     //직선이동(완료)
-    IEnumerator StraightMove(int targetX, int targetY)
+    IEnumerator StraightMove(float targetX, float targetY)
     {
         //초기 위치
-        Vector3 currentPos = transform.position;
+        Vector3 currentPos = transform.position * 10;
         //타겟의 위치
         targetPosition = new Vector3(targetX, 0, targetY);
 
         //흐른시간 체크
         float elapsedTime = 0;
         //거리잰다
-        float dist = Vector3.Distance(transform.position, targetPosition);
+        float dist = Vector3.Distance(transform.position * 10, targetPosition);
         //시간
         float duration = dist / moveSpeed;
 
@@ -373,25 +387,27 @@ public class J_PieceMove : MonoBehaviour
         //타겟의 방향
         Vector3 dir = transform.forward;
         anim.Play("Move", 0, 0);
+
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(currentPos, targetPosition, elapsedTime / duration);
-            //타겟 위치에 적이 있는 경우 공격
-            if(!hasAttacked && isEnemyPosition(targetX,targetY))
-            {
-                Debug.Log("적이 있어서 공격");
-                Attack(targetX, targetY);
-                hasAttacked = true; //중복 공격 방지
-            }
+            transform.position  = Vector3.Lerp(currentPos * 0.1f , targetPosition * 0.1f, elapsedTime / duration);
+            ////타겟 위치에 적이 있는 경우 공격
+            //if(!hasAttacked && isEnemyPosition(targetX,targetY))
+            //{
+            //    Debug.Log("적이 있어서 공격");
+            //    Attack(targetX, targetY);
+            //    hasAttacked = true; //중복 공격 방지
+            //}
             yield return null;// new WaitForSeconds(0.05f);
             //print("움직인다");
         }
-        transform.position = targetPosition;
+        transform.position  = targetPosition;
         yield return new WaitForSeconds(0.01f);
 
         if(pieceState == PieceState.Move1)
         {
+            anim.CrossFade("Attack", 0, 0);
             ChangeState(PieceState.Attack);           
         }
         else if(pieceState == PieceState.Move2) 
@@ -444,14 +460,17 @@ public class J_PieceMove : MonoBehaviour
 
         if(pieceState == PieceState.Rotate1)
         {
-            //적 판별하기 Move1 or move2
-            if(BoardManager.Instance.Chessmans[targetX, targetZ] != null) //적이 있다면
-            {
-                ChangeState(PieceState.Move1);
-            }
-            else if(BoardManager.Instance.Chessmans[targetX, targetZ] == null){
-                ChangeState(PieceState.Move2);
-            }
+            //무조건 내가 가는곳에 적이 있다 치고 
+            ChangeState(PieceState.Move1);
+
+            ////적 판별하기 Move1 or move2
+            //if(BoardManager.Instance.Chessmans[targetX, targetZ] != null) //적이 있다면
+            //{
+            //    ChangeState(PieceState.Move1);
+            //}
+            //else if(BoardManager.Instance.Chessmans[targetX, targetZ] == null){
+            //    ChangeState(PieceState.Move2);
+            //}
         }
 
        
