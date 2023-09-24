@@ -288,6 +288,9 @@ public class J_PieceMove : MonoBehaviour
         transform.position = targetPosition * 0.1f;
         yield return new WaitForSeconds(0.01f);
 
+        // move에서 idle로 전환
+        anim.CrossFade("Idle", 0, 0);
+
         // 적이있다면 공격
         if (Enemy)
         {
@@ -336,6 +339,9 @@ public class J_PieceMove : MonoBehaviour
             {
                 Debug.Log("dds");
                 StartCoroutine(StraightMove(PosX, PosY));
+                // ----------- 턴넘김----------------
+                BoardManager.Instance.PieceIsMove = false;
+                // ----------- 턴넘김----------------
             }
             // 2. 적이 있다면 pretarget
             else
@@ -353,6 +359,9 @@ public class J_PieceMove : MonoBehaviour
         Debug.Log(PosX + " " + PosY);
         yield return new WaitForSeconds(3);
         StartCoroutine(StraightMove(PosX, PosY, false, true));
+        // ----------- 턴넘김----------------
+        BoardManager.Instance.PieceIsMove = false;
+        // ----------- 턴넘김----------------
 
     }
 }
