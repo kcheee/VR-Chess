@@ -38,7 +38,7 @@ public class J_PieceMove : MonoBehaviour
         anim.Play("Idle");
     }
 
-    private void UpdateRotate1(int x, int y)
+    public void UpdateRotate1(int x, int y)
     {
         //비숍일 때
         //targetX = 4;   //0
@@ -195,11 +195,11 @@ public class J_PieceMove : MonoBehaviour
         newParticle.transform.parent = transform;
         
         //Destroy(newParticle);
-        //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
+        BoardManager.Instance.Chessmans[PosX, PosY].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
-        //BoardManager.Instance.Chessmans[targetX, targetZ].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+        BoardManager.Instance.Chessmans[PosX, PosY].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
     }
     private void Update()
     {
@@ -331,11 +331,11 @@ public class J_PieceMove : MonoBehaviour
         if (!EndRot)
         {
             //1.적이없다면 바로감
-            //if (BoardManager.Instance.Chessmans[PosX, PosY] == null)
+            if (BoardManager.Instance.Chessmans[PosX, PosY] == null)
             StartCoroutine(StraightMove(PosX, PosY));
 
             // 2. 적이 있다면 pretarget
-            //else
+            else
             Debug.Log(preTargetX + " " + preTargetZ);
 
             StartCoroutine(StraightMove(preTargetX, preTargetZ, true));

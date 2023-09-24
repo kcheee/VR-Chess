@@ -46,33 +46,33 @@ public class Chessman : MonoBehaviour
         if(type == typeof(Pawn))
         {
             Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x,y);
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
         }
         if (type == typeof(Rook))
         {
             Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x, y);
-            
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
+
         }
         if (type == typeof(Knight))
         {
             Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x, y);
-        }
-        if (type == typeof(Queen))
-        {
-            Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x, y);
-        }
-        if (type == typeof(Bishop))
-        {
-            Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x, y);
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
+        }                                        
+        if (type == typeof(Queen))               
+        {                                        
+            Debug.Log("角青");                   
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
+        }                                         
+        if (type == typeof(Bishop))               
+        {                                         
+            Debug.Log("角青");                    
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
         }
         if (type == typeof(King))
         {
             Debug.Log("角青");
-            transform.GetComponent<J_PieceMove>().PieceMove(x, y);
+            transform.GetComponent<J_PieceMove>().UpdateRotate1(x, y);
         }
 
     }
