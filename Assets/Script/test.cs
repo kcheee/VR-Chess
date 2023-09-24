@@ -9,7 +9,7 @@ using UnityEditor.XR.LegacyInputHelpers;
 public class test : MonoBehaviour
 {
 
-    public GameObject Go;
+    public GameObject Des_Pos;
     public GameObject map;
     public XROrigin yoffset;
     public Transform cameraoffset;
@@ -76,7 +76,7 @@ public class test : MonoBehaviour
 
         while (!endWhile)
         {
-            transform.position = Vector3.Lerp(transform.position,Go.transform.position,1f);
+            transform.position = Vector3.Lerp(transform.position,Des_Pos.transform.position,1f);
             yield return null;
 
         }
@@ -91,7 +91,7 @@ public class test : MonoBehaviour
 
         myTween = cameraoffset.DOMoveY(targetY, shakeDuration).SetLoops(-1, LoopType.Yoyo);
 
-        transform.DOMove(Go.transform.position, 10).OnComplete(() => myTween.Kill());
+        transform.DOMove(Des_Pos.transform.position, 10).OnComplete(() => myTween.Kill());
 
     }
 

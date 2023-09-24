@@ -200,8 +200,8 @@ public class BoardManager : MonoBehaviour
         ActiveChessmans.Add(ChessmanObject);
 
         // 생성된 체스맨의 위치를 정수로 변환하여 x와 y에 저장합니다.
-        int x = (int)(position.x * 10);
-        int y = (int)(position.z * 10);
+        int x = (int)(position.x);
+        int y = (int)(position.z);
 
         
 
@@ -273,27 +273,27 @@ public class BoardManager : MonoBehaviour
         // 퍼즐형
 
         // king
-        SpawnChessman(9, new Vector3(3 * Adjustpos, 0, 0 * Adjustpos));
+        SpawnChessman(9, new Vector3(3 , 0, 0));
         // rook                                          
-        SpawnChessman(6, new Vector3(0 * Adjustpos, 0, 0 * Adjustpos));
-        SpawnChessman(6, new Vector3(7.1f * Adjustpos, 0, 0 * Adjustpos));
+        SpawnChessman(6, new Vector3(0, 0, 0 ));
+        SpawnChessman(6, new Vector3(7, 0, 0));
 
         // pawn
-        SpawnChessman(11, new Vector3(4.1f * Adjustpos, 0, 1.1f * Adjustpos));
-        SpawnChessman(11, new Vector3(5.1f * Adjustpos, 0, 1.1f * Adjustpos));
+        SpawnChessman(11, new Vector3(4, 0, 1));
+        SpawnChessman(11, new Vector3(5, 0, 1));
 
         // - - - 우리팀 - - -
 
         // pawn
-        SpawnChessman(5, new Vector3(2.1f * Adjustpos, 0, 6.1f * Adjustpos));
-        SpawnChessman(5, new Vector3(5.1f * Adjustpos, 0, 6.1f * Adjustpos));
-        SpawnChessman(5, new Vector3(2.1f * Adjustpos, 0, 1.1f * Adjustpos));
+        SpawnChessman(5, new Vector3(2, 0, 6));
+        SpawnChessman(5, new Vector3(5, 0, 6));
+        SpawnChessman(5, new Vector3(2, 0, 1));
 
-        SpawnChessman(0, new Vector3(0 * Adjustpos, 0, 7.1f * Adjustpos));
+        SpawnChessman(0, new Vector3(0 , 0, 7));
 
-        SpawnChessman(3, new Vector3(3.1f * Adjustpos, 0, 7.1f * Adjustpos));
+        SpawnChessman(3, new Vector3(3, 0, 7));
 
-        SpawnChessman(4, new Vector3(5.1f * Adjustpos, 0, 4.1f * Adjustpos));
+        SpawnChessman(4, new Vector3(5, 0, 4));
 
         // 보드 매니저에서 따로 체스 말 관리.
         // 특수한 이동이나 체크메이트를 위해.
