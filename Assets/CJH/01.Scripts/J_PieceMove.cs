@@ -195,11 +195,12 @@ public class J_PieceMove : MonoBehaviour
         newParticle.transform.parent = transform;
         
         //Destroy(newParticle);
-        BoardManager.Instance.Chessmans[PosX, PosY].gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
+        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
-        BoardManager.Instance.Chessmans[PosX, PosY].gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+        Destroy(BoardManager.Instance.deletePiece, 2);
     }
     private void Update()
     {
@@ -283,6 +284,7 @@ public class J_PieceMove : MonoBehaviour
             yield return null;// new WaitForSeconds(0.05f);
             //print("움직인다");
         }
+
         transform.position = targetPosition * 0.1f;
         yield return new WaitForSeconds(0.01f);
 
@@ -296,8 +298,7 @@ public class J_PieceMove : MonoBehaviour
         {
             EndRot = true;
             // 앞에 보게 회전.
-            StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
-            
+            StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));            
         }
     }
     //회전 공식(완료)
@@ -331,14 +332,17 @@ public class J_PieceMove : MonoBehaviour
         if (!EndRot)
         {
             //1.적이없다면 바로감
-            if (BoardManager.Instance.Chessmans[PosX, PosY] == null)
-            StartCoroutine(StraightMove(PosX, PosY));
-
+            if (BoardManager.Instance.deletePiece == null)
+            {
+                Debug.Log("dds");
+                StartCoroutine(StraightMove(PosX, PosY));
+            }
             // 2. 적이 있다면 pretarget
             else
+            {
             Debug.Log(preTargetX + " " + preTargetZ);
-
             StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            }
         }
     }
     //공격 함수

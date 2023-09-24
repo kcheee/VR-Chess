@@ -280,7 +280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66857276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.13, y: 8.734824, z: -11.36}
+  m_LocalPosition: {x: 7.495, y: 9.32, z: -11.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1373,6 +1373,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Push Button
       objectReference: {fileID: 0}
+    - target: {fileID: 5419331889293473514, guid: 76f3439a0ae796e4b81bee3f91f888ee, type: 3}
+      propertyPath: m_StartingHoverFilters.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715982062901706649, guid: 76f3439a0ae796e4b81bee3f91f888ee, type: 3}
+      propertyPath: m_ValueUpdated.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715982062901706649, guid: 76f3439a0ae796e4b81bee3f91f888ee, type: 3}
+      propertyPath: m_ValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715982062901706649, guid: 76f3439a0ae796e4b81bee3f91f888ee, type: 3}
+      propertyPath: m_ValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76f3439a0ae796e4b81bee3f91f888ee, type: 3}
 --- !u!1 &991225506
@@ -2370,6 +2386,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8752623663192769063, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
 --- !u!1 &1335349546
@@ -3249,18 +3269,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChessCount: 0
   ChessmanPrefabs:
-  - {fileID: 7193480333137699817, guid: 7942ef4971c8f5a4a926079ec85e9409, type: 3}
-  - {fileID: 869186455945884708, guid: 8ea4a3cb997067c4483615fed99ddd12, type: 3}
-  - {fileID: 26152986674880324, guid: 0d26627502b5070468d0cfc493ca2837, type: 3}
-  - {fileID: 6659525048061705379, guid: 11132ca9a5f5d4b46af91d7e6f46d227, type: 3}
-  - {fileID: 3395763510902437890, guid: 7cc2802879fc220458610e6c5b62d817, type: 3}
-  - {fileID: 1728187353904243389, guid: 9f896ab69383ef042b363812ab7645cc, type: 3}
-  - {fileID: 7861527571580540591, guid: 4a9f7ecf1aaa8ca4da3b960001778023, type: 3}
-  - {fileID: 7208156746699134750, guid: 5d2146fc980a1e14fa8e5921b68b39d6, type: 3}
-  - {fileID: 3487407850554737821, guid: 6e511269bf2b0f944b746d16edd4cb3a, type: 3}
-  - {fileID: 1999779285983888674, guid: 38ce18cc3000183478ac7b6c33d49228, type: 3}
-  - {fileID: 1800045439719810722, guid: cbfd4d56a3596444cb615987291dad28, type: 3}
-  - {fileID: 2142620018598608326, guid: 8697a18b0eeb1c74cb5dc2dc713b5d6f, type: 3}
+  - {fileID: 8054822061617562282, guid: 082d913e4ca3abd41a073e451116590f, type: 3}
+  - {fileID: 5094853506702990696, guid: b047182b147f2bf45ab6407fc7edfa7b, type: 3}
+  - {fileID: 5007192091254078667, guid: d4e75787950b2514aba9f9db39617335, type: 3}
+  - {fileID: 8191364920559279205, guid: 8fe76debe3cb3df4da6db1dd56431609, type: 3}
+  - {fileID: 8356850144694440833, guid: 9202e15eefdf0f0478e3c057d7e5748e, type: 3}
+  - {fileID: 654757474527506045, guid: 76cfd43021070c048a72f681427252f0, type: 3}
+  - {fileID: 2033569241338655194, guid: 8bf0938b70116af44ae767d56ab3e45e, type: 3}
+  - {fileID: 2754401419507071886, guid: 0b062f72c7015e644b33f0b5ca15d4f3, type: 3}
+  - {fileID: 1450590154784001245, guid: 28d809df0394ed64b85e9b4f09fd00f1, type: 3}
+  - {fileID: 551861909677534164, guid: 9930ab251cfde75499abd1227f067947, type: 3}
+  - {fileID: 8574864043102076294, guid: 43abf8460a8ceb04fb23c59f54f649e0, type: 3}
+  - {fileID: 2935660920545857549, guid: 4bc81963462847d45835cd48be343892, type: 3}
   ActiveChessmans: []
   SelectedChessman: {fileID: 0}
   isWhiteTurn: 1
@@ -3272,6 +3292,7 @@ MonoBehaviour:
   WhiteRook2: {fileID: 0}
   BlackRook1: {fileID: 0}
   BlackRook2: {fileID: 0}
+  deletePiece: {fileID: 0}
 --- !u!114 &1747323638
 MonoBehaviour:
   m_ObjectHideFlags: 0

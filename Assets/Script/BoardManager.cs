@@ -35,7 +35,6 @@ public class BoardManager : MonoBehaviour
     // cam
     Camera cam;
 
-
     // 체스 기물.
     public Chessman[,] Chessmans { set; get; }
     // Currently Selected Chessman
@@ -320,7 +319,7 @@ public class BoardManager : MonoBehaviour
     }
 
     bool ispromotion = false;
-    Chessman deletePiece = null;
+    public Chessman deletePiece = null;
 
     // 체스 기물 이동
     public void MoveChessman(int x, int y)
@@ -526,6 +525,7 @@ public class BoardManager : MonoBehaviour
                 EndGame();
             }
             Destroy(deletePiece.gameObject);
+            deletePiece = null;
         }
         
         Debug.Log("턴 넘김");
