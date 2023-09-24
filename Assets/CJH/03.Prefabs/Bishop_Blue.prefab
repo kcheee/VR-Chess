@@ -934,8 +934,8 @@ MonoBehaviour:
   currentX: 0
   currentY: 0
   chessType: 0
-  pieceState: 0
-  particleObject: {fileID: 0}
+  particleObject: {fileID: 3948274424121261458, guid: 6dc2f8841545e5a48ae3c629228e5f77, type: 3}
+  particlePos: {fileID: 0}
 --- !u!136 &2268868453809821820
 CapsuleCollider:
   m_ObjectHideFlags: 0
