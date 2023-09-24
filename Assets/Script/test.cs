@@ -46,26 +46,27 @@ public class test : MonoBehaviour
         }
         //transform.position += transform.forward * 2 * Time.deltaTime;
         //transform.position += transform.forward*5*Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            //float shakeDuration = 0.5f; // 강도를 높임
-            //Vector3 shakeStrength = new Vector3(0, 0.2f, 0); // 아래로만 움직이도록 조절
 
-            //cameraoffset.DOShakePosition(shakeDuration, -shakeStrength, vibrato: 0, randomness: 0, snapping: false);
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    //float shakeDuration = 0.5f; // 강도를 높임
+        //    //Vector3 shakeStrength = new Vector3(0, 0.2f, 0); // 아래로만 움직이도록 조절
 
-            // 첫 번째 Tween: transform을 Go의 위치로 이동시킵니다.
+        //    //cameraoffset.DOShakePosition(shakeDuration, -shakeStrength, vibrato: 0, randomness: 0, snapping: false);
 
-            // 두 번째 Tween: cameraoffset을 아래로 흔들기 시작합니다.
-            float shakeDuration = 0.5f;
-            Vector3 targetPos = new Vector3(cameraoffset.position.x, cameraoffset.position.y - 0.1f, cameraoffset.position.z);
+        //    // 첫 번째 Tween: transform을 Go의 위치로 이동시킵니다.
 
-            transform.DOMove(Go.transform.position, 10);
+        //    // 두 번째 Tween: cameraoffset을 아래로 흔들기 시작합니다.
+        //    float shakeDuration = 0.5f;
+        //    Vector3 targetPos = new Vector3(cameraoffset.position.x, cameraoffset.position.y - 0.1f, cameraoffset.position.z);
 
-            //Tween Tes = transform.DOMove(Go.transform.position, 10);
-            // 나중에 이 Tween을 중지시킵니다.
-            //myTween.Kill();
+        //    transform.DOMove(Go.transform.position, 10);
 
-        }
+        //    //Tween Tes = transform.DOMove(Go.transform.position, 10);
+        //    // 나중에 이 Tween을 중지시킵니다.
+        //    //myTween.Kill();
+
+        //}
     }
     IEnumerator Giant()
     {

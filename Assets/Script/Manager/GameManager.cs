@@ -24,17 +24,24 @@ public class GameManager : MonoBehaviour
 
     public GameObject board;
 
-    // fadeout
+    // fade In & Out
     public CanvasGroup canvasGroup;
     public CanvasGroup winText;
 
     private void Start()
     {
-        // 페이드 인
+        // 페이드 인 & 페이드 인 사운드
         currentTime = totalTime;
-        SoundManager.Instance.audioSource.clip = SoundManager.Instance.BGMList[2];
+        // MainScene테스트를 위해
+        // SoundManager는 Title에서 Don't destory로 가져옴.
+        if (SoundManager.Instance != null)
+        {
+        SoundManager.Instance.audioSource.clip = SoundManager.Instance.BGMList[1];
         SoundManager.Instance.audioSource.Play();
         SoundManager.Instance.audioSource.DOFade(1, 7);
+        }
+
+        canvasGroup.DOFade(0, 5);
     }
 
     void Update()
@@ -43,7 +50,7 @@ public class GameManager : MonoBehaviour
         if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
-            UpdateTimerDisplay();
+            //UpdateTimerDisplay();
         }
         else
         {

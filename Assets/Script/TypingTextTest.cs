@@ -19,17 +19,18 @@ public class TypingTextTest : MonoBehaviour
     IEnumerator Typing(string talk)
     {
         i++;
-        Test_text.text = null;
-        Test_text.DOText(talk, 5);
+        Test_text.text = "¾Ù¸®½º : ";
+        Test_text.DOText(talk, 3);
 
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(NextTyping(str[i]));
+        yield return new WaitForSeconds(3f);
+        if (i < str.Length)
+            StartCoroutine(NextTyping(str[i]));
     }
     IEnumerator NextTyping(string talk)
     {
         Test_text.text = " ";
         yield return new WaitForSeconds(1f);
-        if(i<5) 
+        Debug.Log(str.Length);
         StartCoroutine(Typing(str[i]));
     }
 }
