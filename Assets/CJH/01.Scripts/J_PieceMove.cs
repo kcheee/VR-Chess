@@ -32,11 +32,16 @@ public class J_PieceMove : MonoBehaviour
 
     public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
+    //사운드
+    public AudioSource audioSource;
+    public AudioClip attackSound;
+
     private void Start()
     {
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
         anim.Play("Idle");
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateRotate1(int x, int y)
@@ -190,12 +195,14 @@ public class J_PieceMove : MonoBehaviour
         Vector3 spawnPos = transform.position + transform.forward * posOffset;
         GameObject newParticle = Instantiate(particleObject,spawnPos, transform.rotation);
         //newParticle.transform.parent = transform;
+        audioSource.Play();
         
         //Destroy(newParticle);
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
+
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
         Destroy(BoardManager.Instance.deletePiece, 2);
         //Debug.Log("삭제");
@@ -364,8 +371,12 @@ public class J_PieceMove : MonoBehaviour
     {
         //yield return null;
         anim.CrossFade("Attack", 0, 0);
+        //자신의 attackClip에 맞는 SoundEffcet가 실행된다.
+        //audioSource.PlayOneShot(attackSound, 1);
+
         //Debug.Log(PosX + " " + PosY);
         yield return new WaitForSeconds(3);
         StartCoroutine(StraightMove(PosX, PosY, false, true));
+        
     }
 }
