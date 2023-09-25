@@ -3551,7 +3551,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023322912275795947, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033887690914328455, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033887692346017520, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6067273033819093865, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
       propertyPath: m_RootOrder
@@ -3612,6 +3620,14 @@ PrefabInstance:
     - target: {fileID: 6067273033819093865, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732404458863674167, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732404460158282304, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 774b91d3cafb88a4dafae82daf804a3f, type: 3}
@@ -6921,6 +6937,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7faaac24bdba3984e89c94321fac7f0c, type: 3}
   - {fileID: 8300000, guid: 7712085f3c0c31443bdae9a23a0e54da, type: 3}
   - {fileID: 8300000, guid: a046e4ec9f97e3849bc178dd6caa9858, type: 3}
+  audioSource: {fileID: 0}
 --- !u!82 &796544509
 AudioSource:
   m_ObjectHideFlags: 0

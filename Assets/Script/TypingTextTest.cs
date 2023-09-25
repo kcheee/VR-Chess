@@ -7,30 +7,44 @@ using UnityEngine.UI;
 
 public class TypingTextTest : MonoBehaviour
 {
+    static public TypingTextTest instance;
+    private void Awake()
+    {
+        instance = this; 
+    }
+
     public Text Test_text;
 
-    public string[] str;
+    public string[] str1;
+    public string[] str2;
+
     int i;
     private void Start()
     {
-        
-        StartCoroutine(Typing(str[i]));
+        // µÙ∑π¿Ã ¡÷∞Ì Ω√¿€.
+        StartCoroutine(delay());
+    }
+
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(Typing(str1[i]));
     }
     IEnumerator Typing(string talk)
     {
         i++;
-        Test_text.text = "æŸ∏ÆΩ∫ : ";
+        Test_text.text = null;
         Test_text.DOText(talk, 3);
 
         yield return new WaitForSeconds(3f);
-        if (i < str.Length)
-            StartCoroutine(NextTyping(str[i]));
+        if (i < str1.Length)
+            StartCoroutine(NextTyping(str1[i]));
     }
     IEnumerator NextTyping(string talk)
     {
         Test_text.text = " ";
         yield return new WaitForSeconds(1f);
-        Debug.Log(str.Length);
-        StartCoroutine(Typing(str[i]));
+        Debug.Log(str1.Length);
+        StartCoroutine(Typing(str1[i]));
     }
 }
