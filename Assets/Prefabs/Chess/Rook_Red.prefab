@@ -298,7 +298,6 @@ GameObject:
   - component: {fileID: 2038823781465926228}
   - component: {fileID: 2047649163965504294}
   - component: {fileID: 1866955098474593309}
-  - component: {fileID: 5054620156132563407}
   - component: {fileID: 3496088629358995669}
   - component: {fileID: 8996891469189798522}
   - component: {fileID: 4980781671406649871}
@@ -391,24 +390,6 @@ MonoBehaviour:
   isMoved: 0
   chesstype: 0
   outline: {fileID: 0}
---- !u!114 &5054620156132563407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033569241338655194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.9013662, b: 0, a: 1}
-  outlineWidth: 3.88
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &3496088629358995669
 MonoBehaviour:
   m_ObjectHideFlags: 0
