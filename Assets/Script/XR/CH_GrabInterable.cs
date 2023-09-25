@@ -55,8 +55,16 @@ public class CH_GrabInterable : XRGrabInteractable
         BoardManager.canGrab = false;
 
         base.Drop();
-        int x = (int)(transform.position.x * 10);
-        int y = (int)(transform.position.z * 10);
+        //int x = (int)(transform.position.x * 10);
+        //int y = (int)(transform.position.z * 10);
+
+        Vector3 pos = transform.position;
+        pos.x += 0.05f;
+        pos.z += 0.05f;
+        pos *= 10;
+        int x = (int)pos.x;
+        int y = (int)pos.z;
+
         Debug.Log("Drop :  " + x + " : " + y);
 
         // allowpos를 확인후
@@ -99,8 +107,13 @@ public class CH_GrabInterable : XRGrabInteractable
 
         BoardManager.canGrab = true;
         base.Grab();
-        int x = (int)(transform.position.x * 10);
-        int y = (int)(transform.position.z * 10);
+
+        Vector3 pos = transform.position;
+        pos.x += 0.05f;
+        pos.z += 0.05f;
+        pos *= 10;
+        int x = (int)pos.x;
+        int y = (int)pos.z;
 
         stored_Piece = Instantiate(transform.gameObject, transform.position, transform.rotation);
         // 보드 매니저에 체스 기물 재정의

@@ -285,6 +285,7 @@ public class J_PieceMove : MonoBehaviour
         Vector3 dir = transform.forward;
         anim.CrossFade("Move", 0, 0);
 
+        
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
         {
             elapsedTime += Time.deltaTime;
@@ -307,11 +308,12 @@ public class J_PieceMove : MonoBehaviour
         }
         if (rot)
         {
-            Debug.Log("asdf");
+            Debug.Log("이거 한번만 실행해야함.");
             EndRot = true;
             // 앞에 보게 회전.
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
-            
+
+            // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
             BoardManager.Instance.PieceIsMove = false;
             // ----------- 턴넘김----------------
@@ -352,7 +354,7 @@ public class J_PieceMove : MonoBehaviour
             //1.적이없다면 바로감
             if (BoardManager.Instance.deletePiece == null)
             {
-                //Debug.Log("dds");
+                Debug.Log("적 발견");
                 StartCoroutine(StraightMove(PosX, PosY, false, true));
 
             }
@@ -374,6 +376,7 @@ public class J_PieceMove : MonoBehaviour
 
         //Debug.Log(PosX + " " + PosY);
         yield return new WaitForSeconds(3);
+        
         StartCoroutine(StraightMove(PosX, PosY, false, true));
         
     }

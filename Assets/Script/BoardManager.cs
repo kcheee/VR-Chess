@@ -283,12 +283,17 @@ public class BoardManager : MonoBehaviour
 
         // - - - ¿ì¸®ÆÀ - - -
 
+
         // pawn
         SpawnChessman(5, new Vector3(2, 0, 6));
         SpawnChessman(5, new Vector3(5, 0, 6));
         SpawnChessman(5, new Vector3(2, 0, 1));
 
         SpawnChessman(0, new Vector3(0 , 0, 7));
+
+        SpawnChessman(1, new Vector3(0, 0, 4));
+
+        SpawnChessman(2, new Vector3(1, 0, 4));
 
         SpawnChessman(3, new Vector3(3, 0, 7));
 
