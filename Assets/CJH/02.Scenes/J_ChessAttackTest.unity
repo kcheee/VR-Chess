@@ -1312,6 +1312,7 @@ MonoBehaviour:
   board: {fileID: 0}
   canvasGroup: {fileID: 0}
   winText: {fileID: 0}
+  Startbutton: {fileID: 0}
 --- !u!1 &1747323628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8729485250777845241, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
@@ -8367,7 +8368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005650253624719605
 Transform:
   m_ObjectHideFlags: 0
@@ -20273,7 +20274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5355750083293595800
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,15 +33,15 @@ public class J_PieceMove : MonoBehaviour
     public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
     //사운드
-    public AudioSource audioSource;
-    public AudioClip attackSound;
+    //public AudioSource audioSource;
+    //public AudioClip attackSound;
 
     private void Start()
     {
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
         anim.Play("Idle");
-        audioSource = GetComponent<AudioSource>();
+       // audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateRotate1(int x, int y)
@@ -195,16 +195,15 @@ public class J_PieceMove : MonoBehaviour
         Vector3 spawnPos = transform.position + transform.forward * posOffset;
         GameObject newParticle = Instantiate(particleObject,spawnPos, transform.rotation);
         //newParticle.transform.parent = transform;
-        audioSource.Play();
+        //audioSource.Play();
         
         //Destroy(newParticle);
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
-
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
-        Destroy(BoardManager.Instance.deletePiece, 2);
+        Destroy(BoardManager.Instance.deletePiece, 2);  
         //Debug.Log("삭제");
     }
     private void Update()
@@ -348,22 +347,22 @@ public class J_PieceMove : MonoBehaviour
 
         if (!EndRot)
         {
-            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
 
-            
-            ////1.적이없다면 바로감
-            //if (BoardManager.Instance.deletePiece == null)
-            //{
-            //    //Debug.Log("dds");
-            //    StartCoroutine(StraightMove(PosX, PosY,false,true));
 
-            //}
-            //// 2. 적이 있다면 pretarget
-            //else
-            //{
-            //    //Debug.Log(preTargetX + " " + preTargetZ);
-            //    StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-            //}
+            //1.적이없다면 바로감
+            if (BoardManager.Instance.deletePiece == null)
+            {
+                //Debug.Log("dds");
+                StartCoroutine(StraightMove(PosX, PosY, false, true));
+
+            }
+            // 2. 적이 있다면 pretarget
+            else
+            {
+                //Debug.Log(preTargetX + " " + preTargetZ);
+                StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            }
         }
     }
     //공격 함수
