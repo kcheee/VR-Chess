@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class J_PieceMove : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class J_PieceMove : MonoBehaviour
 
     bool EndRot = false;  // 마지막 앞을 바라보는 회전
 
-    public ParticleSystem particleObject; //파티클 시스템
+    public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
     private void Start()
     {
@@ -46,39 +47,25 @@ public class J_PieceMove : MonoBehaviour
         PosX = x;
         PosY = y;
 
+        Vector3 pos = transform.position;// (transform.position + (Vector3.right + Vector3.up) * 0.05f) * 10;
+        pos.x += 0.05f;
+        pos.z += 0.05f;
+        pos *= 10;
+
+        int reCal_X = (int)pos.x;
+        int reCal_Y = (int)pos.z;
+
         #region 비숍
         if (chessType == ChessType.BISHOP)
         {
-            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1;
-            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1;
-            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1;
-            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1;
+            CalculateBishop(reCal_X, reCal_Y);
         }
 
         #endregion
         #region 룩
         if (chessType == ChessType.ROOK)
         {
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
-            {
-                preTargetX = PosX;
-                preTargetZ = PosY - 1f;
-            }
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
-            {
-                preTargetX = PosX;
-                preTargetZ = PosY + 1f;
-            }
-            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX + 1f;
-                preTargetZ = PosY;
-            }
-            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX - 1f;
-                preTargetZ = PosY;
-            }
+            CalculateRook(reCal_X, reCal_Y);           
         }
 
         #endregion
@@ -86,67 +73,28 @@ public class J_PieceMove : MonoBehaviour
         if (chessType == ChessType.PAWN)
         {
 
-            //비숍처럼
-            if (transform.position.x * 10 - PosX == 0)
+            CalculateBishop(reCal_X, reCal_Y);
+            //직선이동일때는 직선이동한다.
+            if (isPawn(reCal_X,reCal_Y))
             {
-                Debug.Log("000");
-                preTargetX = PosX;
+                CalculateRook(x, y);
+            }
 
-            }
-            if (transform.position.x * 10 - PosX < 0)
-            {
-                Debug.Log("111");
-                preTargetX = PosX - 1f;
-                
-            }
-            else if (transform.position.x * 10 - PosX > 0)
-            {
-                Debug.Log("222");
-
-                preTargetX = PosX + 1f;
-            }
-            if (transform.position.z * 10 - PosY < 0)
-            {
-                Debug.Log("333f");
-
-                preTargetZ = PosY - 1f;
-            }
-            else if (transform.position.z * 10 - PosY > 0)
-            {
-                Debug.Log("444f");
-
-                preTargetZ = PosY + 1f;
-            }
         }
         #endregion
         #region 퀸
         if (chessType == ChessType.QUEEN)
         {
             //비숍처럼
-            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1f;
-            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1f;
-            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1f;
-            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1f;
+            if(isBishopOrRook(reCal_X, reCal_Y))
+            {
+                CalculateBishop(reCal_X, reCal_Y);
+
+            }
             //룩처럼
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
+            else
             {
-                preTargetX = PosX;
-                preTargetZ = PosY - 1f;
-            }
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
-            {
-                preTargetX = PosX;
-                preTargetZ = PosY + 1f;
-            }
-            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX + 1f;
-                preTargetZ = PosY;
-            }
-            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX - 1f;
-                preTargetZ = PosY;
+                CalculateRook(reCal_X, reCal_Y);
             }
         }
 
@@ -155,44 +103,93 @@ public class J_PieceMove : MonoBehaviour
         if (chessType == ChessType.KING)
         {
             //비숍처럼
-            if (transform.position.x * 10 - PosX < 0) preTargetX = PosX - 1f;
-            else if (transform.position.x * 10 - PosX > 0) preTargetX = PosX + 1f;
-            if (transform.position.z * 10 - PosY < 0) preTargetZ = PosY - 1f;
-            else if (transform.position.z * 10 - PosY > 0) preTargetZ = PosY + 1f;
+            if (isBishopOrRook(reCal_X, reCal_Y))
+            {
+                CalculateBishop(reCal_X, reCal_Y);
+            }
             //룩처럼
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY < 0)
+            else
             {
-                preTargetX = PosX;
-                preTargetZ = PosY - 1f;
-            }
-            if (transform.position.x * 10 - PosX == 0 && transform.position.z * 10 - PosY > 0)
-            {
-                preTargetX = PosX;
-                preTargetZ = PosY + 1f;
-            }
-            if (transform.position.x * 10 - PosX > 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX + 1f;
-                preTargetZ = PosY;
-            }
-            if (transform.position.x * 10 - PosX < 0 && transform.position.z * 10 - PosY == 0)
-            {
-                preTargetX = PosX - 1f;
-                preTargetZ = PosY;
+                CalculateRook(reCal_X, reCal_Y);
             }
         }
 
         #endregion
-        Debug.Log(PosX);
-        Debug.Log(preTargetX );
+        //Debug.Log(PosX);
+        //Debug.Log(preTargetX );
         PieceMove(PosX, PosY);
     }
-    float posOffset = 0.022f;
+    //true면 직선이동 
+    bool isPawn(int x, int y)
+    {
+        return x == PosX;
+    }
+
+    // true 면 비숍 false 룩
+    bool isBishopOrRook(int x, int y)
+    {
+        return (x != PosX && y != PosY);
+    }
+    //비숍 계산법
+    void CalculateBishop(int x, int y)
+    {
+
+        if (x - PosX < 0)
+        {
+            //Debug.Log(PosX);
+            preTargetX = PosX - 1;
+        }
+        else if (x - PosX > 0)
+        {
+            preTargetX = PosX + 1;
+        }
+
+        if (y - PosY < 0)
+        {
+            preTargetZ = PosY - 1;
+        }
+        else if (y - PosY > 0)
+        {
+            preTargetZ = PosY + 1;
+        }
+    }
+    //룩 계산법
+    void CalculateRook(int x, int y)
+    {
+        //룩처럼
+        if (x > PosX)
+        {
+            preTargetX = PosX + 1;
+        }
+        else if (x < PosX)
+        {
+            preTargetX = PosX - 1;
+        }
+        else
+        {
+            preTargetX = PosX;
+        }
+
+        if (y > PosY)
+        {
+            preTargetZ = PosY + 1;
+        }
+        else if (y < PosY)
+        {
+            preTargetZ = PosY - 1;
+        }
+        else
+        {
+            preTargetZ = PosY;
+        }
+    }
+
+    float posOffset = 0.222f;
     public void OnAttack_Hit()
     {
         Vector3 spawnPos = transform.position + transform.forward * posOffset;
-        ParticleSystem newParticle = Instantiate(particleObject,spawnPos, Quaternion.identity);
-        newParticle.transform.parent = transform;
+        GameObject newParticle = Instantiate(particleObject,spawnPos, transform.rotation);
+        //newParticle.transform.parent = transform;
         
         //Destroy(newParticle);
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
@@ -201,6 +198,7 @@ public class J_PieceMove : MonoBehaviour
     {
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
         Destroy(BoardManager.Instance.deletePiece, 2);
+        //Debug.Log("삭제");
     }
     private void Update()
     {
@@ -212,6 +210,12 @@ public class J_PieceMove : MonoBehaviour
             //PieceMove(3, 3);
             UpdateRotate1(5, 4);
         }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            StartCoroutine( RotatePiece(5, 4));
+            //StartCoroutine(Co_Attack());
+        }
+        
     }
     float angle = 0;
     int nDir = 0;
@@ -253,7 +257,6 @@ public class J_PieceMove : MonoBehaviour
         //StartCoroutine(Attack(targetX, targetY));
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
         //ChangeState(PieceState.Rotate1);
-
         return;
     }
 
@@ -271,8 +274,6 @@ public class J_PieceMove : MonoBehaviour
         float dist = Vector3.Distance(transform.position * 10, targetPosition);
         //시간
         float duration = dist / moveSpeed;
-
-
         //타겟의 방향
         Vector3 dir = transform.forward;
         anim.CrossFade("Move", 0, 0);
@@ -290,7 +291,6 @@ public class J_PieceMove : MonoBehaviour
 
         // move에서 idle로 전환
         anim.CrossFade("Idle", 0, 0);
-
         // 적이있다면 공격
         if (Enemy)
         {
@@ -301,8 +301,12 @@ public class J_PieceMove : MonoBehaviour
         {
             EndRot = true;
             // 앞에 보게 회전.
-            StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));            
+            StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
+            // ----------- 턴넘김----------------
+            BoardManager.Instance.PieceIsMove = false;
+            // ----------- 턴넘김----------------
         }
+
     }
     //회전 공식(완료)
     private IEnumerator RotatePiece(float targetAngle, float duration)
@@ -334,20 +338,20 @@ public class J_PieceMove : MonoBehaviour
 
         if (!EndRot)
         {
+            //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+
             //1.적이없다면 바로감
             if (BoardManager.Instance.deletePiece == null)
             {
-                Debug.Log("dds");
+                //Debug.Log("dds");
                 StartCoroutine(StraightMove(PosX, PosY));
-                // ----------- 턴넘김----------------
-                BoardManager.Instance.PieceIsMove = false;
-                // ----------- 턴넘김----------------
+
             }
             // 2. 적이 있다면 pretarget
             else
             {
-            Debug.Log(preTargetX + " " + preTargetZ);
-            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+                //Debug.Log(preTargetX + " " + preTargetZ);
+                StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
             }
         }
     }
@@ -356,12 +360,8 @@ public class J_PieceMove : MonoBehaviour
     {
         //yield return null;
         anim.CrossFade("Attack", 0, 0);
-        Debug.Log(PosX + " " + PosY);
+        //Debug.Log(PosX + " " + PosY);
         yield return new WaitForSeconds(3);
         StartCoroutine(StraightMove(PosX, PosY, false, true));
-        // ----------- 턴넘김----------------
-        BoardManager.Instance.PieceIsMove = false;
-        // ----------- 턴넘김----------------
-
     }
 }
