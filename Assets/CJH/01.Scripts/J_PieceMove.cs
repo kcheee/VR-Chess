@@ -32,6 +32,8 @@ public class J_PieceMove : MonoBehaviour
 
     public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
+
+    bool isEnd = false; //마지막
     //사운드
     //public AudioSource audioSource;
     //public AudioClip attackSound;
@@ -264,6 +266,7 @@ public class J_PieceMove : MonoBehaviour
         //StartCoroutine(Attack(targetX, targetY));
         StartCoroutine(RotatePiece(angle * nDir, (1.0f / 45) * angle));
         //ChangeState(PieceState.Rotate1);
+        isEnd = true;
         return;
     }
 
@@ -309,6 +312,7 @@ public class J_PieceMove : MonoBehaviour
         {
             Debug.Log("asdf");
             EndRot = true;
+            isEnd = true;
             // 앞에 보게 회전.
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
             
@@ -352,8 +356,10 @@ public class J_PieceMove : MonoBehaviour
             //1.적이없다면 바로감
             if (BoardManager.Instance.deletePiece == null)
             {
+                
                 //Debug.Log("dds");
                 StartCoroutine(StraightMove(PosX, PosY, false, true));
+                isEnd = true;
 
             }
             // 2. 적이 있다면 pretarget
@@ -372,6 +378,7 @@ public class J_PieceMove : MonoBehaviour
         //자신의 attackClip에 맞는 SoundEffcet가 실행된다.
         //audioSource.PlayOneShot(attackSound, 1);
 
+        isEnd = false;
         //Debug.Log(PosX + " " + PosY);
         yield return new WaitForSeconds(3);
         StartCoroutine(StraightMove(PosX, PosY, false, true));
