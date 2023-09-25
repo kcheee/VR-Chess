@@ -10,8 +10,8 @@ public class J_AnimEvent : MonoBehaviour
     J_PieceMove pieceMove;
 
     //»ç¿îµå
-    public AudioSource audioSource;
-    public AudioClip attackSound;
+    //public AudioSource audioSource;
+    //public AudioClip attackSound;
 
     // Start is called before the first frame update
     void Awake()
