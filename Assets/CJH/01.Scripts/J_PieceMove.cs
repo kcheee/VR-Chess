@@ -289,8 +289,9 @@ public class J_PieceMove : MonoBehaviour
         transform.position = targetPosition * 0.1f;
         yield return new WaitForSeconds(0.01f);
 
+        
         // move에서 idle로 전환
-        anim.CrossFade("Idle", 0, 0);
+        //anim.CrossFade("Idle", 0, 0);
         // 적이있다면 공격
         if (Enemy)
         {
@@ -299,9 +300,11 @@ public class J_PieceMove : MonoBehaviour
         }
         if (rot)
         {
+            Debug.Log("asdf");
             EndRot = true;
             // 앞에 보게 회전.
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
+            
             // ----------- 턴넘김----------------
             BoardManager.Instance.PieceIsMove = false;
             // ----------- 턴넘김----------------
@@ -338,21 +341,22 @@ public class J_PieceMove : MonoBehaviour
 
         if (!EndRot)
         {
-            //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
 
-            //1.적이없다면 바로감
-            if (BoardManager.Instance.deletePiece == null)
-            {
-                //Debug.Log("dds");
-                StartCoroutine(StraightMove(PosX, PosY));
+            
+            ////1.적이없다면 바로감
+            //if (BoardManager.Instance.deletePiece == null)
+            //{
+            //    //Debug.Log("dds");
+            //    StartCoroutine(StraightMove(PosX, PosY,false,true));
 
-            }
-            // 2. 적이 있다면 pretarget
-            else
-            {
-                //Debug.Log(preTargetX + " " + preTargetZ);
-                StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-            }
+            //}
+            //// 2. 적이 있다면 pretarget
+            //else
+            //{
+            //    //Debug.Log(preTargetX + " " + preTargetZ);
+            //    StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            //}
         }
     }
     //공격 함수
