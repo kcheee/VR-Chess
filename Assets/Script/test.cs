@@ -18,6 +18,9 @@ public class test : MonoBehaviour
     public int vibration = 10; // 진동 수
     float a;
 
+    // 게임시작 UI
+    public CanvasGroup GamestartUI;
+
     Tween myTween;
     void Start()
     {
@@ -72,7 +75,11 @@ public class test : MonoBehaviour
     {
         bool endWhile = false;
         map.transform.DOScale(0.1f, 5).SetEase(Ease.OutQuad).OnComplete(()=> endWhile = true);
-        DOTween.To(() => yoffset.CameraYOffset, x => yoffset.CameraYOffset = x, 0.25f, 5);
+        DOTween.To(() => yoffset.CameraYOffset, x => yoffset.CameraYOffset = x, 0.25f, 5).OnComplete(() =>
+        {
+            // 거인화 끝나고 게임 시작 UI
+            GamestartUI.DOFade(1, 2);
+        });
 
         while (!endWhile)
         {
@@ -91,7 +98,12 @@ public class test : MonoBehaviour
 
         myTween = cameraoffset.DOMoveY(targetY, shakeDuration).SetLoops(-1, LoopType.Yoyo);
 
-        transform.DOMove(Des_Pos.transform.position, 10).OnComplete(() => myTween.Kill());
+        transform.DOMove(Des_Pos.transform.position, 10).OnComplete(() => {
+            myTween.Kill();
+
+            StartCoroutine(TypingTextTest.instance.delay(TypingTextTest.instance.str2));
+            Debug.Log("tlfgod");
+            });
 
     }
 

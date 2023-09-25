@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     public CanvasGroup canvasGroup;
     public CanvasGroup winText;
 
+    // Start버튼 삭제.
+    public GameObject Startbutton;
+
     private void Start()
     {
         // 페이드 인 & 페이드 인 사운드
@@ -69,6 +72,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 게임 시작 
+    // 시작 버튼에서 호출.
+    public void GameStart()
+    {
+        Startbutton.SetActive(false);
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.audioSource.clip = SoundManager.Instance.BGMList[2];
+            SoundManager.Instance.audioSource.Play();
+            //SoundManager.Instance.audioSource.DOFade(1, 4);
+        }
+
+        Debug.Log("시작");
+    }
+
+    // 승리 UI
     public void Winner()
     {
         //winText.

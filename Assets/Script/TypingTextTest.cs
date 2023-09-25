@@ -13,6 +13,7 @@ public class TypingTextTest : MonoBehaviour
         instance = this; 
     }
 
+    public CanvasGroup TextFade;
     public Text Test_text;
 
     public string[] str1;
@@ -22,29 +23,40 @@ public class TypingTextTest : MonoBehaviour
     private void Start()
     {
         // 딜레이 주고 시작.
-        StartCoroutine(delay());
+        // 앨리스 대사
+        StartCoroutine(delay(str1));
     }
 
-    IEnumerator delay()
+   public IEnumerator delay(string[] s)
     {
         yield return new WaitForSeconds(2f);
-        StartCoroutine(Typing(str1[i]));
+        TextFade.DOFade(1, 1);
+        // 앨리스 대사
+        StartCoroutine(Typing(s));
     }
-    IEnumerator Typing(string talk)
+    IEnumerator Typing(string[] talk)
     {
-        i++;
-        Test_text.text = null;
-        Test_text.DOText(talk, 3);
-
-        yield return new WaitForSeconds(3f);
-        if (i < str1.Length)
-            StartCoroutine(NextTyping(str1[i]));
-    }
-    IEnumerator NextTyping(string talk)
-    {
-        Test_text.text = " ";
         yield return new WaitForSeconds(1f);
-        Debug.Log(str1.Length);
-        StartCoroutine(Typing(str1[i]));
+
+        Test_text.text = null;
+        Test_text.DOText(talk[i], 3);
+        i++;
+
+        yield return new WaitForSeconds(2f);
+        if (i < talk.Length)
+            StartCoroutine(NextTyping(talk));
+        else
+        {
+            i = 0;
+            yield return new WaitForSeconds(2f);
+            TextFade.DOFade(0, 2);
+        }
+    }
+    IEnumerator NextTyping(string[] talk)
+    {
+
+        yield return new WaitForSeconds(2f);
+        Test_text.text = " ";
+        StartCoroutine(Typing(talk));
     }
 }
