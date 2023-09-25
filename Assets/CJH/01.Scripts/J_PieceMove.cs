@@ -41,7 +41,7 @@ public class J_PieceMove : MonoBehaviour
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
         anim.Play("Idle");
-       // audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateRotate1(int x, int y)
@@ -202,8 +202,9 @@ public class J_PieceMove : MonoBehaviour
     }
     public void OnAttack_Finished()
     {
+
         BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
-        Destroy(BoardManager.Instance.deletePiece, 2);  
+        Destroy(BoardManager.Instance.deletePiece, 2);
         //Debug.Log("삭제");
     }
     private void Update()
@@ -348,8 +349,6 @@ public class J_PieceMove : MonoBehaviour
         if (!EndRot)
         {
             //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-
-
             //1.적이없다면 바로감
             if (BoardManager.Instance.deletePiece == null)
             {

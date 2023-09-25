@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
 
             board.transform.DOScale(0.1f, 1);
         }
+        
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Winner();
+        }
     }
 
     // 게임 시작 
