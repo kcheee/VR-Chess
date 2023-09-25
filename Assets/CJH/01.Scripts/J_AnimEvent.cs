@@ -7,8 +7,11 @@ public class J_AnimEvent : MonoBehaviour
     //이벤트함수를 제작하고싶다
     // Hit, AttackFinished
     //J_AttackTest attackTest;
-
     J_PieceMove pieceMove;
+
+    //사운드
+    public AudioSource audioSource;
+    public AudioClip attackSound;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,7 +28,7 @@ public class J_AnimEvent : MonoBehaviour
    public void OnAttack_Hit()
     {
         pieceMove.OnAttack_Hit();
-
+        
     }
     public void OnAttack_Finished()
     {
