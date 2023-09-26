@@ -226,9 +226,12 @@ public class J_PieceMove : MonoBehaviour
     }
     float angle = 0;
     int nDir = 0;
+    private bool isend;
+
     //모든 말들의 움직임을 계산하는 함수 
     public void PieceMove(int targetX, int targetY)
     {
+        EndRot = false;
 
         Vector3 targetPos = new Vector3(targetX, 0, targetY) - transform.position * 10;
         float dot = Vector3.Dot(transform.right, targetPos);
@@ -311,6 +314,7 @@ public class J_PieceMove : MonoBehaviour
             Debug.Log("이거 한번만 실행해야함.");
             EndRot = true;
             // 앞에 보게 회전.
+            
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
 
             // 한번만 싫행해야함.
@@ -378,6 +382,9 @@ public class J_PieceMove : MonoBehaviour
         yield return new WaitForSeconds(3);
         
         StartCoroutine(StraightMove(PosX, PosY, false, true));
-        
     }
+
+
+    // 
+
 }
