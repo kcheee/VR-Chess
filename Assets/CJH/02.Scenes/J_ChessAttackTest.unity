@@ -526,7 +526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &507103299
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -796,7 +796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!114 &1098115353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,6 +1313,7 @@ MonoBehaviour:
   board: {fileID: 0}
   canvasGroup: {fileID: 0}
   winText: {fileID: 0}
+  Startbutton: {fileID: 0}
 --- !u!1 &1747323628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8729485250777845241, guid: d602ab336d8bb9346a085e8eb5be05bc, type: 3}
@@ -1379,6 +1381,156 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d86eacdca3b9448baf0486502bd44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2042627153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2042627156}
+  - component: {fileID: 2042627155}
+  - component: {fileID: 2042627154}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &2042627154
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042627153}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2042627155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042627153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f420564fb4b167543a7d80b7c32e6463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  attackSound:
+  - {fileID: 8300000, guid: 54a2c1f4fdedc3544b997b333805e7dd, type: 3}
+  - {fileID: 8300000, guid: 2873e14451d6eb44b9fdd042f0339a15, type: 3}
+  - {fileID: 8300000, guid: c070239f99802b44cbb77e3b0272d860, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 2dbbbeed4f5ef144994740bb86b0e8d4, type: 3}
+  - {fileID: 8300000, guid: 17a48691d051257458107defbbd5860f, type: 3}
+  chessType: 0
+--- !u!4 &2042627156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042627153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7, y: 0, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2734251256357451
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4468,7 +4620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &1109282632095039386
 Transform:
   m_ObjectHideFlags: 0
@@ -5466,8 +5619,7 @@ MonoBehaviour:
   chessType: 0
   particleObject: {fileID: 460929153667862191, guid: 611075dd3ac2ef94aaa4b5c5b683caa8, type: 3}
   particlePos: {fileID: 4253816983303229282}
-  audioSource: {fileID: 4182565385952219311}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &1343724718380363903
 Transform:
   m_ObjectHideFlags: 0
@@ -6468,7 +6620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!114 &1588598909856406560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7307,8 +7460,7 @@ MonoBehaviour:
   chessType: 5
   particleObject: {fileID: 652532021068045594, guid: 7192d092bef622240983bfba2c3407d0, type: 3}
   particlePos: {fileID: 6953717522965821994}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &1737183338506153840
 Transform:
   m_ObjectHideFlags: 0
@@ -8367,7 +8519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005650253624719605
 Transform:
   m_ObjectHideFlags: 0
@@ -11967,7 +12119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &3143018471120079800
 Transform:
   m_ObjectHideFlags: 0
@@ -13487,7 +13640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!1 &3487405065058128008
 GameObject:
   m_ObjectHideFlags: 0
@@ -13731,7 +13885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!1 &3615109453362480922
 GameObject:
   m_ObjectHideFlags: 0
@@ -13815,8 +13970,7 @@ MonoBehaviour:
   chessType: 0
   particleObject: {fileID: 3297188476293076007, guid: 29d34e8447a7bfa4a939bb827426c1cc, type: 3}
   particlePos: {fileID: 7320578387571705444}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &3641549106170173937
 Transform:
   m_ObjectHideFlags: 0
@@ -16091,13 +16245,13 @@ MonoBehaviour:
   solvers:
     leftFoot:
       executedInEditor: 0
-      IKPosition: {x: 0.013000174, y: 0.034127727, z: 0.50301963}
+      IKPosition: {x: 0.5130002, y: 0.034127727, z: 0.40301967}
       IKPositionWeight: 0
       root: {fileID: 7195698453672013961}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: -0.95881873, y: -0.2660413, z: 0.026359774, w: -0.09588566}
-      bendNormal: {x: -0.00059352716, y: 0.00009732725, z: 0.000046327496}
+      bendNormal: {x: -0.0005935276, y: 0.00009732695, z: 0.000046327674}
       bone1:
         transform: {fileID: 3737263866536357286}
         weight: 1
@@ -16135,13 +16289,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightFoot:
       executedInEditor: 0
-      IKPosition: {x: -0.0045261644, y: 0.005219954, z: 0.50567436}
+      IKPosition: {x: 0.49547383, y: 0.005219954, z: 0.40567437}
       IKPositionWeight: 0
       root: {fileID: 7195698453672013961}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.8027962, y: -0.108382754, z: -0.07012792, w: -0.5821115}
-      bendNormal: {x: -0.00018310704, y: -0.00003461705, z: -0.000017382972}
+      bendNormal: {x: -0.00018310623, y: -0.000034616878, z: -0.00001738312}
       bone1:
         transform: {fileID: 6991415287968556005}
         weight: 1
@@ -16179,13 +16333,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     leftHand:
       executedInEditor: 0
-      IKPosition: {x: 0.038205367, y: 0.08507693, z: 0.4913096}
+      IKPosition: {x: 0.5382054, y: 0.08507693, z: 0.39130962}
       IKPositionWeight: 0
       root: {fileID: 7195698453672013961}
       target: {fileID: 0}
       IKRotationWeight: 0
       IKRotation: {x: 0.66953653, y: 0.599991, z: -0.36130908, w: 0.24736166}
-      bendNormal: {x: 0.00010364408, y: 0.00002294364, z: 0.0000764073}
+      bendNormal: {x: 0.00010364408, y: 0.00002294351, z: 0.00007640797}
       bone1:
         transform: {fileID: 4613002957798768797}
         weight: 1
@@ -16223,13 +16377,13 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     rightHand:
       executedInEditor: 0
-      IKPosition: {x: -0.030152364, y: 0.08394258, z: 0.4891729}
+      IKPosition: {x: 0.46984765, y: 0.08394258, z: 0.3891729}
       IKPositionWeight: 0.97
       root: {fileID: 7195698453672013961}
       target: {fileID: 4567781036342586746}
       IKRotationWeight: 0
       IKRotation: {x: -0.460741, y: 0.5733486, z: -0.64409786, w: -0.21006525}
-      bendNormal: {x: 0.000055674467, y: -0.000016797154, z: -0.0000077190625}
+      bendNormal: {x: 0.000055674467, y: -0.000016797143, z: -0.000007718854}
       bone1:
         transform: {fileID: 4835950698241232032}
         weight: 1
@@ -16267,7 +16421,7 @@ MonoBehaviour:
       bendGoal: {fileID: 0}
     spine:
       executedInEditor: 0
-      IKPosition: {x: 0.0030366583, y: 0.1053785, z: 0.5005066}
+      IKPosition: {x: 0.5030367, y: 0.1053785, z: 0.40050656}
       IKPositionWeight: 0
       root: {fileID: 7195698453672013961}
       target: {fileID: 0}
@@ -16278,34 +16432,34 @@ MonoBehaviour:
       bones:
       - transform: {fileID: 6911643482581903177}
         weight: 1
-        solverPosition: {x: 0.001802438, y: 0.076458, z: 0.50111353}
+        solverPosition: {x: 0.50180244, y: 0.076458, z: 0.40111354}
         solverRotation: {x: 0.023263516, y: 0.9997152, z: 0.005341038, w: -0.00010608509}
         defaultLocalPosition: {x: -0, y: 0.15403962, z: 0.011729658}
         defaultLocalRotation: {x: 0.024620062, y: -0.026297737, z: 0.005188922, w: 0.9993375}
         length: 0.013517493
         sqrMag: 0
-        axis: {x: 4.0380663e-10, y: 0.013517493, z: -0.00000001584432}
+        axis: {x: -0.000000004610363, y: 0.013517493, z: 0.000000013956497}
       - transform: {fileID: 69431219186414497}
         weight: 1
-        solverPosition: {x: 0.0024312024, y: 0.08996009, z: 0.50125784}
+        solverPosition: {x: 0.5024312, y: 0.08996009, z: 0.4012578}
         solverRotation: {x: 0.019538505, y: 0.99950814, z: -0.024380457, w: 0.0027464218}
         defaultLocalPosition: {x: -0, y: 0.18023317, z: 5.290888e-10}
         defaultLocalRotation: {x: 0.029645959, y: -0.0035232024, z: -0.003731215, w: 0.9995473}
         length: 0.015448571
         sqrMag: 0
-        axis: {x: -2.1440658e-10, y: 0.015448571, z: -6.5957045e-10}
+        axis: {x: -0.000000008357138, y: 0.015448571, z: -6.225946e-10}
       - transform: {fileID: 1535145994766058442}
         weight: 1
-        solverPosition: {x: 0.0030366583, y: 0.1053785, z: 0.5005066}
+        solverPosition: {x: 0.5030367, y: 0.1053785, z: 0.40050656}
         solverRotation: {x: 0.015639512, y: 0.9983996, z: -0.054076023, w: 0.005454559}
         defaultLocalPosition: {x: -0, y: 0.20598088, z: 1.9181645e-10}
         defaultLocalRotation: {x: 0.029644355, y: -0.0033851145, z: -0.0038909467, w: 0.99954724}
         length: 0
         sqrMag: 0
-        axis: {x: -0.00033981004, y: 0.02884192, z: -0.002513016}
+        axis: {x: -0.00033982281, y: 0.028841924, z: -0.0025129865}
     lookAt:
       executedInEditor: 0
-      IKPosition: {x: 0.0030366583, y: 0.1053785, z: -2.4994934}
+      IKPosition: {x: 0.5030367, y: 0.1053785, z: -2.5994935}
       IKPositionWeight: 0
       root: {fileID: 7195698453672013961}
       target: {fileID: 0}
@@ -16434,7 +16588,7 @@ MonoBehaviour:
       transform: {fileID: 6594377027665155290}
       target: {fileID: 0}
       positionOffset: {x: 0, y: 0, z: 0}
-      position: {x: 0.0014148748, y: 0.0648795, z: 0.5012956}
+      position: {x: 0.5014149, y: 0.0648795, z: 0.40129563}
       positionWeight: 0
       rotationOffset: {x: 0, y: 0, z: 0}
       rotation: {x: 356.44586, y: 182.89717, z: 1.9656516}
@@ -16983,7 +17137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &4390642175698483849
 Transform:
   m_ObjectHideFlags: 0
@@ -17163,8 +17318,7 @@ MonoBehaviour:
   chessType: 3
   particleObject: {fileID: 0}
   particlePos: {fileID: 0}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &4452213324284551146
 Transform:
   m_ObjectHideFlags: 0
@@ -17988,8 +18142,7 @@ MonoBehaviour:
   chessType: 1
   particleObject: {fileID: 8109648206999901849, guid: e25ce92b158905147b8382e38da9328d, type: 3}
   particlePos: {fileID: 1331647436103250901}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!95 &4698258196312747572
 Animator:
   serializedVersion: 5
@@ -18126,8 +18279,7 @@ MonoBehaviour:
   chessType: 4
   particleObject: {fileID: 7458841582699643202, guid: 6b50982c9e8d9e54cb5529a18b7d4e3e, type: 3}
   particlePos: {fileID: 3973965121421568749}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &4737556788607526605
 Transform:
   m_ObjectHideFlags: 0
@@ -18924,7 +19076,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &4922506141783435017
 Transform:
   m_ObjectHideFlags: 0
@@ -19693,7 +19846,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &5164656109491849134
 Transform:
   m_ObjectHideFlags: 0
@@ -19730,8 +19884,7 @@ MonoBehaviour:
   chessType: 2
   particleObject: {fileID: 8322877792448296280, guid: 6dc2f8841545e5a48ae3c629228e5f77, type: 3}
   particlePos: {fileID: 7139286030759200184}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!1 &5185199877499023256
 GameObject:
   m_ObjectHideFlags: 0
@@ -21354,8 +21507,7 @@ MonoBehaviour:
   chessType: 4
   particleObject: {fileID: 7458841582699643202, guid: 6b50982c9e8d9e54cb5529a18b7d4e3e, type: 3}
   particlePos: {fileID: 4567781036342586746}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!1 &5723917273749852230
 GameObject:
   m_ObjectHideFlags: 0
@@ -22700,8 +22852,7 @@ MonoBehaviour:
   chessType: 3
   particleObject: {fileID: 0}
   particlePos: {fileID: 0}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!1 &6179723367832630462
 GameObject:
   m_ObjectHideFlags: 0
@@ -23145,7 +23296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &6322014932566486843
 Transform:
   m_ObjectHideFlags: 0
@@ -24256,7 +24408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!114 &6721863484870321306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24277,8 +24430,7 @@ MonoBehaviour:
   chessType: 5
   particleObject: {fileID: 6898010246044285019, guid: 7192d092bef622240983bfba2c3407d0, type: 3}
   particlePos: {fileID: 4947411971144144231}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!4 &6725697116722497638
 Transform:
   m_ObjectHideFlags: 0
@@ -24647,7 +24799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &6850146581005176295
 Transform:
   m_ObjectHideFlags: 0
@@ -25659,7 +25812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &7194668141210794581
 GameObject:
   m_ObjectHideFlags: 0
@@ -25684,7 +25837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7193480333025325515}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0.4}
   m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -26250,7 +26403,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7193480333025325515}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2dbbbeed4f5ef144994740bb86b0e8d4, type: 3}
@@ -28530,7 +28683,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound: []
+  chessType: 0
 --- !u!4 &7854351784923688798
 Transform:
   m_ObjectHideFlags: 0
@@ -28586,7 +28740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &7875608066068099211
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28644,7 +28798,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7861527571225909879}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2dbbbeed4f5ef144994740bb86b0e8d4, type: 3}
@@ -30759,8 +30913,7 @@ MonoBehaviour:
   chessType: 1
   particleObject: {fileID: 8109648206999901849, guid: e25ce92b158905147b8382e38da9328d, type: 3}
   particlePos: {fileID: 4681093539270948656}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!82 &8564219838998132097
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31084,8 +31237,7 @@ MonoBehaviour:
   chessType: 2
   particleObject: {fileID: 8322877792448296280, guid: 6dc2f8841545e5a48ae3c629228e5f77, type: 3}
   particlePos: {fileID: 6200134394422969152}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!82 &8634869184424986297
 AudioSource:
   m_ObjectHideFlags: 0

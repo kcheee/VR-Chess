@@ -35,6 +35,8 @@ public class J_PieceMove : MonoBehaviour
     //사운드
     //public AudioSource audioSource;
     //public AudioClip attackSound;
+    [SerializeField]
+    public float rotationSpeed = 2.5f; //회전속도 조정값
 
     private void Start()
     {
@@ -198,13 +200,13 @@ public class J_PieceMove : MonoBehaviour
         //audioSource.Play();
         
         //Destroy(newParticle);
-        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
+        //BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
 
-        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
-        Destroy(BoardManager.Instance.deletePiece, 2);
+       // BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+       // Destroy(BoardManager.Instance.deletePiece, 2);
         //Debug.Log("삭제");
     }
     private void Update()
@@ -298,7 +300,7 @@ public class J_PieceMove : MonoBehaviour
         }
 
         transform.position = targetPosition * 0.1f;
-        yield return new WaitForSeconds(0.01f);
+        //yield return new WaitForSeconds(0.01f);
 
         
         // move에서 idle로 전환
@@ -311,7 +313,7 @@ public class J_PieceMove : MonoBehaviour
         }
         if (rot)
         {
-            Debug.Log("이거 한번만 실행해야함.");
+            //Debug.Log("이거 한번만 실행해야함.");
             EndRot = true;
             // 앞에 보게 회전.
             
@@ -319,7 +321,10 @@ public class J_PieceMove : MonoBehaviour
 
             // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
-            BoardManager.Instance.PieceIsMove = false;
+            //턴넘기기전 딜레이 3초
+            //yield return new WaitForSeconds(3f);
+            //BoardManager.Instance.PieceIsMove = false;
+            
             // ----------- 턴넘김----------------
         }
 
@@ -340,34 +345,33 @@ public class J_PieceMove : MonoBehaviour
 
                 transform.rotation = Quaternion.Euler(0, myAngle + angle, 0);
 
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.deltaTime * rotationSpeed ; //회전속도 조정
                 yield return null;
             }
         }
 
         myAngle = myAngle + targetAngle;
         transform.rotation = Quaternion.Euler(0f, myAngle, 0f);
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
         anim.CrossFade("Idle",0,0);
         // 움직임
         // 적이 있는지 판별
 
         if (!EndRot)
         {
-            //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-            //1.적이없다면 바로감
-            if (BoardManager.Instance.deletePiece == null)
-            {
-                Debug.Log("적 발견");
-                StartCoroutine(StraightMove(PosX, PosY, false, true));
-
-            }
-            // 2. 적이 있다면 pretarget
-            else
-            {
-                //Debug.Log(preTargetX + " " + preTargetZ);
-                StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-            }
+            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            ////1.적이없다면 바로감
+            //if (BoardManager.Instance.deletePiece == null)
+            //{
+            //    Debug.Log("적 발견");
+            //    StartCoroutine(StraightMove(PosX, PosY, false, true));
+            //}
+            //// 2. 적이 있다면 pretarget
+            //else
+            //{
+            //    //Debug.Log(preTargetX + " " + preTargetZ);
+            //    StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            //}
         }
     }
     //공격 함수
@@ -379,8 +383,8 @@ public class J_PieceMove : MonoBehaviour
         //audioSource.PlayOneShot(attackSound, 1);
 
         //Debug.Log(PosX + " " + PosY);
-        yield return new WaitForSeconds(3);
-        
+        //yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3f);
         StartCoroutine(StraightMove(PosX, PosY, false, true));
     }
 

@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class J_AnimEvent : MonoBehaviour
+public class J_SoundManager : MonoBehaviour
 {
-    //이벤트함수를 제작하고싶다
-    // Hit, AttackFinished
-    //J_AttackTest attackTest;
-    J_PieceMove pieceMove;
+    //각 기물 별 상황에 맞게 오디오소스가 재생된ㄷㅏ.
 
     //사운드
     public AudioSource audioSource;
@@ -20,9 +17,8 @@ public class J_AnimEvent : MonoBehaviour
     }
     public ChessType chessType;
     // Start is called before the first frame update
-    void Awake()
-    {
-        pieceMove = GetComponentInParent<J_PieceMove>();
+    void Start()
+    { 
         audioSource = gameObject.AddComponent<AudioSource>();
 
         #region 각 기물별 오디오클립
@@ -30,7 +26,7 @@ public class J_AnimEvent : MonoBehaviour
         {
             audioSource.clip = attackSound[0];
         }
-        else if(chessType == ChessType.QUEEN)
+        else if (chessType == ChessType.QUEEN)
         {
             audioSource.clip = attackSound[1];
         }
@@ -54,20 +50,18 @@ public class J_AnimEvent : MonoBehaviour
 
     }
 
+    //음악 호출 함수
+    public void OnSound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+    //상속을 통해  함수가 겹치는것을 방지해본다
+    //
+
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-   public void OnAttack_Hit()
-    {
-        pieceMove.OnAttack_Hit();
-        audioSource.Play();
         
-    }
-    public void OnAttack_Finished()
-    {
-        pieceMove.OnAttack_Finished();
     }
 }
