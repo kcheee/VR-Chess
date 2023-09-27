@@ -24,34 +24,6 @@ public class J_AnimEvent : MonoBehaviour
     {
         pieceMove = GetComponentInParent<J_PieceMove>();
         audioSource = gameObject.AddComponent<AudioSource>();
-
-        #region 각 기물별 오디오클립
-        if (chessType == ChessType.KING)
-        {
-            audioSource.clip = attackSound[0];
-        }
-        else if(chessType == ChessType.QUEEN)
-        {
-            audioSource.clip = attackSound[1];
-        }
-        else if (chessType == ChessType.BISHOP)
-        {
-            audioSource.clip = attackSound[2];
-        }
-        else if (chessType == ChessType.KNIGHT)
-        {
-            audioSource.clip = attackSound[3];
-        }
-        else if (chessType == ChessType.ROOK)
-        {
-            audioSource.clip = attackSound[4];
-        }
-        else if (chessType == ChessType.PAWN)
-        {
-            audioSource.clip = attackSound[5];
-        }
-        #endregion
-
     }
 
     // Update is called once per frame
@@ -63,11 +35,12 @@ public class J_AnimEvent : MonoBehaviour
    public void OnAttack_Hit()
     {
         pieceMove.OnAttack_Hit();
-        audioSource.Play();
-        
+        J_SoundManager.Instance.PlaySound((int)pieceMove.chessType);
     }
+
     public void OnAttack_Finished()
     {
         pieceMove.OnAttack_Finished();
+        
     }
 }
