@@ -54,7 +54,7 @@ public class J_SoundManager : MonoBehaviour
     public void MoveSound(int soundIdx)
     {
         audioSource.clip = moveSound[soundIdx];
-
+        Debug.Log("처음");
         //플레이를 하고 있을때는 멈추고 안하고있을때는 실행이된다.
         if (audioSource.isPlaying)
         {
@@ -63,7 +63,6 @@ public class J_SoundManager : MonoBehaviour
         else
         {
             audioSource.Play();
-
         }
 
     }
