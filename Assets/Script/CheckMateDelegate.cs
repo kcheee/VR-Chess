@@ -23,7 +23,6 @@ public class CheckMateDelegate : MonoBehaviour
 
     public void fade()
     {
-        Debug.Log("r°³»õ²¥");
         canvasGroup.DOFade(1, 1.5f).OnComplete(() =>
         {
             canvasGroup.DOFade(0, 1);

@@ -226,7 +226,7 @@ public class BoardManager : MonoBehaviour
     {
         // 보정 값으로 0.1f 더해줘야함.
 
-        float Adjustpos = 0.1f;
+        float  Adjustpos = 0.1f;
 
         #region 기존(csv로 해보기)
         //// Spawn White Pieces

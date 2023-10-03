@@ -206,15 +206,15 @@ public class J_PieceMove : MonoBehaviour
         GameObject newParticle = Instantiate(particleObject,spawnPos, transform.rotation);
         //newParticle.transform.parent = transform;
         //audioSource.Play();
-        
-        //Destroy(newParticle);
-        //BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
+
+        Destroy(newParticle,5);
+        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Hit", 0, 0);
     }
     public void OnAttack_Finished()
     {
 
-       // BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
-       // Destroy(BoardManager.Instance.deletePiece, 2);
+        BoardManager.Instance.deletePiece.gameObject.GetComponentInChildren<Animator>().CrossFade("Die", 0, 0);
+        Destroy(BoardManager.Instance.deletePiece, 2);
         //Debug.Log("삭제");
     }
     public void OnDie_Finish()
