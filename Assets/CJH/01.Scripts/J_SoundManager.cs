@@ -21,6 +21,7 @@ public class J_SoundManager : MonoBehaviour
     //사운드
     public AudioSource audioSource;
     //public AudioClip attackSound;
+    public AudioClip[] dieSound;
     public AudioClip[] attackSound;
 
     public enum ChessType //체스 종류
@@ -31,35 +32,12 @@ public class J_SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
 
-        #region 각 기물별 오디오클립
-        //if (chessType == ChessType.KING)
-        //{
-        //    audioSource.clip = attackSound[0];
-        //}
-        //else if (chessType == ChessType.QUEEN)
-        //{
-        //    audioSource.clip = attackSound[1];
-        //}
-        //else if (chessType == ChessType.BISHOP)
-        //{
-        //    audioSource.clip = attackSound[2];
-        //}
-        //else if (chessType == ChessType.KNIGHT)
-        //{
-        //    audioSource.clip = attackSound[3];
-        //}
-        //else if (chessType == ChessType.ROOK)
-        //{
-        //    audioSource.clip = attackSound[4];
-        //    PlaySound(ChessType.ROOK);
-        //}
-        //else if (chessType == ChessType.PAWN)
-        //{
-        //    audioSource.clip = attackSound[5];
-        //    PlaySound(ChessType.PAWN);
-        //}
-        #endregion
+    public void DieSound(int soundIdx)
+    {
+        audioSource.clip = dieSound[soundIdx];
+        audioSource.Play();
 
     }
 

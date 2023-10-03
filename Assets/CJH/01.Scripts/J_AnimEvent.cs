@@ -32,6 +32,14 @@ public class J_AnimEvent : MonoBehaviour
 
     }
 
+    public void OnDie_Finish()
+    {
+        pieceMove.OnDie_Finish();
+        J_SoundManager.Instance.DieSound((int)pieceMove.chessType);
+
+    }
+
+
    public void OnAttack_Hit()
     {
         pieceMove.OnAttack_Hit();

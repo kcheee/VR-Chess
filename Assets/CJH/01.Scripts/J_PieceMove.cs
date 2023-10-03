@@ -32,9 +32,9 @@ public class J_PieceMove : MonoBehaviour
 
     public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
-    //사운드
-    //public AudioSource audioSource;
-    //public AudioClip attackSound;
+
+    public AudioSource audioSource;//움직이는 소리
+    public AudioClip moveSound;
     [SerializeField]
     public float rotationSpeed = 2.5f; //회전속도 조정값
 
@@ -43,7 +43,6 @@ public class J_PieceMove : MonoBehaviour
         myAngle = transform.eulerAngles.y;
         anim = GetComponentInChildren<Animator>();
         anim.Play("Idle");
-        //audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateRotate1(int x, int y)
@@ -194,6 +193,18 @@ public class J_PieceMove : MonoBehaviour
     float posOffset = 0.222f;
     public void OnAttack_Hit()
     {
+        if (chessType == ChessType.PAWN)
+        {
+            posOffset = 0.1f;
+        }
+        else if (chessType == ChessType.BISHOP)
+        {
+            posOffset = 0.45f;
+        }
+        else if(chessType == ChessType.ROOK)
+        {
+            posOffset = 0.15f;
+        }
         Vector3 spawnPos = transform.position + transform.forward * posOffset;
         GameObject newParticle = Instantiate(particleObject,spawnPos, transform.rotation);
         //newParticle.transform.parent = transform;
@@ -209,6 +220,11 @@ public class J_PieceMove : MonoBehaviour
        // Destroy(BoardManager.Instance.deletePiece, 2);
         //Debug.Log("삭제");
     }
+    public void OnDie_Finish()
+    {
+
+    }
+
     private void Update()
     {
         currentX = (int)transform.position.x;
@@ -218,11 +234,6 @@ public class J_PieceMove : MonoBehaviour
         {
             //PieceMove(3, 3);
             UpdateRotate1(5, 4);
-        }
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine( RotatePiece(5, 4));
-            //StartCoroutine(Co_Attack());
         }
         
     }
@@ -289,8 +300,9 @@ public class J_PieceMove : MonoBehaviour
         //타겟의 방향
         Vector3 dir = transform.forward;
         anim.CrossFade("Move", 0, 0);
+        audioSource.Play();
 
-        
+
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
         {
             elapsedTime += Time.deltaTime;
@@ -310,6 +322,7 @@ public class J_PieceMove : MonoBehaviour
         {
             // 코루틴으로 딜레이주고 실행.
             StartCoroutine(Co_Attack());
+            audioSource.Stop();
         }
         if (rot)
         {
@@ -318,13 +331,13 @@ public class J_PieceMove : MonoBehaviour
             // 앞에 보게 회전.
             
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
-
+            audioSource.Stop();
             // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
             //턴넘기기전 딜레이 3초
             //yield return new WaitForSeconds(3f);
             //BoardManager.Instance.PieceIsMove = false;
-            
+
             // ----------- 턴넘김----------------
         }
 
