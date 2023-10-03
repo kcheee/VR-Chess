@@ -10,13 +10,20 @@ public class J_AnimEvent : MonoBehaviour
     J_PieceMove pieceMove;
 
     //사운드
-    //public AudioSource audioSource;
+    public AudioSource audioSource;
     //public AudioClip attackSound;
+    public AudioClip[] attackSound;
 
+    public enum ChessType //체스 종류
+    {
+        KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN,
+    }
+    public ChessType chessType;
     // Start is called before the first frame update
     void Awake()
     {
         pieceMove = GetComponentInParent<J_PieceMove>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,13 +32,23 @@ public class J_AnimEvent : MonoBehaviour
 
     }
 
+    public void OnDie_Finish()
+    {
+        pieceMove.OnDie_Finish();
+        J_SoundManager.Instance.DieSound((int)pieceMove.chessType);
+
+    }
+
+
    public void OnAttack_Hit()
     {
         pieceMove.OnAttack_Hit();
-        
+        J_SoundManager.Instance.PlaySound((int)pieceMove.chessType);
     }
+
     public void OnAttack_Finished()
     {
         pieceMove.OnAttack_Finished();
+        
     }
 }
