@@ -23,6 +23,7 @@ public class J_SoundManager : MonoBehaviour
     //public AudioClip attackSound;
     public AudioClip[] dieSound;
     public AudioClip[] attackSound;
+    public AudioClip[] moveSound;
 
     public enum ChessType //체스 종류
     {
@@ -43,12 +44,28 @@ public class J_SoundManager : MonoBehaviour
 
     //음악 호출 함수
     public void PlaySound(int soundIdx)
-    {
-        
+    {        
         audioSource.clip = attackSound[soundIdx];
         audioSource.Play();
         //audioSource.PlayOneShot(clip);
     }
     //상속을 통해  함수가 겹치는것을 방지해본다
     //
+    public void MoveSound(int soundIdx)
+    {
+        audioSource.clip = moveSound[soundIdx];
+
+        //플레이를 하고 있을때는 멈추고 안하고있을때는 실행이된다.
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        else
+        {
+            audioSource.Play();
+
+        }
+
+    }
+
 }

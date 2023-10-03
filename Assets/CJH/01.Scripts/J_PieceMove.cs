@@ -32,9 +32,6 @@ public class J_PieceMove : MonoBehaviour
 
     public GameObject particleObject; //파티클 시스템
     public Transform particlePos; //파티클 생성 위치
-
-    public AudioSource audioSource;//움직이는 소리
-    public AudioClip moveSound;
     [SerializeField]
     public float rotationSpeed = 2.5f; //회전속도 조정값
 
@@ -300,7 +297,8 @@ public class J_PieceMove : MonoBehaviour
         //타겟의 방향
         Vector3 dir = transform.forward;
         anim.CrossFade("Move", 0, 0);
-        audioSource.Play();
+        J_SoundManager.Instance.MoveSound((int)chessType);
+        //audioSource.Play();
 
 
         while (elapsedTime / duration < 1 /* 적이 없으면 */)
@@ -322,7 +320,7 @@ public class J_PieceMove : MonoBehaviour
         {
             // 코루틴으로 딜레이주고 실행.
             StartCoroutine(Co_Attack());
-            audioSource.Stop();
+            J_SoundManager.Instance.MoveSound((int)chessType);
         }
         if (rot)
         {
@@ -331,7 +329,7 @@ public class J_PieceMove : MonoBehaviour
             // 앞에 보게 회전.
             
             StartCoroutine(RotatePiece(-angle * nDir, (1f / 45) * angle));
-            audioSource.Stop();
+            J_SoundManager.Instance.MoveSound((int)chessType);
             // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
             //턴넘기기전 딜레이 3초
