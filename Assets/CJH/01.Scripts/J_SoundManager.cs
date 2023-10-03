@@ -25,13 +25,13 @@ public class J_SoundManager : MonoBehaviour
     public AudioClip[] attackSound;
     public AudioClip[] moveSound;
 
-    public enum ChessType //체스 종류
-    {
-        KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN,
-    }
-    public ChessType chessType;
+    //public enum ChessType //체스 종류
+    //{
+    //    KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN,
+    //}
+    //public ChessType chessType;
     // Start is called before the first frame update
-    void Start()
+    void Start() 
     {
     }
 

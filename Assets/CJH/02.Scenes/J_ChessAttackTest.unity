@@ -1514,7 +1514,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 8300000, guid: f9d4e3cb9e6fb4c42a8df11e89bf4a42, type: 3}
   - {fileID: 8300000, guid: f9d4e3cb9e6fb4c42a8df11e89bf4a42, type: 3}
-  chessType: 0
 --- !u!4 &2042627156
 Transform:
   m_ObjectHideFlags: 0
