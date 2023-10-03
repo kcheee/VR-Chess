@@ -226,6 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWhite: 0
   isMoved: 0
+  value: 900
+  ChcekmateFade: {fileID: 0}
   chesstype: 0
   outline: {fileID: 0}
 --- !u!114 &7617219871670498784
@@ -246,10 +248,9 @@ MonoBehaviour:
   currentX: 0
   currentY: 0
   chessType: 0
-  particleObject: {fileID: 7458841582699643202, guid: 6b50982c9e8d9e54cb5529a18b7d4e3e, type: 3}
+  particleObject: {fileID: 3297188476293076007, guid: 29d34e8447a7bfa4a939bb827426c1cc, type: 3}
   particlePos: {fileID: 4491235091652537588}
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  rotationSpeed: 2.5
 --- !u!114 &6612403301432445065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,7 +1696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
+  attackSound:
+  - {fileID: 0}
+  chessType: 0
 --- !u!1 &5656605521752828766
 GameObject:
   m_ObjectHideFlags: 0
