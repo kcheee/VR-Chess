@@ -192,7 +192,7 @@ public class J_PieceMove : MonoBehaviour
     {
         if (chessType == ChessType.PAWN)
         {
-            posOffset = 0.1f;
+            posOffset = 0.05f;
         }
         else if (chessType == ChessType.BISHOP)
         {
@@ -377,10 +377,10 @@ public class J_PieceMove : MonoBehaviour
                 Debug.Log("적 발견");
                 StartCoroutine(StraightMove(PosX, PosY, false, true));
             }
-            // 2. 적이 있다면 pretarget
+            //2.적이 있다면 pretarget
             else
             {
-                //Debug.Log(preTargetX + " " + preTargetZ);
+                Debug.Log(preTargetX + " " + preTargetZ);
                 StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
             }
         }
