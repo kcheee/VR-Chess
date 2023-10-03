@@ -560,15 +560,21 @@ public class BoardManager : MonoBehaviour
 
         if (isWhiteTurn)
         {
-            if (WhiteKing.InDanger()) Debug.LogError("체크메이트111");
-            if (BlackKing.InDanger()) Debug.LogError("체크메이트222");
+            if (BlackKing.InDanger())
+            {
+                CheckMateDelegate.Instance.fade();
+                //Debug.LogError("체크메이트222");
+            }
 
         }
         // 현재 검은색 킹이 체크 중인 경우
         else
         {
-            if (WhiteKing.InDanger()) Debug.LogError("체크메이트111");
-            if (BlackKing.InDanger()) Debug.LogError("체크메이트222");
+            if (WhiteKing.InDanger())
+            {
+                CheckMateDelegate.Instance.fade();
+                //Debug.LogError("체크메이트111");
+            }
         }
 
         if (condition)

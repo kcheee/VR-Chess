@@ -151,7 +151,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Down");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
             break;
@@ -186,7 +186,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("룩과 퀸의 체크메이트.");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -220,7 +220,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Left");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -254,7 +254,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Up");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -299,7 +299,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen LR Down");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -339,7 +339,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen LR Up");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -378,7 +378,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen RL Down");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -418,7 +418,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen RL Up");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -484,7 +484,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Knight))
             {
                 Debug.Log("나이트에 의한 위협");
-                CheckMateDelegate.Instance.fade();
+                //CheckMateDelegate.Instance.fade();
                 return true;        // Yes, there is a Knight threat
             }
         }
