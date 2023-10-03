@@ -38,14 +38,14 @@ public class CH_GrabInterable : XRGrabInteractable
     {
         base.OnSelectEntered(args);
         // 기능 추가
-        Debug.Log("selectentered");
+
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         base.OnSelectExited(args);
         // 나갔을 때
-        Debug.Log("selectexited");
+
 
     }
     protected override void Drop()
@@ -65,12 +65,10 @@ public class CH_GrabInterable : XRGrabInteractable
         int x = (int)pos.x;
         int y = (int)pos.z;
 
-        Debug.Log("Drop :  " + x + " : " + y);
 
         // allowpos를 확인후
         // true면 
         // boardmanager에있는 움직임 실행.
-        Debug.Log(selectedChessman);
 
         if (BoardManager.Instance.allowedMoves[x,y])
         {
@@ -141,10 +139,6 @@ public class CH_GrabInterable : XRGrabInteractable
         stored_x = x * 0.1f;
         stored_y = y * 0.1f;
 
-
-        Debug.Log("Grab :  " + x + " : " + y);
-
-        Debug.Log(BoardManager.Instance.ActiveChessmans.Count);
 
         // 반투명 렌더러
         Material newMaterial = Resources.Load("M_Grab")as Material;

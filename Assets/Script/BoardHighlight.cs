@@ -28,7 +28,6 @@ public class BoardHighlight : MonoBehaviour
                     // 먹을수 있는 부분.
                     if (BoardManager.Instance.Chessmans[i, j] != null)
                     {
-                        Debug.Log("먹을 수 있는 부분.");
                         // 테스트용
                         GameObject highlightObject = Instantiate(Resources.Load<GameObject>("HighlightEat")
                             , new Vector3(i *0.1f , 0.01f, j * 0.1f), Quaternion.identity);

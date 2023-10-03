@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Bishop : Chessman
 {
+    public Bishop()
+    {
+        value = 30;
+    }
+
     public override bool[,] PossibleMoves()
     {
         bool[,] moves = new bool[8, 8];
@@ -60,7 +65,6 @@ public class Bishop : Chessman
         // 기물이 없으면 계속 실행.
         if (piece == null)
         {
-            Debug.Log("움직일수 있는 부분");
             moves[x, y] = true;
             return true;
         }

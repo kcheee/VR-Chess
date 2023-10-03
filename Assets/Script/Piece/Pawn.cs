@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Pawn : Chessman
 {
+  public Pawn()
+    {
+        value = 10;
+    }
     // 가능한 움직임을 가지고 움직이는 코드를 짜보자.
 
     public override bool[,] PossibleMoves()

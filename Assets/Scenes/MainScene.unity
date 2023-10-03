@@ -493,29 +493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f420564fb4b167543a7d80b7c32e6463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 162839546}
-  dieSound:
-  - {fileID: 8300000, guid: 0fd19838ad4748945b171669d0b9a1c8, type: 3}
-  - {fileID: 8300000, guid: 0fd19838ad4748945b171669d0b9a1c8, type: 3}
-  - {fileID: 8300000, guid: 0fd19838ad4748945b171669d0b9a1c8, type: 3}
-  - {fileID: 8300000, guid: 406c24293fe94054ba6cc0e70116f424, type: 3}
-  - {fileID: 8300000, guid: af2f3c181c77e8049888c0a442b867a5, type: 3}
-  - {fileID: 8300000, guid: 406c24293fe94054ba6cc0e70116f424, type: 3}
-  attackSound:
-  - {fileID: 8300000, guid: 54a2c1f4fdedc3544b997b333805e7dd, type: 3}
-  - {fileID: 8300000, guid: 2873e14451d6eb44b9fdd042f0339a15, type: 3}
-  - {fileID: 8300000, guid: c070239f99802b44cbb77e3b0272d860, type: 3}
-  - {fileID: 8300000, guid: a96b38c48bc629c48b5efc0242b008b3, type: 3}
-  - {fileID: 8300000, guid: 2dbbbeed4f5ef144994740bb86b0e8d4, type: 3}
-  - {fileID: 8300000, guid: 17a48691d051257458107defbbd5860f, type: 3}
-  moveSound:
-  - {fileID: 8300000, guid: d7aba6be088143b4a865b99806292bb6, type: 3}
-  - {fileID: 8300000, guid: d7aba6be088143b4a865b99806292bb6, type: 3}
-  - {fileID: 8300000, guid: d7aba6be088143b4a865b99806292bb6, type: 3}
-  - {fileID: 8300000, guid: a96b38c48bc629c48b5efc0242b008b3, type: 3}
-  - {fileID: 8300000, guid: f9d4e3cb9e6fb4c42a8df11e89bf4a42, type: 3}
-  - {fileID: 8300000, guid: f9d4e3cb9e6fb4c42a8df11e89bf4a42, type: 3}
-  chessType: 0
 --- !u!4 &162839548
 Transform:
   m_ObjectHideFlags: 0
@@ -39662,7 +39639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8405820154444535315}
   m_LocalRotation: {x: 0.00689955, y: -0.70707315, z: -0.0068995743, w: 0.70707315}
-  m_LocalPosition: {x: 2.98, y: -0.337, z: 9.686}
+  m_LocalPosition: {x: 3.1498, y: -0.337, z: 9.686}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:

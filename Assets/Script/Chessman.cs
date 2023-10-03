@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Chessman : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class Chessman : MonoBehaviour
     public bool isWhite;
 
     public bool isMoved = false;
+    
+    // 가치
+    public int value;
+
+    // 체크메이트 표시
+    public CanvasGroup ChcekmateFade;
 
     // 타입 설정
     public enum ChessType
@@ -40,6 +47,7 @@ public class Chessman : MonoBehaviour
 
         // 기물들을 움직임.
     }
+
 
     public void Move(int x, int y, Type type)
     {
@@ -104,8 +112,10 @@ public class Chessman : MonoBehaviour
         return arr;
     }
 
-
+    
     // 킹에 대한 위협들.
+
+    // 오른쪽 왼쪽  대각선 안됌.
     public bool InDanger()
     {
         Chessman piece = null;
@@ -141,6 +151,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Down");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
             break;
@@ -174,7 +185,8 @@ public class Chessman : MonoBehaviour
             // 룩과 퀸이 있으면.
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
-                Debug.Log("Threat from Rook/Queen Right");
+                Debug.Log("룩과 퀸의 체크메이트.");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -208,6 +220,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Left");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -241,6 +254,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Rook/Queen Up");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -285,6 +299,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen LR Down");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -324,6 +339,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen LR Up");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -362,6 +378,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen RL Down");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -401,6 +418,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
             {
                 Debug.Log("Threat from Bishup/Queen RL Up");
+                CheckMateDelegate.Instance.fade();
                 return true;
             }
 
@@ -448,7 +466,6 @@ public class Chessman : MonoBehaviour
         return false;
     }
 
-
     public bool KnightThreat(int x, int y)
     {
         if (x >= 0 && y >= 0 && x <= 7 && y <= 7)
@@ -467,6 +484,7 @@ public class Chessman : MonoBehaviour
             if (piece.GetType() == typeof(Knight))
             {
                 Debug.Log("나이트에 의한 위협");
+                CheckMateDelegate.Instance.fade();
                 return true;        // Yes, there is a Knight threat
             }
         }

@@ -5,6 +5,10 @@ using UnityEngine;
 public class King : Chessman
 {
 
+    public King()
+    {
+        value = 900;
+    }
     // king은 가로 세로
     // 대각선 방향으로 움직임.
 
@@ -62,12 +66,12 @@ public class King : Chessman
 
             if (piece == null)
             {
-                    moves[x, y] = true;
+                moves[x, y] = true;
             }
             // If the piece is not from same team
             else if (piece.isWhite != isWhite)
             {
-                    moves[x, y] = true;
+                moves[x, y] = true;
             }
         }
     }

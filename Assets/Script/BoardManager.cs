@@ -313,7 +313,7 @@ public class BoardManager : MonoBehaviour
 
         SpawnChessman(3, new Vector3(3, 0, 7));
 
-        SpawnChessman(4, new Vector3(5, 0, 4));
+        SpawnChessman(4, new Vector3(3, 0, 3));
 
         // 보드 매니저에서 따로 체스 말 관리.
         // 특수한 이동이나 체크메이트를 위해.
@@ -498,8 +498,9 @@ public class BoardManager : MonoBehaviour
 
             // CheckMate 
             isCheckmate();
+            // 턴 수
             ChessCount++;
-            Debug.Log("턴 수 : " + ChessCount);
+            //Debug.Log("턴 수 : " + ChessCount);
             return;
         }
 
@@ -557,12 +558,26 @@ public class BoardManager : MonoBehaviour
             deletePiece = null;
         }
 
-        Debug.Log("턴 넘김");
+        if (isWhiteTurn)
+        {
+            if (WhiteKing.InDanger()) Debug.LogError("체크메이트111");
+            if (BlackKing.InDanger()) Debug.LogError("체크메이트222");
+
+        }
+        // 현재 검은색 킹이 체크 중인 경우
+        else
+        {
+            if (WhiteKing.InDanger()) Debug.LogError("체크메이트111");
+            if (BlackKing.InDanger()) Debug.LogError("체크메이트222");
+        }
+
         if (condition)
         {
             isWhiteTurn = !isWhiteTurn;
             move_TurnLimit = false;
         }
+        
+        
         yield return null;
 
     }
@@ -571,6 +586,7 @@ public class BoardManager : MonoBehaviour
     // 체크메이트 체크 함수.
     private void isCheckmate()
     {
+
         // 초기에는 어떤 체스맨도 허용된 움직임이 없다고 가정합니다.
         bool hasAllowedMove = false;
 
@@ -604,16 +620,13 @@ public class BoardManager : MonoBehaviour
         if (!hasAllowedMove)
         {
 
+            Debug.LogError("체크메이트");
             // 디버그 로그로 체크메이트임을 출력합니다.
-            Debug.Log("CheckMate");
-
-            // 컴퓨터의 평균 응답 시간을 출력합니다.
-            Debug.Log("Average Response Time of computer (in seconds): " + (ChessAI.Instance.averageResponseTime / 1000.0));
 
             // 게임 오버 메뉴를 표시합니다.
             Debug.Log("CheckMate");
             // 게임 종료 로직을 호출할 수 있습니다. (주석 처리된 코드)
-            //EndGame();
+            EndGame();
         }
     }
 

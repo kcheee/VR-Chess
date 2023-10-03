@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.audioSource.Play();
             //SoundManager.Instance.audioSource.DOFade(1, 4);
         }
-
-        Debug.Log("½ÃÀÛ");
     }
 
     // ½Â¸® UI
