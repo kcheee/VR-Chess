@@ -334,7 +334,7 @@ public class J_PieceMove : MonoBehaviour
             // ----------- 턴넘김----------------
             //턴넘기기전 딜레이 3초
             //yield return new WaitForSeconds(3f);
-            //BoardManager.Instance.PieceIsMove = false;
+            BoardManager.Instance.PieceIsMove = false;
 
             // ----------- 턴넘김----------------
         }

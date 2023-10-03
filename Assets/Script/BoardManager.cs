@@ -567,7 +567,6 @@ public class BoardManager : MonoBehaviour
 
     }
 
-
     // 체크메이트 체크 함수.
     private void isCheckmate()
     {
@@ -603,9 +602,10 @@ public class BoardManager : MonoBehaviour
         // 만약 어떤 체스맨도 허용된 움직임이 없다면 체크메이트입니다.
         if (!hasAllowedMove)
         {
-
             // 디버그 로그로 체크메이트임을 출력합니다.
             Debug.Log("CheckMate");
+
+            Debug.LogError("체크메이트");
 
             // 컴퓨터의 평균 응답 시간을 출력합니다.
             Debug.Log("Average Response Time of computer (in seconds): " + (ChessAI.Instance.averageResponseTime / 1000.0));
@@ -616,6 +616,8 @@ public class BoardManager : MonoBehaviour
             //EndGame();
         }
     }
+
+
 
     void EndGame()
     {
