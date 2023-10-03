@@ -19,12 +19,15 @@ public class TypingTextTest : MonoBehaviour
     public string[] str1;
     public string[] str2;
 
+    AudioSource audioSource;
+    
     int i;
     private void Start()
     {
         // 딜레이 주고 시작.
         // 앨리스 대사
         StartCoroutine(delay(str1));
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
    public IEnumerator delay(string[] s)
@@ -39,7 +42,9 @@ public class TypingTextTest : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Test_text.text = null;
+
         Test_text.DOText(talk[i], 3);
+        audioSource.Play();
         i++;
 
         yield return new WaitForSeconds(2f);
