@@ -289,6 +289,9 @@ public class BoardManager : MonoBehaviour
         //SpawnChessman(6, new Vector3(0, 0, 0));
         SpawnChessman(6, new Vector3(7, 0, 0));
 
+        // 비숍
+        SpawnChessman(8, new Vector3(5, 0, 0));
+
         // pawn
         SpawnChessman(11, new Vector3(4, 0, 1));
         SpawnChessman(11, new Vector3(5, 0, 1));
@@ -299,7 +302,9 @@ public class BoardManager : MonoBehaviour
         // pawn
         SpawnChessman(5, new Vector3(2, 0, 6));
         SpawnChessman(5, new Vector3(5, 0, 6));
-        SpawnChessman(5, new Vector3(2, 0, 1));
+        SpawnChessman(5, new Vector3(6, 0, 3));
+
+        //SpawnChessman(5, new Vector3(2, 0, 1));
 
         SpawnChessman(5, new Vector3(7, 0, 6));
 
@@ -313,7 +318,7 @@ public class BoardManager : MonoBehaviour
 
         SpawnChessman(3, new Vector3(3, 0, 7));
 
-        SpawnChessman(4, new Vector3(3, 0, 3));
+        SpawnChessman(4, new Vector3(4, 0, 3));
 
         // 보드 매니저에서 따로 체스 말 관리.
         // 특수한 이동이나 체크메이트를 위해.

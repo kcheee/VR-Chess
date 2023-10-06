@@ -68,6 +68,7 @@ public class WalkANDGiant : MonoBehaviour
         {
             // 거인화 끝나고 게임 시작 UI
             GamestartUI.DOFade(1, 2);
+            //transform.position = new Vector3(transform.position.x, 0.202f, transform.position.y);
         });
 
         while (!endWhile)

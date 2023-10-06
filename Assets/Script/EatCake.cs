@@ -12,10 +12,11 @@ public class EatCake : XRGrabInteractable
 
     float distance;
     AudioSource audioSource;
-
+    Rigidbody rb;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -29,7 +30,7 @@ public class EatCake : XRGrabInteractable
     protected override void Drop()
     {
         base.Drop();
-
+        rb.velocity = Vector3.zero;
         if (distance < 0.3f)
         {
             Debug.Log("ÄÉÀÌÅ© ¸ÔÀ½");

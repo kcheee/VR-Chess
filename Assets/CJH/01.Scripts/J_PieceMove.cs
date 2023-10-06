@@ -24,7 +24,7 @@ public class J_PieceMove : MonoBehaviour
 
     int PosX, PosY; //타겟위치
     float preTargetX, preTargetZ; // 공격하기 전 위치
-    float currTime = 0;
+    //float currTime = 0;
 
     float myAngle; //내가 움직였던 각도
 
@@ -196,7 +196,7 @@ public class J_PieceMove : MonoBehaviour
         }
         else if (chessType == ChessType.BISHOP)
         {
-            posOffset = 0.45f;
+            posOffset = 0.25f;
         }
         else if(chessType == ChessType.ROOK)
         {
@@ -333,7 +333,7 @@ public class J_PieceMove : MonoBehaviour
             // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
             //턴넘기기전 딜레이 3초
-            //yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             BoardManager.Instance.PieceIsMove = false;
 
             // ----------- 턴넘김----------------
