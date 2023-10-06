@@ -333,7 +333,7 @@ public class J_PieceMove : MonoBehaviour
             // 한번만 싫행해야함.
             // ----------- 턴넘김----------------
             //턴넘기기전 딜레이 3초
-            //yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3f);
             BoardManager.Instance.PieceIsMove = false;
 
             // ----------- 턴넘김----------------
@@ -370,19 +370,19 @@ public class J_PieceMove : MonoBehaviour
 
         if (!EndRot)
         {
-            //StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
             //1.적이없다면 바로감
-            if (BoardManager.Instance.deletePiece == null)
-            {
-                Debug.Log("적 발견");
-                StartCoroutine(StraightMove(PosX, PosY, false, true));
-            }
-            //2.적이 있다면 pretarget
-            else
-            {
-                Debug.Log(preTargetX + " " + preTargetZ);
-                StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
-            }
+            //if (BoardManager.Instance.deletePiece == null)
+            //{
+            //    Debug.Log("적 발견");
+            //    StartCoroutine(StraightMove(PosX, PosY, false, true));
+            //}
+            ////2.적이 있다면 pretarget
+            //else
+            //{
+            //    Debug.Log(preTargetX + " " + preTargetZ);
+            //    StartCoroutine(StraightMove(preTargetX, preTargetZ, true));
+            //}
         }
     }
     //공격 함수
