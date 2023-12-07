@@ -38,6 +38,7 @@ Unity 2019.3.26f1
 
 # 📅 진행 기록
 
+간트차트 좀 붙여주세요,, ㅎㅎ
 
 
 # 💡 주요내용
@@ -85,8 +86,15 @@ Unity 2019.3.26f1
 
 
 # 🛠 기술 스택   
+### XR
+ <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"> <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white">   
 
+### MODEL
 
+### Product Manager   
+
+### ETC
+깃허브 노션 구글드라이브 (피그마)? 아이콘 추가해야됌.
 
 # 📃 결과물   
 ### 시연영상
