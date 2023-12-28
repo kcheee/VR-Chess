@@ -41,6 +41,12 @@ Unity 2019.3.26f1
 간트차트 좀 붙여주세요,, ㅎㅎ
 
 
+# 클래스 다이어그램
+
+![VR-Chess_Diagram](https://github.com/kcheee/VR_Chess/assets/86779278/85bea753-7ce8-4e0f-907d-f307a71a3899)
+
+
+
 # 💡 주요내용
 
 <details>
